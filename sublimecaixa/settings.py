@@ -36,9 +36,9 @@ INSTALLED_APPS = [
     'accounts',
 ]
 
-LOGIN_URL = '/accounts/login/' #se tentar acessar algo protegido sem login vai para esta pagina
+LOGIN_URL = '/caixa/' #se tentar acessar algo protegido sem login vai para esta pagina
 LOGIN_REDIRECT_URL = '/caixa/' # pra onde o usuario vai depois de logar
-LOGOUT_REDIRECT_URL = '/accounts/login/' # para logout volta pra login
+LOGOUT_REDIRECT_URL = '/caixa/' # para logout volta pra login
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
