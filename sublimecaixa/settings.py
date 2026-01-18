@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-w0pr7xt=t^_o+@b42op_k4@99l#gm1jrogynvc4f!f(^%ri+ff
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://sublimecaixa-teste.onrender.com", "www.sublimecaixa-teste-onrender.com"]
+ALLOWED_HOSTS = ["https://sublimecaixa-teste.onrender.com", "www.sublimecaixa-teste.onrender.com"]
 
 
 # Application definition
