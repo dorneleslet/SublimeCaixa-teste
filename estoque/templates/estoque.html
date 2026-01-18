@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+{% endblock %}
+
+{% block dashboard %}
+    <div class="container">
+        <div class="row">
+            <div onclick="exibirFormEstoque('1')" class="col-md card-dashboard" style="cursor: pointer;">
+                <p class="text-card">Novo produto</p>
+            </div>
+            <div onclick="exibirFormEstoque('2')" class="col-md card-dashboard" style="cursor: pointer;">
+                <p class="text-card">Editar produto</p>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <div id="form-novo-produto" style="display:none;"><hr> <!-- hr aqui pq senão altera form de cadastro -->
+            <form method="POST" action="{% url 'novo_produto' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md">
+                        <label for="nome">Nome do Produto:<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="nome" placeholder="Nome do produto" maxlength="50" required>
+                    </div>
+                    <div class="col-md">
+                        <label for="quantidade">Quantidade:<span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" name="quantidade" maxlength="5" placeholder="Quantidade" inputmode="numeric" pattern="\d{1,5}" required>
+                    </div>
+                    <div class="col-md">
+                        <label for="preco_unitario">Preço Unitário:<span style="color: red;">*</span></label>
+                        <input type="text" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                    </div>
+                    <script>
+                        const precoInput = document.getElementById('preco_unitario');
+
+                        precoInput.addEventListener('input', function () {
+                            let valor = precoInput.value.replace(/\D/g, '');
+
+                            if (!valor) {
+                                precoInput.value = '';
+                                return;
+                            }
+
+                            if (valor.length > 7) {
+                                valor = valor.slice(0, 7);
+                            }
+
+                            let parteInteira = '';
+                            let parteDecimal = '';
+
+                            if (valor.length <= 2) {
+                                parteInteira = '0';
+                                parteDecimal = valor.padStart(2, 0);
+                            } else {
+                                parteInteira = valor.slice(0, -2);
+                                parteDecimal = valor.slice(-2);
+                            }
+                            parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                            precoInput.value = `${parteInteira},${parteDecimal}`;
+                        })
+                    </script>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md">
+                        <label for="descricao">Descrição:</label>
+                        <textarea class="form-control" name="descricao" rows="2" maxlength="200" placeholder="Descrição do produto (opcional)"></textarea>
+                    </div>
+                </div>
+
+                <hr style="background-color:gray;"> 
+
+                <br>
+                <input type="submit" id="btn-salvar-produto" class="btn btn-success" value="Cadastrar">
+                <!-- <hr>
+                <a href="{% url 'relatorio_estoque' %}"> Ver Relatório do Estoque </a> -->
+            </form>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const form = document.querySelector("form");
+                    const btn = document.getElementById("btn-salvar-produto");
+
+                    form.addEventListener("submit", function(event){
+                        //Muda texto e desativa botão
+                        btn.disabled = true;
+                        const originalText = btn.value;
+                        btn.value = "Gravando...";
+
+                        //Espera 3 segundos antes de permitit clique novamente
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.value = originalText;
+                        }, 3000);
+                    });
+                    // Mensagem de sucesso desaparece após 2 segundos
+                    const msg = document.getElementById("mensagem-sucesso");
+                    if (msg) {
+                        setTimeout(() => {
+                            msg.style.display = "none";
+                        }, 2000);
+                    }
+                });
+            </script>
+            <br>
+            {% if messages %}
+                <div id="mensagem-sucesso">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}    
+        </div>
+
+        <!-- FORMULÁRIO DE EDIÇÃO -->
+        <div id="form-editar-produto" style="display: none;">
+            {% csrf_token %}
+            <p></p><!-- BARRA DE PESQUISA -->
+            <input type="text" id="search-bar-produto" class="form-control mb-3" placeholder="Procurar produto..." oninput="filtrarProdutos()">
+            <!-- LISTA DE PRODUTOS -->
+            <div id="lista-produtos" class="list-group list-group-flush">
+                {% for produto in produtos %}
+                <button id="produto-{{ produto.id }}" type="button" class="list-group-item list-group-item-action text-start" onclick="carregarProduto('{{ produto.id }}', this)"
+                data-nome="{{ produto.nome}}"
+                data-quantidade="{{ produto.quantidade }}"
+                data-preco_unitario="{{ produto.preco_unitario }}"
+                data-descricao="{{ produto.descricao|default:'' }}">
+                    {{ produto.nome }} • {{ produto.quantidade }} unidades • {{ produto.preco_unitario|floatformat:2|cut:'.' }}€ 
+                </button>
+                {% endfor %}
+            </div>
+
+            <!-- FORMULÁRIO DE EDIÇÃO -->
+            <div id="form-produto-edicao" style="display: none;">
+                <button onclick="voltarListaProduto()" class="btn btn-secondary mb-3">← Voltar para lista de produtos</button>
+                <hr>
+                <form id="editar-produto-form" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" id="produto_id" name="id">
+
+                    <label for="editar_nome">Nome do Produto:<span style="color: red;">*</span></label>
+                    <input type="text" id="editar_nome" name="nome" class="form-control" maxlength="50" required>
+
+                    <label for="editar_quantidade" class="mt-2">Quantidade atual:</label>
+                    <input type="number" id="editar_quantidade" name="quantidade" class="form-control" value="{{ produto.quantidade }}" readonly>
+                    
+                    <label for="nova_entrada" class="mt-2">Adicionar ao Estoque:</label>
+                    <input type="text" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar"> 
+
+                    <label for="editar_preco_unitario" class="mt-2">Preço Unitário:<span style="color: red;">*</span></label>
+                    <input type="text" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0" maxlength="7" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+
+                    <label for="editar_descricao" class="mt-2">Descrição:</label>
+                    <textarea id="editar_descricao" name="descricao" class="form-control" rows="2" maxlength="200"></textarea>
+
+                    <br>
+                    <input type="button" class="btn btn-success" value="Salvar alterações" onclick="atualizarProduto()">
+                    <button type="button" class="btn btn-danger" onclick="confirmarExcluirProduto()">Excluir</button>
+                
+                <div id="mensagem-sucesso-produto" class="alert alert-success mt-3" style="display: none;">
+                    <p>Produto atualizado com sucesso!</p>
+                </div>
+                </form>
+                    
+   
+            </div>
+        </div>
+
+        <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+
+        <div id="confirm-delete-produto" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252, 209, 209, 0.5);
+                justify-content: center; align-items: center; z-index: 1000;">
+            <div style="background: white; padding: 20px; border-radius: 8px; max-width: 320px; text-align: center; color: #333;">
+                <p>Tem certeza que deseja excluir este produto?</p>
+                <button id="btn-confirm-delete-produto" class="btn btn-danger">Apagar</button>
+                <button id="btn-cancel-delete-produto" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+
+<script src="{% static 'estoque/js/estoque.js' %}"></script>    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        listarProdutos(); // carrega a lista assim que a página abre
+    });
+</script>
+
+
+{% endblock %}

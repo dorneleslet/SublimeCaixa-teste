@@ -1,0 +1,489 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+{% endblock %}
+ 
+{% block dashboard %}
+    <div class="container">
+        <div class="row">
+            <div onclick="exibir_form('1')" class="col-md card-dashboard">
+                <p class="text-card">Adicionar clientes</p>
+            </div>    
+
+            <div onclick="exibir_form('2')" class="col-md card-dashboard">
+            <p class="text-card">Atualizar clientes</p> 
+            </div>
+
+        </div>
+            <!-- FORMULÁRIO DE CADASTRO -->
+            <div id="adicionar-cliente" class="adicionar-cliente">
+                <form id="form-cadastro-cliente" method="POST" action="{% url 'clientes' %}">
+                    {% csrf_token %}     <!--é obrigatório em formulários para evitar ataques-->           
+                    <hr>
+                    <div class="row">    
+                        <div class="col-md">
+                            <label for="nome">Nome Completo:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control {% if erro_nome %}is-invalid{% endif %}" placeholder="Nome do cliente" id="nome" name="nome" value="{{nome}}" maxlength="50">
+                            {% if erro_nome %}
+                                <div class="invalid-feedback" style="color: red;">
+                                    {{ erro_nome }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <br>
+                    <label for="telefone">Telefone:<span style="color: red;">*</span></label>
+                    <br>
+                    <input type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}">
+                    <!-- {% if erro_telefone %}
+                        <div class="invalid-feedback" style="color: red;">
+                            {{ erro_telefone }}
+                        </div>
+                    {% endif %} -->
+                    <div class="'invalid-feedback" id="'erro_telefone" style="color: red;">
+                        {% if erro_telefone %}{{ erro_telefone }}{% endif %}
+                    </div>
+                    <script>
+                        let itiCadastro = null;
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const telefoneInput = document.querySelector("#telefone");
+                            
+                                if (!telefoneInput) return;
+
+                                itiCadastro = window.intlTelInput(telefoneInput, {
+                                    initialCountry: "pt", // Portugal como padrão
+                                    preferredCountries: ["pt", "br", "es", "fr", "us"], // países sugeridos no topo da lista
+                                    nationalMode: false, // exibe o DDI (+351, +55, etc.)
+                                    separateDialCode: false, // mostra o código separado do número
+                                    autoHideDialCode: false,
+                                    dropdownContainer: document.body, // melhora o comportamento em modais
+                                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                                    //allowDropdown: true, // já vem por padrão true
+                                    
+                                    // Ativa a barra de pesquisa dentro da lista de países
+                                    //customContainer: "intl-tel-input", // opcional, para estilo
+                                });
+
+                                // Quando enviar o formulário, substitui o valor input por getNumber() com DDI
+                                const formCadastro = document.getElementById("form-cadastro-cliente");
+                                if (formCadastro) {
+                                    formCadastro.addEventListener("submit", function () {
+                                        const telefoneComDDI = itiCadastro.getNumber();
+                                        telefoneInput.value = telefoneComDDI;
+                                    });
+                                }
+
+                                // Bloqueia letras
+                                telefoneInput.addEventListener("input", () => {
+                                    telefoneInput.value = telefoneInput.value.replace(/\D/g, "");
+                                });
+                            });
+                        //});
+                    </script>
+
+                    <br><br>
+                    <label for="nif">NIF:<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control {% if erro_nif %}is-invalid{% endif %}" placeholder="___.___.___" id="nif" name="nif" value="{{nif}}" maxlength="11">
+                    {% if erro_nif %}
+                        <div class="invalid-feedback" style="color: red;">
+                            {{ erro_nif }}
+                        </div>
+                    {% endif %}
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const nifInput = document.getElementById('nif');
+
+                        nifInput.addEventListener('input', function () {
+                            let value = this.value.replace(/\D/g, ''); //Remove tudo que não for número
+                            if (value.length > 9) {
+                                value = value.slice(0, 9); // Limita a 9 digitos
+                            }
+
+                            // Formata para 999.999.999
+                            if (value.length > 6) {
+                                value = value.replace(/(\d{3})(\d{3})(\d{0,3})/, '$1.$2.$3');
+                            } else if (value.length > 3) {
+                                value = value.replace(/(\d{3})(\d{0,3})/, '$1.$2');
+                            }
+                            this.value = value;
+                        });
+                        nifInput.addEventListener('keydown', function (e) {
+                            // Bloqueia letras e sinais, permite apenas números e teclas de controle (backspace, delete, setas etc.)
+                            const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+                            if (!/^\d$/.test(e.key) && !allowedKeys.includes(e.key)) {
+                                e.preventDefault();
+                            }
+                        });
+                    });
+                    </script>
+
+                    <br>
+                    <!-- <p>Nascimento:</p>
+                    <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="nascimento" value="{{nascimento}}"> -->
+                    <p>Nascimento:</p>
+                    <input type="text" class="form-control {% if erro_nascimento %}is-invalid{% endif %}" placeholder="dd/mm/aaaa" name="nascimento" id="nascimento" value="{{nascimento|date:'d/m/Y'}}">
+                    <!-- {% if erro_nascimento %} -->
+                        <div class="invalid-feedback" style="color: red;">
+                            {% if erro_nascimento %}{{ erro_nascimento }}{% endif %}
+                        </div>
+                    <!-- {% endif %} -->
+                    <script>
+                        // máscara e validação nascimento dd/mm/aaaa
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const nascInput = document.getElementById('nascimento');
+                            const erro = document.getElementById('erro_nascimento');
+
+                            nascInput.addEventListener('input', function () {
+                                let valor = nascInput.value.replace(/\D/g, ""); // só aceita números
+                                if (valor.length > 8) valor = valor.slice(0, 8);
+
+                                let formatado = "";
+                                if (valor.length > 4) {
+                                    formatado = valor.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                } else if (valor.length > 2) {
+                                    formatado = valor.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                } else {
+                                    formatado = valor;
+                                }
+                                nascInput.value = formatado;
+                            });
+
+                            nascInput.addEventListener('blur', function () {
+                                const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                if (nascInput.value && !regex.test(nascInput.value)) {
+                                    erro.style.display = 'block';
+                                } else {
+                                    erro.style.display = 'none'; // se vazio, deixa passar
+                                }
+                                if (!regex.test(nascInput.value)){
+                                    erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA.';
+                                    erro.style.display = 'block';
+                                    return;
+                                }
+
+                                // pega o ano atual
+                                const anoAtual = new Date().getFullYear();
+                                const partes = nascInput.value.split('/');
+                                const ano = parseInt(partes[2]);
+
+                                if (ano > anoAtual) {
+                                    erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                    erro.style.display = 'block';
+                                } else {
+                                    erro.style.display = 'none';
+                                }
+                            });
+                        });
+                    </script>
+
+                    <br>
+                    <p>E-mail:</p>
+                    <input data-test="email-cadastro" type="email" class="form-control" placeholder="nome@email.com" name="email" value="{{email}}" maxlength="50">
+                                  
+                    <hr style="background-color:gray;"> 
+
+                    <br>
+                    <input type="submit" id="btn-salvar" value="Cadastrar" class="btn btn-success" data-test="btn-salvar">
+
+                    {% if mensagem_sucesso %}
+                        <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert">
+                            <p>Cliente cadastrado com sucesso!</p>
+                        </div>
+                    {% endif %}
+                    <script>
+                        //Esconde a mensagem de sucesso após 3 segundos
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const mensagem = document.getElementById("mensagem-sucesso");
+                            if (mensagem) {
+                                setTimeout(function () {
+                                    mensagem.style.display = "none";
+                                }, 3000); // 3000ms = 3 segundos
+                            }
+                        });
+                    </script>
+
+
+                </form>
+            
+            </div>
+
+            <div id="att_cliente">
+                <!-- CSS no topo | para deixar os dados em editar clientes para <<<< -->
+                <style>
+                    #lista-clientes .list-group-item {
+                        text-align: left !important; 
+                        justify-content: flex-start;
+                    }
+                </style>
+
+
+                <p></p> <!-- BARRA DE PESQUISA -->
+                <input type="text" id="search-bar" class="form-control mb-3" placeholder="Procurar nome, telefone ou NIF" oninput="filtrarClientes()">
+                <!-- LISTA DE CLIENTES -->
+                <div id="lista-clientes" class="list-group list-group-flush"></div>
+
+
+                <!-- FORMULÁRIO DE EDIÇÃO -->
+                <div id="form-att-cliente" style="display: none;">
+                    <button onclick="voltarParaLista()" class="btn btn-secondary mb-3">← Voltar para lista de clientes</button>
+                    <hr>
+                    <input type="hidden" id="id_cliente">
+                    <label for="edit-nome">Nome Completo:<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" placeholder="Nome do cliente" id="edit-nome" name="edit-nome" maxlength="50" required>
+                    <div class="invalid-feedback" style="color: red;"></div>
+                    <br>
+                    <label for="edit-telefone">Telefone:<span style="color: red;">*</span></label>
+                    <br>
+                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" required>
+                    <div id="erro_edit-telefone" class="invalid-feedback" style="color: red;"></div>
+                    <script>
+                        let itiEdicao = null;
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const editTelefoneInput = document.querySelectorAll("#edit-telefone");
+
+                            editTelefoneInput.forEach(function (input) {
+                                if (!input) return;
+                            
+
+                                itiEdicao = window.intlTelInput(input, {
+                                    initialCountry: "pt", // Portugal como padrão
+                                    preferredCountries: ["pt", "br", "es", "fr", "us"], // países sugeridos no topo da lista
+                                    nationalMode: false, // FALSE: exibe o DDI (+351, +55, etc.) | TRUE: é o segredo para evitar o DDI no campo
+                                    separateDialCode: false, // FALSE: oculta o DDI visualmente | TRUE: mostra o código separado do número
+                                    autoHideDialCode: false,
+                                    dropdownContainer: document.body, // melhora o comportamento em modais
+                                    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+                                    //allowDropdown: true, // já vem por padrão true
+                                    
+                                    // Ativa a barra de pesquisa dentro da lista de países
+                                    //customContainer: "intl-tel-input", // opcional, para estilo
+                                });
+
+                                // Bloqueia letras
+                                input.addEventListener("input", () => {
+                                    input.value = input.value.replace(/\D/g, "");
+                                });
+                            });
+                        });
+                    </script>
+                    <br><br>
+                    <label for="edit-nif">NIF:<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" placeholder="___.___.___" id="edit-nif" name="edit-nif" required>
+                    <div class="invalid-feedback" style="color: red;"></div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const nifInput = document.getElementById('edit-nif');
+
+                            nifInput.addEventListener('input', function () {
+                                let value = this.value.replace(/\D/g, ''); //Remove tudo que não for número
+                                if (value.length > 9) {
+                                    value = value.slice(0, 9); // Limita a 9 digitos
+                                }
+
+                                // Formata para 999.999.999
+                                if (value.length > 6) {
+                                    value = value.replace(/(\d{3})(\d{3})(\d{0,3})/, '$1.$2.$3');
+                                } else if (value.length > 3) {
+                                    value = value.replace(/(\d{3})(\d{0,3})/, '$1.$2');
+                                }
+                                this.value = value;
+                            });
+                            nifInput.addEventListener('keydown', function (e) {
+                                // Bloqueia letras e sinais, permite apenas números e teclas de controle (backspace, delete, setas etc.)
+                                const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+                                if (!/^\d$/.test(e.key) && !allowedKeys.includes(e.key)) {
+                                    e.preventDefault();
+                                }
+                            });
+                        });
+                    </script>
+                    <br>
+                    <p>Nascimento:</p>
+                    <input id="edit-nascimento" type="text" class='form-control' name="edit-nascimento" value="">
+                    <div class="invalid-feedback" id="erro_edit-nascimento"></div>
+                    <script>
+                        // máscara e validação nascimento dd/mm/aaaa
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const nascInput = document.getElementById('edit-nascimento');
+                            const erro = document.getElementById('erro_edit-nascimento');
+
+                            nascInput.addEventListener('input', function () {
+                                let valor = nascInput.value.replace(/\D/g, ""); // só aceita números
+                                if (valor.length > 8) valor = valor.slice(0, 8);
+
+                                let formatado = "";
+                                if (valor.length > 4) {
+                                    formatado = valor.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                } else if (valor.length > 2) {
+                                    formatado = valor.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                } else {
+                                    formatado = valor;
+                                }
+                                nascInput.value = formatado;
+                            });
+
+                            nascInput.addEventListener('blur', function () {
+                                const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                if (nascInput.value && !regex.test(nascInput.value)) {
+                                    erro.style.display = 'block';
+                                } else {
+                                    erro.style.display = 'none'; // se vazio, deixa passar
+                                }
+                                if (!regex.test(nascInput.value)){
+                                    erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA.';
+                                    erro.style.display = 'block';
+                                    return;
+                                }
+
+                                // pega o ano atual
+                                const anoAtual = new Date().getFullYear();
+                                const partes = nascInput.value.split('/');
+                                const ano = parseInt(partes[2]);
+
+                                if (ano > anoAtual) {
+                                    erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                    erro.style.display = 'block';
+                                } else {
+                                    erro.style.display = 'none';
+                                }
+                            });
+                        });
+                    </script>
+                    <br>
+                    <p>E-mail</p>
+                    <input id="edit-email" type="email" class='form-control' name="edit-email" value="" maxlength="50">
+
+                    <hr style="background-color:gray;">
+                    <br>
+                    <input id="btn-salvar" onclick="update_cliente()" type="button" value="Salvar alterações" class="btn btn-success">
+                    <button class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value)">Excluir</button>
+
+                    <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert" style="display: none;">
+                        <p>Dados alterados com sucesso!</p>
+                    </div>
+
+                    <div id="confirm-hide-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252, 209, 209, 0.5);
+                        justify-content: center; align-items: center; z-index: 1000;"> <!--esse background rgba deixa o fundo esmaecido da cor que colocar, tava rgba(0,0,0,0.5)-->
+                        <div style="background: rgb(255, 255, 255); padding: 20px; border-radius: 8px; max-width: 320px; text-align: center; color: #333;">
+                            <p>Tem certeza que deseja excluir este cliente?</p>
+                            <button type="button" id="btn-confirm-hide" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value, event)">Excluir</button>
+                            <button id="btn-cancel-hide" class="btn btn-secondary">Cancelar</button>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <!-- FICHA DO CLIENTE -->
+                <div id="ficha-container" style="display: none;">
+                    <hr>
+                    <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#fichaCliente" aria-expanded="false" aria-controls="historico">
+                        📑 Ver ficha do cliente
+                    </button>
+                    <div class="collapse" id="fichaCliente">
+                        <div class="table-responsive">
+                            <br>
+                            <!-- Adicionar nova ficha -->
+                            <h5>Adicionar nova ficha</h5>
+                            <form method="post" id="form-ficha">
+                                {% csrf_token %}
+                                <input type="hidden" id="id_cliente" name="id_cliente" value="{{ cliente.id }}">
+                                
+                                <div class="mb-2">
+                                    <label>Data do procedimento:<span style="color: red;">*</span></label>
+                                    <input type="text" id="data-proced" name="data" class="form-control" placeholder="dd/mm/aaaa" required>
+                                    <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
+                                </div>
+                                <script>
+                                    // máscara e validação da data dd/mm/aaaa
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const dataProced = document.getElementById('data-proced');
+                                        const erro = document.getElementById('erro-data');
+
+                                        dataProced.addEventListener('input', function () {
+                                            let data = dataProced.value.replace(/\D/g, ""); // só aceita números
+                                            if (data.length > 8) data = data.slice(0, 8);
+
+                                            let formatado = "";
+                                            if (data.length > 4) {
+                                                formatado = data.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                            } else if (data.length > 2) {
+                                                formatado = data.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                            } else {
+                                                formatado = data;
+                                            }
+                                            dataProced.value = formatado;
+                                        });
+
+                                        dataProced.addEventListener('blur', function () {
+                                            const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                            if (dataProced.value && !regex.test(dataProced.value)) {
+                                                erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
+                                                erro.style.display = 'block';
+                                                return;
+                                            } 
+
+                                            // pega o ano atual
+                                            if (dataProced.value) {
+                                                const anoAtual = new Date().getFullYear();
+                                                const partes = dataProced.value.split('/');
+                                                const ano = parseInt(partes[2]);
+
+                                                if (ano > anoAtual) {
+                                                    erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                                    erro.style.display = 'block';
+                                                    return;
+                                                }
+                                            }    
+                                            // se passou em todas validações
+                                            erro.style.display = 'none';
+                                        });
+                                    });
+                                </script>
+                                <div class="mb-2">
+                                    <label>Profissional que realizou:</label>
+                                    <input type="text" name="profissional" class="form-control" maxlength="50" placeholder="Nome do profissional">
+                                </div>
+                                <div class="mb-2">
+                                    <label>Valor pago:<span style="color: red;">*</span></label>
+                                    <input type="text" step="0.01" min="0" maxlength="7" name="valor" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" class="form-control" placeholder="0,01" required>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Procedimento realizado:</label>
+                                    <textarea name="procedimento" class="form-control" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Linha home care:</label>
+                                    <textarea name="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Observação:</label>
+                                    <textarea name="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
+                                </div>
+                                <br>
+                                <button type="button" class="btn btn-success">Adicionar ficha</button>
+                            </form>
+                            {% if ficha_sucesso %}
+                                <div id="mensagem-sucesso-ficha" class="alert alert-success mt-3" role="alert">
+                                    <p>Ficha do cliente adicionada com sucesso!</p>
+                                </div>
+                            {% endif %} 
+
+                            <hr style="background-color:gray;">
+                            
+                            <h5>Histórico do Cliente</h5>
+                            <div id="historico-fichas">
+                                {% include 'clientes/fichashistorico.html' with fichas=fichas %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    <script src="{% static 'clientes/js/clientes.js' %}"></script>
+{% endblock %}

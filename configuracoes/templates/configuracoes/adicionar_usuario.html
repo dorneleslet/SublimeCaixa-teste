@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block dashboard %}
+
+<div class="container fluid" style="background-color: #292929;">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-1">⚙️ Usuários</h2>
+            <small class="text-muted">Criação e permissões de usuários.</small>
+            <hr style="border-top: 1px solid #555;">
+
+        </div>
+        <div class="col-12">
+
+            <h2>Adicionar Usuário</h2>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-2">
+                    <label>Usuário:<span style="color: red;">*</span></label>
+                    <input type="text" name="username" class="form-control" maxlength="20" required>
+                </div>
+                <div class="mb-2">
+                    <label>Senha:<span style="color: red;">*</span></label>
+                    <input type="password" name="password" minlength="8" maxlength="20" class="form-control" required>
+                </div>
+                <div class="mb-2">
+                    <label>Grupo:<span style="color: red;">*</span></label>
+                    <select name="grupo" class="form-control" required>
+                        {% for g in grupos %}
+                            <option value="{{ g.id }}">{{ g.name }} {% if g.name == "Administrador" %}[acesso geral]{% else %}[acesso limitado a caixa e clientes]{% endif %}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Adicionar usuário</button>
+            </form>
+            
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

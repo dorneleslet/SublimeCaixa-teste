@@ -1,0 +1,75 @@
+.titulo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.categoria {
+    margin-top: 20px;
+}
+
+.card-servico {
+    display: flex;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4 px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.lado-esquerdo {
+    font-size: 20px;
+    color: #f2b2a6;
+    padding-top: 5px;
+}
+
+.conteudo-servico {
+    flex: 1;
+}
+
+.nome-servico,
+.duracao,
+.preco
+.descricao {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    width: 100%;
+    resize: none;
+    pointer-events: none;
+}
+
+.nome-servico:focus,
+.duracao:focus,
+.preco:focus,
+.descricao:focus {
+    outline: none;
+    background: #f0f0f0;
+}
+
+.infos {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.acoes {
+    align-self: flex-start;
+}
+
+.btn-editar,
+.btn-salvar,
+.btn-excluir {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.acoes-edicao {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0 20px 40px;
+}

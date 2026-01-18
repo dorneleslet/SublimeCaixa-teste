@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% block dashboard %}
+
+<!-- HISTÓRICO DE VENDAS -->
+      <div class="container fluid" style="background-color: #292929;">
+        <div class="row">
+          <div class="col">
+            <br>
+            <h2 class="mb-1">📜 Histórico de Vendas</h2>
+            <small class="text-muted">Visualize o histórico das vendas registradas no caixa.</small>
+            <hr style="border-top: 1px solid #555;">
+
+          </div>
+          
+        </div>
+              
+              <table class="display table table-dark table-striped table-responsive table-sm" id="tabela-historico">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data</th>
+                        <th>Cliente</th>
+                        <th>NIF</th>
+                        <th>Desconto</th>
+                        <th>Pagamento</th>
+                        <th>Observações</th>
+                        <th>Profissional</th>
+                        <th>Fatura</th>
+                        <th>Sinal</th>
+                        <th>Total</th>
+                        <th>Recibo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in vendas %}
+                    <tr>
+                        <td>{{ venda.id }}</td>
+                        <td>{{ venda.data|date:"d/m/Y H:i" }}</td>
+                        <td>{{ venda.cliente.nome|default:"Não informado" }}</td>
+                        <td>{{ venda.cliente.nif|default:"-" }}</td>
+                        <td>{{ venda.desconto|default:"-" }}</td>
+                        <td>{{ venda.get_forma_pagamento_display }}</td>
+                        <td>{{ venda.observacoes|default:"-" }}</td>
+                        <td>{{ venda.profissional|default:"-" }}</td>
+                        <td>{{ venda.get_fatura_display }}</td>
+                        <td>{{ venda.sinal|default:"-" }}</td>
+                        <td>{{ venda.total }}</td>
+                        <td>
+                          <a href="{% url 'relatorio_venda' venda.id %}" target="_blank" rel="noopener noreferrer">+</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="11" class="text-center">Nenhuma venda registrada ainda.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+              
+              <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+              <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+              <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+              <!-- Buttons Extension -->
+              <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+              <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+
+              <!-- Export Excel -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+              <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>  
+
+              <script>
+                  $(document).ready(function() {
+                      
+                      var table = $('#tabela-historico').DataTable({
+                        language: { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json" },
+                        orderCellsTop: true, // Permite que o cabeçalho da tabela mantenha células de ordenação no topo
+                        fixedHeader: true, // Mantém o cabeçalho fixo quando você rola a tabela para baixo
+                        paging: true, // ativa a paginação da tabela
+                        order: [[0, 'desc']], // deixa a lista das ultimas vendas primeiro, o 1 é da coluna Data
+               
+                        initComplete: function () { // função que é executada quando a tabela termina de inicializar
+                          this.api().columns().every(function () { // para cada coluna da tabela
+                              var column = this; // salva a referência da coluna atual
+
+                              // cria um <select> vazio e adiciona no header da coluna
+                              var select = $('<select><option value=""></option></select>')
+                                  .appendTo($(column.header()).append('<br>')) // .empty() - adiciona o select no header da coluna, removendo o conteúdo antigo
+                                  .on('change', function () { // define o que acontece quando o usuário muda a seleção
+                                      var val = $.fn.dataTable.util.escapeRegex($(this).val()); // escapa caracteres especiais do valor selecionado
+                                      column
+                                          .search(val ? '^' + val + '$' : '', true, false) // aplica filtro exato na coluna
+                                          .draw(); // re-renderiza a tabela aplicando o filtro
+                                  });
+                              // para cada valor unico da coluna, adiciona uma opção no select
+                              column.data().unique().sort().each(function (d, j) {
+                                  select.append('<option value="' + d + '">' + d + '</option>')
+                              });
+                          });
+                        }
+                    });
+                  });
+              </script>
+              <hr>
+       </div>
+              
+
+        
+        
+
+
+{% endblock %}
+ 

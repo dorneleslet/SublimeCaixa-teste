@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block dashboard %}
+
+<div class="container fluid" style="background-color: #292929;">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-1">🔐 Login</h2>
+            <small class="text-muted">Por favor, digite seu nome de usuário e senha para acessar.</small>
+            <hr style="border-top: 1px solid #555;">
+
+        </div>
+        <div class="col-12">
+
+            <h3>Entrar</h3>
+            <br>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">Login</button>
+            </form>
+
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+{% endblock %}

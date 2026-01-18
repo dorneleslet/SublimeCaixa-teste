@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block dashboard %}
+
+<div class="container">
+<!-- BLOCO DE CLIENTES -->
+    <br>
+    <div class="cliente-bloco">
+        <input type="hidden" id="cliente_id">
+
+        <div class="card-header">
+            <h5 class="mb-0">Cliente</h5>
+        </div>
+        <div class="card-body">
+
+            <!-- CAMPO DE BUSCA -->
+             <div class="mb-3">
+                <label class="form-label">Buscar cliente:</label>
+                <input type="text" class="form-control campo-busca buscar_cliente" placeholder="Informe o nome, telefone ou NIF...">
+                <input type="hidden" id="cliente_id">
+                <!-- Lista da barra de pesquisa -->
+                <ul class="lista_clientes" ></ul>
+             </div>
+             
+
+              <!-- CAMPOS CONGELADOS  -->
+               <div class="dados_cliente" style="display: none;">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Telefone</label>
+                            <input type="text" class="form-control cliente_telefone" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">NIF</label>
+                            <input type="text" class="form-control cliente_nif" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">E-mail</label>
+                            <input type="text" class="form-control cliente_email" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nascimento</label>
+                            <input type="text" class="form-control cliente_nascimento" readonly>
+                        </div>
+                    </div>
+               </div>
+        </div>
+    </div>
+
+
+<!-- BLOCO DE SERVIÇOS -->
+    <div class="servico-bloco">
+        <div class="card-header">
+            <h5 class="mb-0">Serviços</h5>
+        </div>
+        <div class="card-body" > 
+            <!-- CAMPO DE BUSCA -->
+            <div id="container_servicos">
+                <div class="bloco-servico servico-selecionado d-flex align-items-start gap-2">
+                    <!-- barra de pesquisa ocupa mais espaço -->
+                     <div class="mb-3 flex-grow-1">
+                        <label for="buscar_servico" class="form-label">Buscar procedimento:</label>
+                        <input type="text" class="form-control campo-busca buscar_servico" placeholder="Informe o procedimento...">
+                        <!-- Lista da barra de pesquisa -->
+                        <ul id="lista_servicos" class="lista_servicos"></ul>
+                     </div>
+                    
+                    <!-- valor ocupa menos espaço à direita -->
+                    <div class="dados_servico">
+                            <label class="form-label servico-preco">Preço (€):</label><br>
+                            <input type="text" class="form-control servico_valor" readonly>                  
+                    </div>
+                    <!-- botão x para limpar primeiro bloco -->
+                     <div class="d-flex align-items-end gap-2">
+                        <button type="button" class="btn btn-danger btn-sm btn-clear-servico">x</button>
+                    </div>
+                    <!-- botão x só aparece nos clones -->
+                     <div class="d-flex align-items-end gap-2">
+                        <button type="button" class="btn btn-danger btn-sm btn-remove-servico" style="display: none;">x</button>
+                     </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary btn-sm" id="btn_add_servico">
+                + Adicionar serviço
+            </button>
+
+        </div>
+
+    </div>
+
+<!-- BLOCO DOS PRODUTOS -->
+     <div class="produto-bloco">
+        <div class="card-header">
+            <h5 class="mb-0">Produtos</h5>
+        </div>
+        <div class="card-body">
+            <!-- CAMPO DE BUSCA -->
+            <div id="container_produtos">
+                <div class="bloco-produto d-flex align-items-start gap-2">
+                    <!-- barra de produtos ocupa mais espaço -->
+                     <div class="mb-3">
+                        <label for="buscar_produto" class="form-label">Buscar produto:</label>
+                        <input type="text" class="form-control campo-busca buscar_produto" placeholder="Informe o produto...">
+                        <!-- Lista da barra de pesquisa -->
+                        <ul id="lista_produtos" class="lista_produtos">
+                            <!-- <li class="produto-selecionado" data-id="{{ produto.id }}" data-nome="{{ produto.nome }}" data-estoque="{{ produto.quantidade }}" data-quantidade="1" data-preco="{{ produto.preco_unitario }}"></li> -->
+                        </ul>
+                     </div>
+
+                     <!-- valor do produto -->
+                    <div class="dados_produto">
+                        <div class="produto-info d-flex gap-2 align-items-end">
+                            <div class="produto-estoque">
+                                <label>Estoque</label>
+                                <input type="text" class="form-control estoque_produto" readonly>
+                            </div>
+                            <div class="produto-preco">
+                                <label>Preço (€):</label>
+                                <input type="text" class="form-control produto_valor" readonly>
+                            </div>
+                            <!-- botão x para limpar primeiro bloco -->
+                            <div class="d-flex align-items-end gap-2">
+                                <button type="button" class="btn btn-danger btn-sm btn-clear-produto">x</button>
+                            </div>
+                            <!-- botão x só aparece nos clones -->
+                            <div class="produto-remover">
+                                <button type="button" class="btn btn-danger btn-sm btn-remove-produto" style="display: none;">x</button>
+                            </div>
+                        </div>    
+                        
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-secondary btn-sm" id="btn_add_produto">
+                + Adicionar produto
+            </button>
+        </div>
+     </div>
+
+<!-- BLOCO DE FICHA TÉCNICA -->
+     <div class="ficha-bloco">
+        <input type="hidden" id="cliente_id" name="cliente_id">
+        <div class="card-header">
+            <h5 class="mb-0">Ficha Técnica</h5>
+        </div>
+        <div class="card-body">
+            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalFicha">
+                + Adicionar ficha
+            </button>
+            <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseFichas">
+                + Ver ficha
+            </button>
+
+            <!-- COLLAPSE COM HISTÓRICO -->
+             <div class="collapse mt-2" id="collapseFichas">
+                <div id="historico-fichas" class="border rounded p-3 bg-dark text-white">
+                    <p class="text-muted">Nenhuma ficha carregada ainda.</p>
+                </div>
+             </div>
+        </div>
+     </div>
+
+     <!-- MODAL DE ADICIONAR FICHA -->
+      <div class="modal fade" id="modalFicha" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Ficha Técnica</h5>
+                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-ficha-caixa">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_cliente_caixa" id="id_cliente_caixa">
+
+                        <div class="mb-2">
+                            <label for="ficha_data" class="form-label">Data do procedimento:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="data" id="ficha_data" placeholder="dd/mm/yyyy" required>
+                            <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
+                        </div>
+                        <script>
+                            // máscara e validação da data dd/mm/aaaa
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const dataProced = document.getElementById('ficha_data');
+                                const erro = document.getElementById('erro-data');
+
+                                dataProced.addEventListener('input', function () {
+                                    let data = dataProced.value.replace(/\D/g, ""); // só aceita números
+                                    if (data.length > 8) data = data.slice(0, 8);
+
+                                    let formatado = "";
+                                    if (data.length > 4) {
+                                        formatado = data.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                    } else if (data.length > 2) {
+                                        formatado = data.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                    } else {
+                                        formatado = data;
+                                    }
+                                    dataProced.value = formatado;
+                                });
+
+                                dataProced.addEventListener('blur', function () {
+                                    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                    if (dataProced.value && !regex.test(dataProced.value)) {
+                                        erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
+                                        erro.style.display = 'block';
+                                        return;
+                                    } 
+
+                                    // pega o ano atual
+                                    if (dataProced.value) {
+                                        const anoAtual = new Date().getFullYear();
+                                        const partes = dataProced.value.split('/');
+                                        const ano = parseInt(partes[2]);
+
+                                        if (ano > anoAtual) {
+                                            erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                            erro.style.display = 'block';
+                                            return;
+                                        }
+                                    }    
+                                    // se passou em todas validações
+                                    erro.style.display = 'none';
+                                });
+                            });
+                        </script>
+
+                        <div class="mb-2">
+                            <label for="ficha_profissional" class="form-label">Profissional que realizou:</label>
+                            <input type="text" class="form-control" name="profissional" maxlength="50" id="ficha_profissional" placeholder="Nome do profissional">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="ficha_valor" class="form-label">Valor pago:<span style="color: red;">*</span></label>
+                            <input type="text" step="0.01" min="0" maxlength="7" class="form-control" name="valor" id="ficha_valor" placeholder="0,01" required>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="ficha_procedimento" class="form-label">Procedimento realizado:</label>
+                            <textarea class="form-control" name="procedimento" maxlength="200" id="ficha_procedimento" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="ficha_homecare" class="form-label">Linha home care:</label>
+                            <textarea class="form-control" name="homecare" maxlength="200" id="ficha_homecare" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="ficha_observacao" class="form-label">Observações:</label>
+                            <textarea class="form-control" name="observacao" rows="2" maxlength="200" id="ficha_observacao" placeholder="Notas internas (opcional)..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnSalvarFichaCaixa">Salvar</button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+<!-- PROFISSIONAL -->
+       <div class="profissional-bloco">
+            <div class="card-body">
+                <div class="bloco-profissional d-flex align-items-start gap-3">
+                        <div class="profissional">
+                            <label for="profissional" class="form-label">Procedimento realizado por:<span style="color: red;">*</span></label>
+                            <input type="text" maxlength="50" id="profissional" class="form-control profissional" placeholder="Nome do profissional" required>
+                        </div>
+                </div>
+            </div>
+       </div>    
+
+
+
+<!-- BLOCO DE PAGAMENTO -->
+    <div class="pagamento-bloco">
+        <div class="card-header">
+            <h5 class="mb-0">Pagamento</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="bloco-pagamento d-flex align-items-start gap-3">
+                <!-- Desconto -->
+                <div class="pagamento-desconto">
+                    <label for="desconto" class="form-label">Desconto (€):</label>
+                    <input type="number" step="0.01" min="0" id="desconto" class="form-control pagamento-input">
+                </div>
+
+                <!-- Sinal -->
+                <div class="pagamento-sinal">
+                    <label for="sinal" class="form-label">Sinal (€):</label>
+                    <input type="number" step="0.01" min="0" id="sinal" class="form-control pagamento-input">
+                </div>
+            </div>
+            <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">
+                <!-- Fatura -->
+                <div class="pagamento-fatura">
+                    <label class="form-label">Deseja fatura? </label>
+                    <br>
+                    <select id="fatura" class="form-select pagamento-input">
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+            </div>
+            <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">    
+                <!-- Forma de pagamento -->
+                <div class="pagamento-forma">
+                        <label for="forma_pagamento" class="form-label">Forma de pagamento:<span style="color: red;">*</span></label>
+                        <br>
+                        <select id="forma_pagamento" class="form-select pagamento-input">
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="dinheiro">Dinheiro</option>
+                            <option value="mbway">MB Way</option>
+                            <option value="multibanco">Multibanco</option>
+                            <option value="Transferência">Transferência</option>
+                            <option value="misto">Misto</option>
+                            <option value="pendente">Pagamento pendente</option>
+                            <option value="saida">Saída Espaço Sublime</option>
+                        </select>
+                </div>
+
+            </div>
+        </div>    
+    </div>
+
+<!-- OBSERVAÇÕES -->
+     <div class="observacao-bloco">
+        <div class="card-header">
+            <div class="row mt-3">
+                <div class="card-body">
+                    <label for="observacoes">Notas internas:</label>
+                    <textarea class="form-control" name="observacoes" rows="2" placeholder="(Opcional)"></textarea>
+                </div>
+            </div>
+        </div> 
+     </div>
+
+<!-- BLOCO TOTAL -->
+    <div class="total-bloco">
+        <div class="card-header">
+            <div class="pagamento-total mt-3">
+                <h3>Total: <span id="total" class="fw-bold">0,00€</span></h3>
+                <!-- <label for="total" class="form-label">Total:</label> 
+                <input type="text" id="total" class="form-control" readonly> -->
+            </div>
+        <hr>    
+        
+        <button id="btnFinalizar" type="button" onclick="finalizarVenda()" class="btn btn-success">
+            Finalizar Venda
+        </button>  
+        <br>
+        <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert" style="display: none;">
+            <p>Venda registrada com sucesso!</p>
+        </div>
+        <br><br>
+        <!-- <div id="mensagem-caixa" class="mensagem-sucesso" style="display: none;"></div> -->
+        <!-- <hr>  
+        <a href="{% url 'historico_vendas' %}"> Ver Histórico de Vendas</a> -->
+        </div>
+    </div>
+
+</div>
+
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
+<script src="{% static 'caixa/js/caixa.js' %}"></script>
+
+{% endblock %}
+
+
+
+

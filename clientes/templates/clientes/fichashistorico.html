@@ -1,0 +1,7 @@
+{% if fichas %}
+    {% for ficha in fichas %}
+        {% include 'clientes/fichacliente.html' %}
+    {% endfor %}
+{% else %}
+    <p class="text-muted">Nenhuma ficha adicionada ainda.</p>
+{% endif %}

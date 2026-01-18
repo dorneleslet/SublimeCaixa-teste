@@ -1,0 +1,12 @@
+
+<div class="ficha border rounded p-2 mb-3 bg-dark text-white" id="ficha-{{ ficha.id}}">
+    <strong>Ficha #{{ forloop.counter }}</strong><br>
+    <b>Data do procedimento:</b> {{ ficha.data|date:'d/m/Y' }}<br>
+    <b>Profissional que realizou:</b> {{ ficha.profissional }}<br>
+    <b>Valor pago:</b> {{ ficha.valor|floatformat:2|cut:"." }}€<br>
+    <b>Procedimento realizado:</b> {{ ficha.procedimento|default:"-" }}<br>
+    <b>Linha home care:</b> {{ ficha.homecare|default:"-" }}<br>
+    <b>Observação:</b> {{ ficha.observacao|default:"-" }}<br>
+    <br><button class="btn btn-danger btn-excluir-ficha" data-id="{{ ficha.id }}">Excluir</button>
+</div>
+<hr>

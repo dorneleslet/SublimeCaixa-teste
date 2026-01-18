@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block dashboard %}
+
+<div class="container fluid" style="background-color: #292929;">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-1">⚙️ Usuários</h2>
+            <small class="text-muted">Criação e permissões de usuários.</small>
+            <hr style="border-top: 1px solid #555;">
+
+        </div>
+        <div class="col-12">
+            
+            <h2>Editar Usuário</h2>
+            <form method="POST" action="{% url 'editar_usuario' user.id %}">
+                {% csrf_token %}
+                <div class="mb-2">
+                    <label>Usuário:<span style="color: red;">*</span></label>
+                    <input type="text" name="username" value="{{ user.username }}" class="form-control" maxlength="20" required>
+                </div>
+                <div class="mb-2">
+                    <label>Grupo:<span style="color: red;">*</span></label>
+                    <select name="grupo" class="form-control" required>
+                        {% for g in grupos %}
+                            {% if g.name == 'Administrador' or g.name == 'Colaborador' %}
+                                <option value="{{ g.id }}" {% if g in user.groups.all %}selected{% endif %}>{{ g.name }} {% if g.name == "Administrador" %}[acesso geral]{% else %}[acesso limitado a caixa e clientes]{% endif %}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Salvar alterações</button>
+            </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

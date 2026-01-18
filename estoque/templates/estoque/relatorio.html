@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+{% block dashboard %}
+
+
+<!-- FILTRO DE ENTRADAS E SAÍDAS DE PRODUTOS -->
+
+    <div class="container fluid" style="background-color: #292929;">
+        <div class="row mb-3">
+            <div class="col">
+                <br>
+                <h2 class="mb-1">📦 Relatório de Estoque</h2>
+                <small class="text-muted">Visualize entradas, saídas e saldo atual dos produtos</small>
+                <hr style="border-top: 1px solid #555;">
+            </div>
+        </div>
+
+            <!-- FILTRO DE DATAS -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="data_inicio" class="form-label">Data início:</label>
+                            <input type="date" id="data_inicio" name="data_inicio" class="form-control" value="{{ request.GET.data_inicio }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="data_fim" class="form-label">Data fim:</label>
+                            <input type="date" id="data_fim" name="data_fim" class="form-control" value="{{ request.GET.data_fim }}">
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-secondary">Filtrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- RELATÓRIO TOTAL DO ESTOQUE -->
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-hover" id="relatorio">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Entradas</th>
+                            <th>Saídas</th>
+                            <th>Saldo Atual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in resumo_estoque %}
+                        <tr>
+                            <td>{{ item.produto.nome }}</td>
+                            <td>{{ item.entradas }}</td>
+                            <td>{{ item.saidas }}</td>
+                            <td>{{ item.saldo }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center">Nenhuma movimentação registrada.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    
+            <hr>
+            <!-- BOTÃO PARA MOSTRA/OCULTAR HISTÓRICO -->
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#historico" aria-expanded="false" aria-controls="historico">
+                📜 Ver Histórico de Entradas e Saídas
+            </button>
+            <br><br>
+            <!-- HISTÓRICO DAS ENTRADAS -->
+            <div class="collapse" id="historico">
+                <div class="card card-body bg-dark text-white">
+                    <!-- <form method="get" class="mb-3 d-flex gap-2"></form> -->
+
+                    <div class="table-responsive">
+                        <table id="tabela-historico" class="table table-bordered table-dark">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Tipo</th>
+                                    <th>Quantidade</th>
+                                    <th>Cliente</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for m in historico %}
+                                <tr>
+                                    <td>{{ m.produto.nome }}</td>
+                                    <td>{{ m.get_tipo_display }}</td>
+                                    <td>{{ m.quantidade }}</td>
+                                    <td>{% if m.cliente %}{{ m.cliente.nome }}{% else %}-{% endif %}</td>
+                                    <td>{{ m.data|date:"d/m/Y H:i" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">Nenhuma movimentação encontrada.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>    
+                </div>
+            </div>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#tabela-historico').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json" }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#relatorio').DataTable({
+                "language": { "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json" },
+                "order": [], // deixa a ordenação inicial neutra
+                "paging": false, // desativa paginação (opcional)
+                "info": false   // remove contador de registros (opcional)
+            });
+        });
+    </script>
+</div>
+
+{% endblock %}

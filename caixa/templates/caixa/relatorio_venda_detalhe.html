@@ -1,0 +1,50 @@
+{% load static %}
+<div style="max-width: 700px; margin: auto; font-family: Arial, Helvetica, sans-serif; color: #333;">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{% static 'imagens/logo.png' %}" alt="LogoEspacoSublime" style="max-width: 150px;">
+    </div>
+
+    <h2 style="text-align: center;">Recibo</h2>
+    <hr>
+
+    <p><strong>Cliente:</strong> {{ venda.cliente.nome }}</p>
+    <p><strong>NIF:</strong> {{ venda.cliente.nif }}</p>
+    <p><strong>Venda:</strong> #{{ venda.id }}</p>
+    <p><strong>Efetuado a:</strong> {{ venda.data|date:"d/m/Y H:i" }}</p>
+    <p><strong>Pagamento:</strong> {{ venda.forma_pagamento }}</p>
+
+    <hr>
+    <h3>Procedimentos | Produtos</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr style="background: #f2f2f2;">
+                <th style="border: 1px solid #ccc; padding: 6px;">Serviço</th>
+                <th style="border: 1px solid #ccc; padding: 6px;">Preço</th>
+                <th style="border: 1px solid #ccc; padding: 6px;">Produto</th>
+                <th style="border: 1px solid #ccc; padding: 6px;">Preço</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens %}
+            <tr>
+                <td style="border: 1px solid #ccc; padding: 6px;">{% if item.servico %} {{ item.nome_servico|default:item.servico.nome }} {% else %} - {% endif %}</td>
+                <td style="border: 1px solid #ccc; padding: 6px; text-align: center;">{% if item.servico %} {{ item.valor_unitario|default:item.servico.preco }}€ {% else %} - {% endif %}</td>
+                <td style="border: 1px solid #ccc; padding: 6px;">{% if item.produto %} {{ item.nome_produto|default:item.produto.nome }} {% else %} - {% endif %}</td>
+                <td style="border: 1px solid #ccc; padding: 6px; text-align: center;">{% if item.produto %} {{ item.valor_unitario|default:item.produto.preco_unitario }}€ {% else %} - {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br><hr>
+
+    <p><strong>Desconto:</strong>{% if venda.desconto %} {{ venda.desconto }}€ {% else %} - {% endif %}</p>
+    <p><strong>Sinal:</strong>{% if venda.sinal %} {{ venda.sinal }}€ {% else %} - {% endif %}</p>
+
+    <hr>
+    <h3 style="text-align: right;">Total: {{ venda.total }}€</h3>
+
+    <br><br><br><br><br><br><br><br><br>
+    <hr>
+    <p style="text-align: center;">@espaco_sublime.pt | + 351 910 496 885 | Rua Padre José Estevens Dias, nº 87, Pinhal Novo</p>
+
+</div>
