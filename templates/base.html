@@ -23,7 +23,7 @@
             <i class='bx bx-menu' id="btn" ></i>
         </div>
         <ul class="nav-list">
-          {% if 'Colaborador' in grupos_usuario %}
+          <!-- {% if 'Colaborador' in grupos_usuario % -->
             <li>
               <a href="{% url 'caixa_principal' %}">
                 <i class='bx bx-dollar'></i>
@@ -73,7 +73,7 @@
             
 
           {% endif %}
-          {% if 'Administrador' in grupos_usuario %}
+          <!-- {% if 'Administrador' in grupos_usuario %} -->
             <li>
               <a href="{% url 'caixa_principal' %}">
                 <i class='bx bx-dollar'></i>
