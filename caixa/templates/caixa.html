@@ -18,7 +18,7 @@
             <!-- CAMPO DE BUSCA -->
              <div class="mb-3">
                 <label class="form-label">Buscar cliente:</label>
-                <input type="text" class="form-control campo-busca buscar_cliente" placeholder="Informe o nome, telefone ou NIF...">
+                <input data-test="buscar_cliente" type="text" class="form-control campo-busca buscar_cliente" placeholder="Informe o nome, telefone ou NIF...">
                 <input type="hidden" id="cliente_id">
                 <!-- Lista da barra de pesquisa -->
                 <ul class="lista_clientes" ></ul>
@@ -62,7 +62,7 @@
                     <!-- barra de pesquisa ocupa mais espaço -->
                      <div class="mb-3 flex-grow-1">
                         <label for="buscar_servico" class="form-label">Buscar procedimento:</label>
-                        <input type="text" class="form-control campo-busca buscar_servico" placeholder="Informe o procedimento...">
+                        <input data-test="buscar_servico" type="text" class="form-control campo-busca buscar_servico" placeholder="Informe o procedimento...">
                         <!-- Lista da barra de pesquisa -->
                         <ul id="lista_servicos" class="lista_servicos"></ul>
                      </div>
@@ -269,7 +269,7 @@
                 <div class="bloco-profissional d-flex align-items-start gap-3">
                         <div class="profissional">
                             <label for="profissional" class="form-label">Procedimento realizado por:<span style="color: red;">*</span></label>
-                            <input type="text" maxlength="50" id="profissional" class="form-control profissional" placeholder="Nome do profissional" required>
+                            <input data-test="profissional" type="text" maxlength="50" id="profissional" class="form-control profissional" placeholder="Nome do profissional" required>
                         </div>
                 </div>
             </div>
@@ -288,13 +288,13 @@
                 <!-- Desconto -->
                 <div class="pagamento-desconto">
                     <label for="desconto" class="form-label">Desconto (€):</label>
-                    <input type="number" step="0.01" min="0" id="desconto" class="form-control pagamento-input">
+                    <input data-test="desconto" type="number" step="0.01" min="0" id="desconto" class="form-control pagamento-input">
                 </div>
 
                 <!-- Sinal -->
                 <div class="pagamento-sinal">
                     <label for="sinal" class="form-label">Sinal (€):</label>
-                    <input type="number" step="0.01" min="0" id="sinal" class="form-control pagamento-input">
+                    <input data-test="sinal" type="number" step="0.01" min="0" id="sinal" class="form-control pagamento-input">
                 </div>
             </div>
             <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">
@@ -302,7 +302,7 @@
                 <div class="pagamento-fatura">
                     <label class="form-label">Deseja fatura? </label>
                     <br>
-                    <select id="fatura" class="form-select pagamento-input">
+                    <select data-test="fatura" id="fatura" class="form-select pagamento-input">
                         <option value="" disabled selected>Selecione...</option>
                         <option value="sim">Sim</option>
                         <option value="nao">Não</option>
@@ -314,7 +314,7 @@
                 <div class="pagamento-forma">
                         <label for="forma_pagamento" class="form-label">Forma de pagamento:<span style="color: red;">*</span></label>
                         <br>
-                        <select id="forma_pagamento" class="form-select pagamento-input">
+                        <select data-test="pagamento" id="forma_pagamento" class="form-select pagamento-input">
                             <option value="" disabled selected>Selecione...</option>
                             <option value="dinheiro">Dinheiro</option>
                             <option value="mbway">MB Way</option>
@@ -352,7 +352,7 @@
             </div>
         <hr>    
         
-        <button id="btnFinalizar" type="button" onclick="finalizarVenda()" class="btn btn-success">
+        <button data-test="finalizar-venda" id="btnFinalizar" type="button" onclick="finalizarVenda()" class="btn btn-success">
             Finalizar Venda
         </button>  
         <br>
