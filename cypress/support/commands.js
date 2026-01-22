@@ -8,7 +8,7 @@ Cypress.Commands.add('cadastro', (email, senha) => {
     cy.get('#nome').type('Cliente Teste');
     cy.get('#telefone').type('123456789');
     cy.get('#nif').type('555222126');
-    cy.get('#nascimento').type('12101990');
+    //cy.get('#nascimento').type('12101990');
     //cy.get('[data-test="email-cadastro"]').type('cliente@teste.com');
     //cy.contains('input', 'Cadastrar').click();
     cy.get('[data-test=btn-salvar]').click();

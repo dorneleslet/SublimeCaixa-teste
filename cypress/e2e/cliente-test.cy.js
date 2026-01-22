@@ -8,22 +8,19 @@
 //   })
 // })
 
-describe('Cadastrar novo cliente', () => {
+describe('Cadastrar novo cliente, serviço e realizar venda com sucesso', () => {
   beforeEach(() => {
     cy.visit('https://sublimecaixa-teste.onrender.com/clientes/');
     cy.login('Teste', 'Teste123456');
   })
   it('Deve carregar a página de clientes, preencher os campos e cadastrar o cliente com sucesso', () => {
+   
     cy.visit('https://sublimecaixa-teste.onrender.com/clientes/');
-    cy.cadastro('Jane Doe', '555874965', '512374965', '11/11/1985', 'jane.doe@email.com.br')
-    // cy.get('#nome').type('Cliente Teste');
-    // cy.get('#telefone').type('123456789');
-    // cy.get('#nif').type('555222126');
-    // cy.get('#nascimento').type('12101990');
-    // //cy.get('[data-test="email-cadastro"]').type('cliente@teste.com');
-    // //cy.contains('input', 'Cadastrar').click();
-    // cy.get('[data-test=btn-salvar]').click();
-  
+    cy.get('#nome').type('Cliente Teste');
+    cy.get('#telefone').type('123456789');
+    cy.get('#nif').type('587458745');
+    cy.get('[data-test=btn-salvar]').click();
+    cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
   })
 
   it('Acessar a página de serviços e cadastrar um serviço com sucesso', () => {
@@ -36,13 +33,15 @@ describe('Cadastrar novo cliente', () => {
 
   it('Acessar a página de caixa e realizar uma venda com sucesso', () => {
     cy.visit('https://sublimecaixa-teste.onrender.com/caixa/');
-    cy.get('[data-test="buscar_cliente"]').type('Leticia Dorneles').click();
+    cy.get('[data-test="buscar_cliente"]').type('Leticia Dorneles');
+    cy.contains('.list-group-item', 'Leticia Dorneles').click();
     cy.get('[data-test="buscar_servico"]').type('Serviço Teste').click();
+    cy.contains('#lista_servicos > :nth-child(1)', 'Serviço Teste').click();
     cy.get('[data-test="profissional"]').type('Joana');
     cy.get('[data-test="desconto"]').type('10');
     cy.get('[data-test="sinal"]').type('10');
-    cy.get('[data-test="fatura"]').type('Sim').click();
-    cy.get('[data-test="pagamento"]').type('Dinheiro').click();
+    cy.get('[data-test="fatura"]').select('Sim');
+    cy.get('[data-test="pagamento"]').select('Dinheiro');
     cy.get('[data-test="finalizar-venda"]').click();
     cy.contains('Venda registrada com sucesso!').should('be.visible');
   })
