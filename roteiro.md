@@ -61,7 +61,7 @@ https://sublimecaixa.onrender.com/accounts/login/
 
 ### **Objetivo** 
 
-Validar o fluxo de login bem-sucedido.
+Autenticação de uauário, validar o fluxo de login bem-sucedido.
 
 ### **Pré-condições**
 
@@ -143,8 +143,8 @@ Validar o fluxo de cadastro de cliente sem os dados obrigatórios, nome, telefon
 | 2 | O usuário não preenche os campos "Nome Completo". | Aparece a mensagem "**Por favor, indique o nome do cliente.**". |
 | 3 | O usuário não preenche o campo "Telefone". | Aparece a mensagem "**Por favor, indique um número para contato.**". |
 | 4 | O usuário não preenche o campo "NIF". | Aparece a mensagem "**Por favor, indique o número de contribuinte.**" |
-| 5 | O usuário preenche o campo "Nascimento". | - |
-| 6 | O usuário preenche o campo "Email". | - |
+| 5 | O usuário não preenche o campo "Nascimento". | - |
+| 6 | O usuário não preenche o campo "Email". | - |
 | 7 | O usuário clica no botão "Cadastrar". | Aparece as mensagens de erro. |
 2. Não é possível fazer o cadastro do cliente sem os campos obrigatórios e o usuário permanece na tela de cadastro de clientes.
 
