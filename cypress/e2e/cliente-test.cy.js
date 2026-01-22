@@ -10,7 +10,7 @@
 
 describe('Cadastrar novo cliente', () => {
   beforeEach(() => {
-    cy.visit('https://sublimecaixa-teste.onrender.com/accounts/login/');
+    cy.visit('https://sublimecaixa-teste.onrender.com/clientes/');
     cy.login('Teste', 'Teste123456');
   })
   it('Deve carregar a página de clientes, preencher os campos e cadastrar o cliente com sucesso', () => {

@@ -4,7 +4,7 @@ Cypress.Commands.add('login', (email, senha) => {
     cy.get('.btn').click();
  })
 
-Cypress.Commands.add('login', (email, senha) => { 
+Cypress.Commands.add('cadastro', (email, senha) => { 
     cy.get('#nome').type('Cliente Teste');
     cy.get('#telefone').type('123456789');
     cy.get('#nif').type('555222126');

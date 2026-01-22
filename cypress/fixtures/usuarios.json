@@ -1,126 +1,126 @@
 {
     "usuarios": [
         {
-            "name": "William Byers",
+            "nome": "William Byers",
             "telefone": "805457499",
             "nif": "805457499",
             "nascimento": "22/03/1971",
             "email": "will.byers@email.com"
         },
         {
-            "name": "Jane Eleven Ives",
+            "nome": "Jane Eleven Ives",
             "telefone": "855429546",
             "nif": "855429546",
             "nascimento": "11/06/1971",
             "email": "eleven@email.com"
         },
         {
-            "name": "Mike Wheeler",
+            "nome": "Mike Wheeler",
             "telefone": "912345678",
             "nif": "912345678",
             "nascimento": "07/04/1971",
             "email": "mike.wheeler@email.com"
         },
         {
-            "name": "Dustin Henderson",
+            "nome": "Dustin Henderson",
             "telefone": "913456789",
             "nif": "913456789",
             "nascimento": "29/02/1972",
             "email": "dustin@email.com"
         },
         {
-            "name": "Lucas Sinclair",
+            "nome": "Lucas Sinclair",
             "telefone": "914567890",
             "nif": "914567890",
             "nascimento": "30/10/1971",
             "email": "lucas.sinclair@email.com"
         },
         {
-            "name": "Maxine Mayfield",
+            "nome": "Maxine Mayfield",
             "telefone": "915678901",
             "nif": "915678901",
             "nascimento": "04/07/1971",
             "email": "max.mayfield@email.com"
         },
         {
-            "name": "Nancy Wheeler",
+            "nome": "Nancy Wheeler",
             "telefone": "916789012",
             "nif": "916789012",
             "nascimento": "15/12/1968",
             "email": "nancy@email.com"
         },
         {
-            "name": "Jonathan Byers",
+            "nome": "Jonathan Byers",
             "telefone": "917890123",
             "nif": "917890123",
             "nascimento": "26/04/1967",
             "email": "jonathan.byers@email.com"
         },
         {
-            "name": "Steve Harrington",
+            "nome": "Steve Harrington",
             "telefone": "918901234",
             "nif": "918901234",
             "nascimento": "14/08/1966",
             "email": "steve.h@email.com"
         },
         {
-            "name": "Robin Buckley",
+            "nome": "Robin Buckley",
             "telefone": "919012345",
             "nif": "919012345",
             "nascimento": "03/09/1967",
             "email": "robin.b@email.com"
         },
         {
-            "name": "Erica Sinclair",
+            "nome": "Erica Sinclair",
             "telefone": "920123456",
             "nif": "920123456",
             "nascimento": "12/01/1975",
             "email": "erica@email.com"
         },
         {
-            "name": "Joyce Byers",
+            "nome": "Joyce Byers",
             "telefone": "921234567",
             "nif": "921234567",
             "nascimento": "18/05/1943",
             "email": "joyce.byers@email.com"
         },
         {
-            "name": "Jim Hopper",
+            "nome": "Jim Hopper",
             "telefone": "922345678",
             "nif": "922345678",
             "nascimento": "04/10/1942",
             "email": "hopper@email.com"
         },
         {
-            "name": "Karen Wheeler",
+            "nome": "Karen Wheeler",
             "telefone": "923456789",
             "nif": "923456789",
             "nascimento": "11/02/1946",
             "email": "karen.w@email.com"
         },
         {
-            "name": "Ted Wheeler",
+            "nome": "Ted Wheeler",
             "telefone": "924567890",
             "nif": "924567890",
             "nascimento": "27/06/1944",
             "email": "ted.w@email.com"
         },
         {
-            "name": "Billy Hargrove",
+            "nome": "Billy Hargrove",
             "telefone": "925678901",
             "nif": "925678901",
             "nascimento": "12/11/1966",
             "email": "billy@email.com"
         },
         {
-            "name": "Suzie Bingham",
+            "nome": "Suzie Bingham",
             "telefone": "926789012",
             "nif": "926789012",
             "nascimento": "08/03/1972",
             "email": "suzie@email.com"
         },
         {
-            "name": "Bob Newby",
+            "nome": "Bob Newby",
             "telefone": "927890123",
             "nif": "927890123",
             "nascimento": "09/09/1958",

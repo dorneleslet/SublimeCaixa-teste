@@ -25,7 +25,7 @@
                     <div class="row">    
                         <div class="col-md">
                             <label for="nome">Nome Completo:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control {% if erro_nome %}is-invalid{% endif %}" placeholder="Nome do cliente" id="nome" name="nome" value="{{nome}}" maxlength="50">
+                            <input data-test="nome-cadastro" type="text" class="form-control {% if erro_nome %}is-invalid{% endif %}" placeholder="Nome do cliente" id="nome" name="nome" value="{{nome}}" maxlength="50">
                             {% if erro_nome %}
                                 <div class="invalid-feedback" style="color: red;">
                                     {{ erro_nome }}
@@ -37,7 +37,7 @@
                     <br>
                     <label for="telefone">Telefone:<span style="color: red;">*</span></label>
                     <br>
-                    <input type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}">
+                    <input data-test="telefone-cadastro" type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}">
                     <!-- {% if erro_telefone %}
                         <div class="invalid-feedback" style="color: red;">
                             {{ erro_telefone }}
@@ -86,7 +86,7 @@
 
                     <br><br>
                     <label for="nif">NIF:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control {% if erro_nif %}is-invalid{% endif %}" placeholder="___.___.___" id="nif" name="nif" value="{{nif}}" maxlength="11">
+                    <input data-test="nif-cadastro" type="text" class="form-control {% if erro_nif %}is-invalid{% endif %}" placeholder="___.___.___" id="nif" name="nif" value="{{nif}}" maxlength="11">
                     {% if erro_nif %}
                         <div class="invalid-feedback" style="color: red;">
                             {{ erro_nif }}
@@ -124,7 +124,7 @@
                     <!-- <p>Nascimento:</p>
                     <input type="date" class="form-control" placeholder="DD/MM/AAAA" name="nascimento" value="{{nascimento}}"> -->
                     <p>Nascimento:</p>
-                    <input type="text" class="form-control {% if erro_nascimento %}is-invalid{% endif %}" placeholder="dd/mm/aaaa" name="nascimento" id="nascimento" value="{{nascimento|date:'d/m/Y'}}">
+                    <input data-test="nascimento-cadastro" type="text" class="form-control {% if erro_nascimento %}is-invalid{% endif %}" placeholder="dd/mm/aaaa" name="nascimento" id="nascimento" value="{{nascimento|date:'d/m/Y'}}">
                     <!-- {% if erro_nascimento %} -->
                         <div class="invalid-feedback" style="color: red;">
                             {% if erro_nascimento %}{{ erro_nascimento }}{% endif %}
