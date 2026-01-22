@@ -1,33 +1,6 @@
 {
     "usuarios": [
-        {
-            "nome": "William Byers",
-            "telefone": "805457499",
-            "nif": "805457499",
-            "nascimento": "22/03/1971",
-            "email": "will.byers@email.com"
-        },
-        {
-            "nome": "Jane Eleven Ives",
-            "telefone": "855429546",
-            "nif": "855429546",
-            "nascimento": "11/06/1971",
-            "email": "eleven@email.com"
-        },
-        {
-            "nome": "Mike Wheeler",
-            "telefone": "912345678",
-            "nif": "912345678",
-            "nascimento": "07/04/1971",
-            "email": "mike.wheeler@email.com"
-        },
-        {
-            "nome": "Dustin Henderson",
-            "telefone": "913456789",
-            "nif": "913456789",
-            "nascimento": "29/02/1972",
-            "email": "dustin@email.com"
-        },
+        
         {
             "nome": "Lucas Sinclair",
             "telefone": "914567890",
@@ -62,69 +35,6 @@
             "nif": "918901234",
             "nascimento": "14/08/1966",
             "email": "steve.h@email.com"
-        },
-        {
-            "nome": "Robin Buckley",
-            "telefone": "919012345",
-            "nif": "919012345",
-            "nascimento": "03/09/1967",
-            "email": "robin.b@email.com"
-        },
-        {
-            "nome": "Erica Sinclair",
-            "telefone": "920123456",
-            "nif": "920123456",
-            "nascimento": "12/01/1975",
-            "email": "erica@email.com"
-        },
-        {
-            "nome": "Joyce Byers",
-            "telefone": "921234567",
-            "nif": "921234567",
-            "nascimento": "18/05/1943",
-            "email": "joyce.byers@email.com"
-        },
-        {
-            "nome": "Jim Hopper",
-            "telefone": "922345678",
-            "nif": "922345678",
-            "nascimento": "04/10/1942",
-            "email": "hopper@email.com"
-        },
-        {
-            "nome": "Karen Wheeler",
-            "telefone": "923456789",
-            "nif": "923456789",
-            "nascimento": "11/02/1946",
-            "email": "karen.w@email.com"
-        },
-        {
-            "nome": "Ted Wheeler",
-            "telefone": "924567890",
-            "nif": "924567890",
-            "nascimento": "27/06/1944",
-            "email": "ted.w@email.com"
-        },
-        {
-            "nome": "Billy Hargrove",
-            "telefone": "925678901",
-            "nif": "925678901",
-            "nascimento": "12/11/1966",
-            "email": "billy@email.com"
-        },
-        {
-            "nome": "Suzie Bingham",
-            "telefone": "926789012",
-            "nif": "926789012",
-            "nascimento": "08/03/1972",
-            "email": "suzie@email.com"
-        },
-        {
-            "nome": "Bob Newby",
-            "telefone": "927890123",
-            "nif": "927890123",
-            "nascimento": "09/09/1958",
-            "email": "bob.newby@email.com"
         }
     ]
 }

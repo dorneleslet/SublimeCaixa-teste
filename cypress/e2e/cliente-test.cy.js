@@ -25,4 +25,13 @@ describe('Cadastrar novo cliente', () => {
     // cy.get('[data-test=btn-salvar]').click();
   
   })
+
+  it('Acessar a página de serviços e cadastrar um serviço com sucesso', () => {
+    cy.visit('https://sublimecaixa-teste.onrender.com/servicos/novo/');
+    cy.get('[data-test="servico-cadastro"]').type('Serviço Teste');
+    cy.get('[data-test="preco-cadastro"]').type('45');
+    cy.get('[data-test="botao-cadastro"]').click();
+    cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
+  }
+)
 })

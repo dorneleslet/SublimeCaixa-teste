@@ -14,7 +14,8 @@ describe('Página de cadastro de clientes', () => {
             //cy.get('#nascimento').clear().type(usuario.nascimento);
             //cy.get('[data-test="email-cadastro"]').clear().type(usuario.email);
             cy.get('[data-test=btn-salvar]').click();
-            cy.contains('')
+            cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+        
         
         })
     })    
