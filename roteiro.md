@@ -438,8 +438,6 @@ Validar o fluxo de exclusão de ficha técnica de cliente na edição de cadastr
 
 ## 📑 Casos de Teste: Serviço
 
----
-
 ### CT017: Cadastro de serviço com Sucesso (Completo)
 
 ### **Objetivo** 
