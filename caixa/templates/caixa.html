@@ -106,7 +106,6 @@
                         <input type="text" class="form-control campo-busca buscar_produto" placeholder="Informe o produto...">
                         <!-- Lista da barra de pesquisa -->
                         <ul id="lista_produtos" class="lista_produtos">
-                            <!-- <li class="produto-selecionado" data-id="{{ produto.id }}" data-nome="{{ produto.nome }}" data-estoque="{{ produto.quantidade }}" data-quantidade="1" data-preco="{{ produto.preco_unitario }}"></li> -->
                         </ul>
                      </div>
 
@@ -347,8 +346,7 @@
         <div class="card-header">
             <div class="pagamento-total mt-3">
                 <h3>Total: <span id="total" class="fw-bold">0,00€</span></h3>
-                <!-- <label for="total" class="form-label">Total:</label> 
-                <input type="text" id="total" class="form-control" readonly> -->
+                
             </div>
         <hr>    
         
@@ -360,16 +358,12 @@
             <p>Venda registrada com sucesso!</p>
         </div>
         <br><br>
-        <!-- <div id="mensagem-caixa" class="mensagem-sucesso" style="display: none;"></div> -->
-        <!-- <hr>  
-        <a href="{% url 'historico_vendas' %}"> Ver Histórico de Vendas</a> -->
         </div>
     </div>
 
 </div>
 
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="{% static 'caixa/js/caixa.js' %}"></script>
 
 {% endblock %}

@@ -45,34 +45,8 @@
               </a>
               <span class="tooltip">Agenda</span>
             </li>
-            <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-              
-
-            {% if user.is_authenticated %}
-              <li>
-                <a href="{% url 'logout' %}">
-                  <i class='bx bx-log-out'></i>
-                  <span class="links_name">Sair</span>
-                </a>
-                <span class="tooltip">Sair</span>
-              </li>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-            <li>
-              <a href=""> -->
-                <!-- <div class="user-info m-3 text-white"> COMENTADO -->
-                    <!-- <i class='bx bx-user'></i>
-                    <span class="links_name"><strong>{{ user.username }}</strong></span> -->
-                <!-- </div> COMENTADO -->
-              <!-- </a>
-              <span class="tooltip">{{ user.username }}</span>
-            </li>
-            {% endif %} -->
-
-            
-
           {% endif %}
+
           {% if 'Administrador' in grupos_usuario %}
             <li>
               <a href="{% url 'caixa_principal' %}">
@@ -123,38 +97,7 @@
               </a>
               <span class="tooltip">Configurações</span>
             </li>
-          
-            <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-              
-
-            {% if user.is_authenticated %}
-              <li>
-                <a href="{% url 'logout' %}">
-                  <i class='bx bx-log-out'></i>
-                  <span class="links_name">Sair</span>
-                </a>
-                <span class="tooltip">Sair</span>
-                  
-              </li>
-            {% endif %}
-
-            {% if user.is_authenticated %}
-            <li>
-              <a href=""> -->
-                <!-- <div class="user-info m-3 text-white"> COMENTADO-->
-                    <!-- <i class='bx bx-user'></i>
-                    <span class="links_name"><strong>{{ user.username }}</strong></span> -->
-                <!-- </div> COMENTADO-->
-              <!-- </a>
-              <span class="tooltip">{{ user.username }}</span>
-            </li>
-            {% endif %}-->
           {% endif %} 
-                       
-            
-            <!-- <p style="color:white;">Usuário autenticado: {{ user.is_authenticated }}</p> COMENTADO-->
-            
-
         </ul>
 
         <div class="sidebar-footer">
@@ -172,36 +115,14 @@
           {% if user.is_authenticated %}
           <li>
             <a href="#">
-              <!-- <div class="user-info m-3 text-white"> COMENTADO-->
                   <i class='bx bx-user'></i>
                   <span class="links_name"><strong>{{ user.username }}</strong></span>
-              <!-- </div> COMENTADO-->
             </a>
             <span class="tooltip">{{ user.username }}</span>
           </li>
           {% endif %}
           <br><br>
         </div>  
-       
-
-        <!-- {% if user.is_authenticated %}
-        <div>
-          <a href="{% url 'logout' %}" style="background: red; color: white; display: block; padding: 10px;">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Sair</span>
-          </a>
-          <span class="tooltip">Sair</span>
-            
-        </div>
-        {% endif %}
-        
-        {% if user.is_authenticated %}
-          <div class="user-info m-3 text-white">
-            <small>Logado como:</small><br>
-            <strong>{{ user.username }}</strong>
-          </div>
-        {% endif %}
-        <p style="color:white;">Usuário autenticado: {{ user.is_authenticated }}</p>-->
     </div>
       
       
@@ -217,11 +138,9 @@
     {% block 'body' %}
     {% endblock %}
     <script src="{% static 'general/js/base.js' %}"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <!-- Inputmask (para o NIF) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
     <!-- Intl-Tel-Input CSS e JS -->
