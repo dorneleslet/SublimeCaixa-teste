@@ -4,7 +4,7 @@ Este é um sistema interno desenvolvido para um salão de beleza, com foco em co
 O projeto serviu como prática para consolidar meus conhecimentos em Python (Django), JavaScript, HTML e CSS, além de reforçar habilidades importantes para QA, como organização de dados, validação de entradas e usabilidade.
 
 ## Funcionalidades
-- Cadastro e edição de clientes (com fichas de acompanhamentos)  
+- Cadastro e edição de clientes (com fichas técnicas de acompanhamentos)  
 - Cadastro e edição de serviços  
 - Controle de caixa (registro e relatórios de vendas)  
 - Gestão de estoque (entradas e saídas de produtos)  
@@ -20,6 +20,8 @@ O projeto serviu como prática para consolidar meus conhecimentos em Python (Dja
 - servicos/ → módulo de cadastro e edição de serviços  
 - estoque/ → módulo de controle de produtos  
 - caixa/ → módulo de registro de vendas 
+- configuracoes/ → módulo de acesso a relatórios e gestão de usuários do sistema  
+
 
 ## Aprendizados
 Durante o desenvolvimento deste projeto, pude reforçar conhecimentos em:
@@ -34,7 +36,7 @@ Durante o desenvolvimento deste projeto, pude reforçar conhecimentos em:
 
 ## Como executar o projeto
 1. Clone este repositório:  
-   git clone https://github.com/dorneleslet/SublimeCaixa.git
+   git clone https://github.com/dorneleslet/SublimeCaixa-teste.git
    
 3. Crie e ative um ambiente virtual:
 python -m venv venv
@@ -55,4 +57,3 @@ Status do Projeto
 Concluído – atualmente em uso no salão de beleza e disponível para melhorias futuras.
 
 Desenvolvido por Letícia Dorneles – em transição de carreira para QA Tester.
-Atualmente estudando CTFL (ISTQB), testes manuais e automação com Python.

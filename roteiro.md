@@ -3,7 +3,7 @@
 ## Ambiente e Dados de Teste
 
 ### URL do Sistema
-https://sublimecaixa.onrender.com/accounts/login/
+https://sublimecaixa-teste.onrender.com/accounts/login/
 
 -**Ambiente de Testes:**``
 
@@ -55,8 +55,6 @@ https://sublimecaixa.onrender.com/accounts/login/
 
 ## 📑 Casos de Teste: Login
 
----
-
 ### CT001: Login Sistema de Caixa Sublime com Sucesso (Completo)
 
 ### **Objetivo** 
@@ -100,8 +98,6 @@ Validar o tratamento de erro do sistema quando um login é inválido.
 ---
 
 ## 📑 Casos de Teste: Cliente
-
----
 
 ### CT003: Cadastro de cliente com Sucesso (Completo)
 
