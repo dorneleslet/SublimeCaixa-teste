@@ -388,7 +388,7 @@ function inicializarBuscaProduto(bloco) {
                         // const bloco = document.createElement('div');
                         bloco.classList.add('produto-selecionado');
                         bloco.dataset.id = p.id;
-                        bloco.dataset.quantidade = 1; // sempre 1, já que você vende 1 por vez
+                        bloco.dataset.quantidade = 1; // sempre 1, já que vende 1 por vez
                         bloco.dataset.preco = p.preco;
                         bloco.dataset.nome = p.nome;
                         bloco.dataset.estoque = p.quantidade;

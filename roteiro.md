@@ -802,3 +802,112 @@ Validar o fluxo de realizar venda no caixa bem-sucedida.
 2. A página é atualizada e o usuário permanece na tela do caixa.
 
 ---
+
+### CT032: Realizando uma venda no caixa sem dados do cliente
+
+### **Objetivo** 
+
+Validar o fluxo de realizar venda no caixa sem os dados do cliente.
+
+### **Pré-condições**
+
+1. O usuário possui os dados de serviços ou produtos para realizar a venda.
+
+| Passo | Ação | Resultado Esperado |
+| --- | --- | --- |
+| 1 | O usuário acessa a página de caixa do sistema. | Deve exibir uma tela com abas de cliente, serviços, produtos, ficha técnica, profissional, pagamento, notas internas e um botão de "Finalizar Venda". |
+| 2 | O usuário NÃO preenche o campo "Buscar cliente". | - |
+| 3 | O usuário preenche o campo "Buscar procedimento" com o valor "Corte e Finalização" da massa de dados. | - |
+| 4 | O usuário preenche o campo "Buscar produto" com o valor "Shampoo" da massa de dados. | - |
+| 5 | O usuário preenche o campo "Procedimento realizado por" com o valor "Sara" da massa de dados. | - |
+| 6 | O usuário preenche o campo "Desconto" com o valor "3" da massa de dados. | - |
+| 7 | O usuário preenche o campo "Sinal" com o valor "10" da massa de dados. | - |
+| 8 | O usuário no campo "Deseja fatura" clica na opção com o valor "Sim". | - |
+| 9 | O usuário no campo "Forma de pagamento" clica na opção com o valor "MBWay". | - |
+| 10 | O usuário NÃO preenche o campo "Notas internas". | - |
+| 11 | O usuário clica no botão "Finalizar Venda". | Aparece uma mensagem de sucesso "**Venda registrada com sucesso!**" |
+2. A página é atualizada e o usuário permanece na tela do caixa. Quando é feito uma venda sem registro de cliente, no relatório de vendas o cliente fica como "Não informado".
+
+---
+
+### CT033: Realizando uma venda no caixa sem produto no estoque
+
+### **Objetivo** 
+
+Validar o fluxo de realizar venda no caixa sem produto no estoque.
+
+### **Pré-condições**
+
+1. O usuário possui os dados de serviços ou produtos para realizar a venda.
+2. O usuário deve cadastrar um produto "Produto teste" com a quantidade "0"
+
+| Passo | Ação | Resultado Esperado |
+| --- | --- | --- |
+| 1 | O usuário acessa a página de caixa do sistema. | Deve exibir uma tela com abas de cliente, serviços, produtos, ficha técnica, profissional, pagamento, notas internas e um botão de "Finalizar Venda". |
+| 2 | O usuário NÃO preenche o campo "Buscar cliente". | - |
+| 3 | O usuário NÃO preenche o campo "Buscar procedimento". | - |
+| 4 | O usuário preenche o campo "Buscar produto" com o valor "Produto teste". | - |
+| 5 | O usuário NÃO preenche o campo "Procedimento realizado por". | - |
+| 6 | O usuário NÃO preenche o campo "Desconto". | - |
+| 7 | O usuário NÃO preenche o campo "Sinal". | - |
+| 8 | O usuário no campo "Deseja fatura" NÃO seleciona uma opção. | - |
+| 9 | O usuário no campo "Forma de pagamento" clica na opção com o valor "MBWay". | - |
+| 10 | O usuário NÃO preenche o campo "Notas internas". | - |
+| 11 | O usuário clica no botão "Finalizar Venda". | Aparece uma mensagem "**O produto "Produto teste" está sem estoque disponível e não pode ser vendido.**" |
+3. O usuário permanece na tela do caixa e não é possível realizar uma venda sem o produto escolhido no estoque.
+
+---
+
+### CT034: Realizando uma venda no caixa com o valor total zerado
+
+### **Objetivo** 
+
+Validar o fluxo de realizar venda no caixa com o valor total zerado.
+
+### **Pré-condições**
+
+1. O usuário possui os dados de serviços ou produtos para realizar a venda.
+
+| Passo | Ação | Resultado Esperado |
+| --- | --- | --- |
+| 1 | O usuário acessa a página de caixa do sistema. | Deve exibir uma tela com abas de cliente, serviços, produtos, ficha técnica, profissional, pagamento, notas internas e um botão de "Finalizar Venda". |
+| 2 | O usuário NÃO preenche o campo "Buscar cliente". | - |
+| 3 | O usuário NÃO preenche o campo "Buscar procedimento". | - |
+| 4 | O usuário preenche o campo "Buscar produto" com o valor "Corte e Finalização" da massa de dados. | - |
+| 5 | O usuário NÃO preenche o campo "Procedimento realizado por". | - |
+| 6 | O usuário preenche o campo "Desconto" com o valor "45.99". | - |
+| 7 | O usuário NÃO preenche o campo "Sinal". | - |
+| 8 | O usuário no campo "Deseja fatura" NÃO seleciona uma opção. | - |
+| 9 | O usuário no campo "Forma de pagamento" clica na opção com o valor "MBWay". | - |
+| 10 | O usuário NÃO preenche o campo "Notas internas". | - |
+| 11 | O usuário clica no botão "Finalizar Venda". | Aparece uma mensagem "**O total da venda não pode ser zero ou negativo!**" |
+2. O usuário permanece na tela do caixa e não é possível realizar uma venda com o valor sendo zero ou negativo, a venda só é realizada se o valor total for maior que 0,01€.
+
+---
+
+### CT035: Realizando uma venda no caixa sem um método de pagamento
+
+### **Objetivo** 
+
+Validar o fluxo de realizar venda no caixa sem os dados do cliente.
+
+### **Pré-condições**
+
+1. O usuário possui os dados de serviços ou produtos para realizar a venda.
+
+| Passo | Ação | Resultado Esperado |
+| --- | --- | --- |
+| 1 | O usuário acessa a página de caixa do sistema. | Deve exibir uma tela com abas de cliente, serviços, produtos, ficha técnica, profissional, pagamento, notas internas e um botão de "Finalizar Venda". |
+| 2 | O usuário NÃO preenche o campo "Buscar cliente". | - |
+| 3 | O usuário NÃO preenche o campo "Buscar procedimento". | - |
+| 4 | O usuário preenche o campo "Buscar produto" com o valor "Corte e Finalização" da massa de dados. | - |
+| 5 | O usuário NÃO preenche o campo "Procedimento realizado por". | - |
+| 6 | O usuário NÃO preenche o campo "Desconto". | - |
+| 7 | O usuário NÃO preenche o campo "Sinal". | - |
+| 8 | O usuário no campo "Deseja fatura" NÃO seleciona uma opção. | - |
+| 9 | O usuário no campo "Forma de pagamento" NÃO seleciona uma opção. | - |
+| 10 | O usuário NÃO preenche o campo "Notas internas". | - |
+| 11 | O usuário clica no botão "Finalizar Venda". | Aparece uma mensagem "**Por favor, selecione uma forma de pagamento!**" |
+2. O usuário permanece na tela do caixa e não é possível realizar uma venda sem selecionar o método de pagamento.
+
+---
