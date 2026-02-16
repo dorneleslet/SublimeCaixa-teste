@@ -2,6 +2,8 @@
 {% load static %}
 {% csrf_token %}
 
+{% block title %}Caixa | Sublime Caixa{% endblock %}
+
 {% block dashboard %}
 
 <div class="container">
@@ -367,7 +369,3 @@
 <script src="{% static 'caixa/js/caixa.js' %}"></script>
 
 {% endblock %}
-
-
-
-
