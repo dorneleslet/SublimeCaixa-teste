@@ -78,4 +78,5 @@ def criar_grupos_iniciais():
         if criado:
             print(f'Grupo {nome} criado!')
 
-
+def message(request):
+    return render(request, 'message.html')

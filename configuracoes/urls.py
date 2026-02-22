@@ -8,7 +8,7 @@ urlpatterns = [
     path('usuarios/adicionar/', views.adicionar_usuario, name='adicionar_usuario'),
     path('usuarios/<int:user_id>/editar/',views.editar_usuario, name='editar_usuario'),
     path('usuarios/<int:user_id>/excluir/', views.excluir_usuario, name='excluir_usuario'),
-
+    path('message/', views.message, name='message'),
 
 
     # #rota de login/logout

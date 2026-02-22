@@ -65,7 +65,7 @@ https://sublimecaixa-teste.onrender.com/accounts/login/
 
 ### **Objetivo** 
 
-Autenticação de uauário, validar o fluxo de login bem-sucedido.
+Autenticação de usuário, validar o fluxo de login bem-sucedido.
 
 ### **Pré-condições**
 
