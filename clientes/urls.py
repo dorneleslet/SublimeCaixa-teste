@@ -11,6 +11,8 @@ urlpatterns = [
     path('<int:cliente_id>/detalhe/', views.detalhe_cliente, name='detalhe_cliente'),
     path('<int:cliente_id>/ocultar/', views.ocultar_cliente, name='ocultar_cliente'),
     path('ficha/<int:ficha_id>/excluir/', views.excluir_ficha, name='excluir_ficha'),
+    path('ficha/<int:ficha_id>/detalhes/', views.ficha_detalhes, name='ficha_detalhes'),
+    path('ficha/<int:ficha_id>/update/', views.update_ficha, name='update_ficha'),
 
 
 ]

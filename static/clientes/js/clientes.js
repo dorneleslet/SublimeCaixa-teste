@@ -446,8 +446,10 @@ function selecionarCliente(id, nome) {
 }
 // excluir ficha do cliente
 document.addEventListener('click', function(event) {
-    if(event.target.classList.contains('btn-excluir-ficha')) {
-        const fichaId = event.target.dataset.id;
+    const btnExcluir = event.target.closest('.btn-excluir-ficha');
+    if(btnExcluir) {
+        event.preventDefault();
+        const fichaId = btnExcluir.dataset.id;
         if(confirm('Tem certeza que deseja excluir esta ficha?')) {
             fetch(`/clientes/ficha/${fichaId}/excluir/`, {
                 method: 'POST',
@@ -513,4 +515,67 @@ function ocultarCliente(id, event) {
     newBtnCancel.onclick = () => {
         modal.style.display = 'none';
     };
+}
+
+function abrirModalEdicaoFicha(fichaId) {
+    fetch(`/clientes/ficha/${fichaId}/detalhes/`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            const ficha = data.ficha;
+            document.getElementById('edit-ficha-id').value = ficha.id;
+            document.getElementById('edit-ficha-data').value = ficha.data;
+            document.getElementById('edit-ficha-profissional').value = ficha.profissional;
+            document.getElementById('edit-ficha-valor').value = ficha.valor.replace('.', ',');
+            document.getElementById('edit-ficha-procedimento').value = ficha.procedimento;
+            document.getElementById('edit-ficha-homecare').value = ficha.homecare;
+            document.getElementById('edit-ficha-observacao').value = ficha.observacao;
+
+            // Usando jQuery para abrir o modal (padrão do projeto)
+            $('#modalEditarFicha').modal('show');
+        } else {
+            alert('Erro ao carregar dados da ficha.');
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert('Erro ao carregar dados da ficha.');
+    });
+}
+
+function salvarEdicaoFicha() {
+    const fichaId = document.getElementById('edit-ficha-id').value;
+    const csrf_token = getCookie('csrftoken');
+
+    const data = {
+        data: document.getElementById('edit-ficha-data').value,
+        profissional: document.getElementById('edit-ficha-profissional').value,
+        valor: document.getElementById('edit-ficha-valor').value,
+        procedimento: document.getElementById('edit-ficha-procedimento').value,
+        homecare: document.getElementById('edit-ficha-homecare').value,
+        observacao: document.getElementById('edit-ficha-observacao').value,
+    };
+
+    fetch(`/clientes/ficha/${fichaId}/update/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf_token,
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.status === 'ok') {
+            $('#modalEditarFicha').modal('hide');
+            const clienteId = document.getElementById('id_cliente').value;
+            carregarFichas(clienteId); // Recarrega o histórico para mostrar a alteração
+        } else {
+            alert('Erro ao salvar: ' + (result.mensagem || 'Verifique os dados.'));
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao salvar ficha:', error);
+        alert('Ocorreu um erro inesperado ao salvar.');
+    });
 }

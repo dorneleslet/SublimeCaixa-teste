@@ -254,3 +254,59 @@ def excluir_ficha(request, ficha_id):
         return JsonResponse({'status': 'ok', 'ficha_id': ficha_id})
     else:
         return JsonResponse({'status': 'erro', 'mensagem': 'Método inválido'})
+
+def ficha_detalhes(request, ficha_id):
+    try:
+        ficha = get_object_or_404(FichaCliente, id=ficha_id)
+        dados = {
+            'id': ficha.id,
+            'data': ficha.data.strftime('%d/%m/%Y'),
+            'profissional': ficha.profissional or "",
+            'valor': f"{ficha.valor:.2f}",
+            'procedimento': ficha.procedimento or "",
+            'homecare': ficha.homecare or "",
+            'observacao': ficha.observacao or "",
+        }
+        return JsonResponse({'status': 'ok', 'ficha': dados})
+    except FichaCliente.DoesNotExist:
+        return JsonResponse({'status': 'erro', 'mensagem': 'Ficha não encontrada'}, status=404)
+
+
+@csrf_exempt
+def update_ficha(request, ficha_id):
+    if request.method == 'POST':
+        try:
+            ficha = get_object_or_404(FichaCliente, id=ficha_id)
+            data = json.loads(request.body)
+
+            data_str = data.get('data')
+            valor_str = str(data.get('valor', '0')).replace(',', '.').strip()
+
+            if not data_str or not valor_str:
+                return JsonResponse({'status': 'erro', 'mensagem': 'Data e valor são obrigatórios.'}, status=400)
+
+            try:
+                data_formatada = datetime.strptime(data_str, '%d/%m/%Y')
+                if timezone.is_naive(data_formatada):
+                    ficha.data = timezone.make_aware(data_formatada)
+                else:
+                    ficha.data = data_formatada
+            except (ValueError, TypeError):
+                return JsonResponse({'status': 'erro', 'mensagem': 'Formato de data inválido. Use DD/MM/AAAA.'}, status=400)
+            
+            try:
+                ficha.valor = float(valor_str)
+            except (ValueError, TypeError):
+                return JsonResponse({'status': 'erro', 'mensagem': 'Formato de valor inválido.'}, status=400)
+
+            ficha.profissional = data.get('profissional', '')
+            ficha.procedimento = data.get('procedimento', '')
+            ficha.homecare = data.get('homecare', '')
+            ficha.observacao = data.get('observacao', '')
+            
+            ficha.save()
+
+            return JsonResponse({'status': 'ok'})
+        except Exception as e:
+            return JsonResponse({'status': 'erro', 'mensagem': str(e)}, status=500)
+    return JsonResponse({'status': 'erro', 'mensagem': 'Método não permitido'}, status=405)

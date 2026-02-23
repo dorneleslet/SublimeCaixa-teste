@@ -477,5 +477,51 @@
             
         </div>
     </div>
+
+    <!-- MODAL DE EDIÇÃO DE FICHA -->
+    <div class="modal fade" id="modalEditarFicha" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Ficha Técnica</h5>
+                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-edit-ficha">
+                        <input type="hidden" id="edit-ficha-id">
+
+                        <div class="mb-2">
+                            <label class="form-label">Data do procedimento:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="data" id="edit-ficha-data" placeholder="dd/mm/aaaa" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Profissional que realizou:</label>
+                            <input type="text" class="form-control" name="profissional" id="edit-ficha-profissional" maxlength="50">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Valor pago:<span style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="valor" id="edit-ficha-valor" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Procedimento realizado:</label>
+                            <textarea class="form-control" name="procedimento" id="edit-ficha-procedimento" maxlength="200"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Linha home care:</label>
+                            <textarea class="form-control" name="homecare" id="edit-ficha-homecare" maxlength="200"></textarea>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Observações:</label>
+                            <textarea class="form-control" name="observacao" id="edit-ficha-observacao" rows="2" maxlength="200"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarEdicaoFicha()">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="{% static 'clientes/js/clientes.js' %}"></script>
 {% endblock %}
