@@ -70,12 +70,20 @@ function getCookie(name) {
 
 function update_cliente(){  // envia alterações para o backend | atualiza os dados via fetch com POST
     
-    const btn = document.getElementById("btn-salvar");
+    const btn = document.getElementById("btn-salvar-alteracoes");
     const msg = document.getElementById("mensagem-sucesso");
 
     const originalText = btn.value;
     btn.disabled = true; //desativa o botão
     btn.value = "Salvando..."; //troca o texto do botão
+
+    // Limpa erros anteriores
+    document.querySelectorAll('#form-att-cliente .form-control').forEach(el => {
+        el.classList.remove('is-invalid');
+    });
+    document.querySelectorAll('#form-att-cliente .invalid-feedback').forEach(el => {
+        el.innerHTML = '';
+    });
 
     let nome = document.getElementById('edit-nome').value
     let telefone = itiEdicao.getNumber(); // inclui o ddi
@@ -83,6 +91,17 @@ function update_cliente(){  // envia alterações para o backend | atualiza os d
     let email = document.getElementById('edit-email').value
     let nif = document.getElementById('edit-nif').value
     let id = document.getElementById('id_cliente').value
+
+    // Validação NIF (Client-side)
+    let nifNumeros = nif.replace(/\D/g, '');
+    if (nifNumeros.length !== 9) {
+        const input = document.getElementById('edit-nif');
+        input.classList.add('is-invalid');
+        input.nextElementSibling.innerHTML = 'O NIF deve conter 9 dígitos.';
+        btn.disabled = false;
+        btn.value = originalText;
+        return;
+    }
 
     fetch('/clientes/update_cliente/' + id, {
         method: 'POST',
@@ -149,9 +168,7 @@ function update_cliente(){  // envia alterações para o backend | atualiza os d
                 btn.value = originalText;
                 btn.disabled = false; // reativa o botão
                 listarClientes();
-                // esconde o formulario e mostra a lista
-                document.getElementById('form-att-cliente').style.display = 'none';
-                document.getElementById('lista-clientes').style.display = 'block';
+                voltarParaLista();
             }, 2000);
 
         })
@@ -252,6 +269,22 @@ function filtrarClientes() {
     });
 }
 
+function habilitarEdicaoCliente() {
+    // Habilita os campos do formulário
+    document.getElementById('edit-nome').disabled = false;
+    document.getElementById('edit-telefone').disabled = false;
+    document.getElementById('edit-nif').disabled = false;
+    document.getElementById('edit-nascimento').disabled = false;
+    document.getElementById('edit-email').disabled = false;
+
+    // Esconde o botão "Editar dados"
+    document.getElementById('btn-editar-dados').style.display = 'none';
+
+    // Mostra os botões "Salvar alterações" e "Excluir"
+    document.getElementById('btn-salvar-alteracoes').style.display = 'inline-block';
+    document.getElementById('btn-excluir-cliente').style.display = 'inline-block';
+}
+
 function voltarParaLista() {
     // Mostra barra e lista
     document.getElementById('search-bar').style.display = 'block';
@@ -259,6 +292,17 @@ function voltarParaLista() {
     // Oculta o formulário de edição
     document.getElementById('form-att-cliente').style.display = 'none';
     document.getElementById('ficha-container').style.display = 'none';
+
+    // Reseta o estado do formulário para "congelado"
+    document.getElementById('edit-nome').disabled = true;
+    document.getElementById('edit-telefone').disabled = true;
+    document.getElementById('edit-nif').disabled = true;
+    document.getElementById('edit-nascimento').disabled = true;
+    document.getElementById('edit-email').disabled = true;
+
+    document.getElementById('btn-editar-dados').style.display = 'inline-block';
+    document.getElementById('btn-salvar-alteracoes').style.display = 'none';
+    document.getElementById('btn-excluir-cliente').style.display = 'inline-block';
 }
 
 function removerAcentos(texto) {

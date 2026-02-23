@@ -224,12 +224,12 @@
                     <hr>
                     <input type="hidden" id="id_cliente">
                     <label for="edit-nome">Nome Completo:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="Nome do cliente" id="edit-nome" name="edit-nome" maxlength="50" required>
+                    <input type="text" class="form-control" placeholder="Nome do cliente" id="edit-nome" name="edit-nome" maxlength="50" required disabled>
                     <div class="invalid-feedback" style="color: red;"></div>
                     <br>
                     <label for="edit-telefone">Telefone:<span style="color: red;">*</span></label>
                     <br>
-                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" required>
+                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" required disabled>
                     <div id="erro_edit-telefone" class="invalid-feedback" style="color: red;"></div>
                     <script>
                         let itiEdicao = null;
@@ -262,7 +262,7 @@
                     </script>
                     <br><br>
                     <label for="edit-nif">NIF:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="___.___.___" id="edit-nif" name="edit-nif" required>
+                    <input type="text" class="form-control" placeholder="___.___.___" id="edit-nif" name="edit-nif" required disabled>
                     <div class="invalid-feedback" style="color: red;"></div>
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
@@ -293,7 +293,7 @@
                     </script>
                     <br>
                     <p>Nascimento:</p>
-                    <input id="edit-nascimento" type="text" class='form-control' name="edit-nascimento" value="">
+                    <input id="edit-nascimento" type="text" class='form-control' name="edit-nascimento" value="" disabled>
                     <div class="invalid-feedback" id="erro_edit-nascimento"></div>
                     <script>
                         // máscara e validação nascimento dd/mm/aaaa
@@ -345,12 +345,13 @@
                     </script>
                     <br>
                     <p>E-mail</p>
-                    <input id="edit-email" type="email" class='form-control' name="edit-email" value="" maxlength="50">
+                    <input id="edit-email" type="email" class='form-control' name="edit-email" value="" maxlength="50" disabled>
 
                     <hr style="background-color:gray;">
                     <br>
-                    <input id="btn-salvar" onclick="update_cliente()" type="button" value="Salvar alterações" class="btn btn-success">
-                    <button class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value)">Excluir</button>
+                    <button id="btn-editar-dados" type="button" onclick="habilitarEdicaoCliente()" class="btn btn-secondary">Editar dados</button>
+                    <input id="btn-salvar-alteracoes" onclick="update_cliente()" type="button" value="Salvar alterações" class="btn btn-success" style="display: none;">
+                    <button id="btn-excluir-cliente" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value)" >Excluir</button>
 
                     <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert" style="display: none;">
                         <p>Dados alterados com sucesso!</p>
