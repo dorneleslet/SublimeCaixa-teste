@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-w0pr7xt=t^_o+@b42op_k4@99l#gm1jrogynvc4f!f(^%ri+ff
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["sublimecaixa-teste.onrender.com", "www.sublimecaixa-teste.onrender.com"]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -79,12 +79,8 @@ WSGI_APPLICATION = 'sublimecaixa.wsgi.application'
 
 DATABASES = {
     'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'testesublime_db',
-    'USER': 'testesublime_db_user',
-    'PASSWORD': 'qAAhscvxo88dj8vTZRMxaEuBbDKd7FCN',
-    'HOST': 'dpg-d5mij3mmcj7s73c43j8g-a.virginia-postgres.render.com',
-    'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
