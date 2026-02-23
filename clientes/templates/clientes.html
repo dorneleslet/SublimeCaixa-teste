@@ -442,7 +442,7 @@
                                 </div>
                                 <div class="mb-2">
                                     <label>Valor pago:<span style="color: red;">*</span></label>
-                                    <input type="text" step="0.01" min="0" maxlength="7" name="valor" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" class="form-control" placeholder="0,01" required>
+                                    <input type="text" id="add-ficha-valor" maxlength="15" name="valor" inputmode="numeric" class="form-control" placeholder="0,00" required>
                                 </div>
                                 <div class="mb-2">
                                     <label>Procedimento realizado:</label>
@@ -453,7 +453,7 @@
                                     <textarea name="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
                                 </div>
                                 <div class="mb-2">
-                                    <label>Observação:</label>
+                                    <label>Observações:</label>
                                     <textarea name="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
                                 </div>
                                 <br>
@@ -493,35 +493,106 @@
                         <div class="mb-2">
                             <label class="form-label">Data do procedimento:<span style="color: red;">*</span></label>
                             <input type="text" class="form-control" name="data" id="edit-ficha-data" placeholder="dd/mm/aaaa" required>
+                            <div id="erro-data-edit" class="invalid-feedback" style="color: red;"></div>
                         </div>
+                        <script>
+                            // máscara e validação da data dd/mm/aaaa
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const dataProcedEdit = document.getElementById('edit-ficha-data');
+                                const erro = document.getElementById('erro-data-edit');
+
+                                dataProcedEdit.addEventListener('input', function () {
+                                    let data = dataProcedEdit.value.replace(/\D/g, ""); // só aceita números
+                                    if (data.length > 8) data = data.slice(0, 8);
+
+                                    let formatado = "";
+                                    if (data.length > 4) {
+                                        formatado = data.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                    } else if (data.length > 2) {
+                                        formatado = data.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                    } else {
+                                        formatado = data;
+                                    }
+                                    dataProcedEdit.value = formatado;
+                                });
+
+                                dataProcedEdit.addEventListener('blur', function () {
+                                    const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                    if (dataProcedEdit.value && !regex.test(dataProcedEdit.value)) {
+                                        erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
+                                        erro.style.display = 'block';
+                                        return;
+                                    } 
+
+                                    // pega o ano atual
+                                    if (dataProcedEdit.value) {
+                                        const anoAtual = new Date().getFullYear();
+                                        const partes = dataProcedEdit.value.split('/');
+                                        const ano = parseInt(partes[2]);
+
+                                        if (ano > anoAtual) {
+                                            erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                            erro.style.display = 'block';
+                                            return;
+                                        }
+                                    }    
+                                    // se passou em todas validações
+                                    erro.style.display = 'none';
+                                });
+                            });
+                        </script>
+
+
                         <div class="mb-2">
                             <label class="form-label">Profissional que realizou:</label>
                             <input type="text" class="form-control" name="profissional" id="edit-ficha-profissional" maxlength="50">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Valor pago:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="valor" id="edit-ficha-valor" required>
+                            <input type="text" maxlength="15" class="form-control" name="valor" id="edit-ficha-valor" inputmode="numeric" placeholder="0,00" required>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Procedimento realizado:</label>
-                            <textarea class="form-control" name="procedimento" id="edit-ficha-procedimento" maxlength="200"></textarea>
+                            <textarea class="form-control" name="procedimento" id="edit-ficha-procedimento" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Linha home care:</label>
-                            <textarea class="form-control" name="homecare" id="edit-ficha-homecare" maxlength="200"></textarea>
+                            <textarea class="form-control" name="homecare" id="edit-ficha-homecare" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Observações:</label>
-                            <textarea class="form-control" name="observacao" id="edit-ficha-observacao" rows="2" maxlength="200"></textarea>
+                            <textarea class="form-control" name="observacao" id="edit-ficha-observacao" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="salvarEdicaoFicha()">Salvar Alterações</button>
+                    <button type="button" class="btn btn-success" onclick="salvarEdicaoFicha()">Salvar Alterações</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputsValor = [document.getElementById('add-ficha-valor'), document.getElementById('edit-ficha-valor')];
+            
+            inputsValor.forEach(input => {
+                if (!input) return;
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, "");
+                    if (value === "") {
+                        e.target.value = "";
+                        return;
+                    }
+                    // Converte para float e fixa 2 casas decimais (estilo ATM)
+                    value = (parseInt(value) / 100).toFixed(2);
+                    // Troca ponto por vírgula para decimal e adiciona ponto para milhares
+                    value = value.replace(".", ",");
+                    value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                    e.target.value = value;
+                });
+            });
+        });
+    </script>
     <script src="{% static 'clientes/js/clientes.js' %}"></script>
 {% endblock %}

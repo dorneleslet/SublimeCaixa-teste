@@ -526,7 +526,12 @@ function abrirModalEdicaoFicha(fichaId) {
             document.getElementById('edit-ficha-id').value = ficha.id;
             document.getElementById('edit-ficha-data').value = ficha.data;
             document.getElementById('edit-ficha-profissional').value = ficha.profissional;
-            document.getElementById('edit-ficha-valor').value = ficha.valor.replace('.', ',');
+            
+            // Formata o valor para exibição (ex: 1.234,56)
+            let valorFormatado = parseFloat(ficha.valor).toFixed(2).replace('.', ',');
+            valorFormatado = valorFormatado.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            document.getElementById('edit-ficha-valor').value = valorFormatado;
+
             document.getElementById('edit-ficha-procedimento').value = ficha.procedimento;
             document.getElementById('edit-ficha-homecare').value = ficha.homecare;
             document.getElementById('edit-ficha-observacao').value = ficha.observacao;

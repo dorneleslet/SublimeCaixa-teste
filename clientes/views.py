@@ -220,7 +220,7 @@ def adicionar_ficha(request, cliente_id): #salva ficha e retorna json
                 cliente=cliente,
                 data=data_formatada,
                 profissional=profissional,
-                valor=float(valor.replace(',', '.')), #garante o decimal
+                valor=float(valor.replace('.', '').replace(',', '.')), # remove ponto de milhar e troca virgula por ponto
                 procedimento=procedimento,
                 homecare=homecare,
                 observacao=observacao,
@@ -280,7 +280,7 @@ def update_ficha(request, ficha_id):
             data = json.loads(request.body)
 
             data_str = data.get('data')
-            valor_str = str(data.get('valor', '0')).replace(',', '.').strip()
+            valor_str = str(data.get('valor', '0')).replace('.', '').replace(',', '.').strip()
 
             if not data_str or not valor_str:
                 return JsonResponse({'status': 'erro', 'mensagem': 'Data e valor são obrigatórios.'}, status=400)
