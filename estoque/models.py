@@ -2,7 +2,7 @@ from django.db import models
 
 class ProdutoEstoque(models.Model):
     nome = models.CharField(max_length=100)
-    quantidade = models.PositiveIntegerField(default=0)
+    #quantidade = models.PositiveIntegerField(default=0)
     preco_unitario = models.FloatField()
     descricao = models.TextField(blank=True, null=True)
 

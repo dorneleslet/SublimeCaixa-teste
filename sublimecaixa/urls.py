@@ -10,5 +10,11 @@ urlpatterns = [
     path('caixa/', include('caixa.urls')),
     path('configuracoes/', include('configuracoes.urls')),
     path('api/clientes/', include('clientes.api_urls')),
+    path('api/estoque/', include('estoque.api_urls')),
+    path('api/servicos/', include('servicos.api_urls')),
+    path('api/caixa/', include('caixa.api_urls')),
+
+
+
 
 ]
