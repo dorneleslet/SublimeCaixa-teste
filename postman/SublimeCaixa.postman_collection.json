@@ -1,0 +1,2073 @@
+{
+  "info": {
+    "_postman_id": "7b8c0c4e-ebce-491e-be69-9dcc99266e21",
+    "name": "SublimeCaixa",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50767098",
+    "_collection_link": "https://go.postman.co/collection/50767098-7b8c0c4e-ebce-491e-be69-9dcc99266e21?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "/clientes",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true,
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/clientes/criar/",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"\",\n    \"telefone\": \"\",\n    \"nif\": \"\",\n    \"email\": \"\",\n    \"nascimento\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/criar/",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            "criar",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/clientes/criar/nif-duplicado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 409\", function () {",
+              "    pm.response.to.have.status(409);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"Antonia José\",\n    \"telefone\": \"+351222666222\",\n    \"nif\": \"123456789\",\n    \"email\": \"\",\n    \"nascimento\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/criar/",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            "criar",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/clientes/criar/sem-dados",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 400\", function () {",
+              "    pm.response.to.have.status(400);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"nome\": \"\",\n    \"telefone\": \"\",\n    \"nif\": \"\",\n    \"email\": \"\",\n    \"nascimento\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/criar/",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            "criar",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/clientes/id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true,
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/67/",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            "67",
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/clientes/id-nao-encontrado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true,
+        "followRedirects": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}clientes/9999",
+          "host": [
+            "{{SublimeServidor}}clientes"
+          ],
+          "path": [
+            "9999"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/estoque",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}estoque/",
+          "host": [
+            "{{SublimeServidor}}estoque"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/estoque/id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}estoque/36",
+          "host": [
+            "{{SublimeServidor}}estoque"
+          ],
+          "path": [
+            "36"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/estoque/id-nao-encontrado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}estoque/20",
+          "host": [
+            "{{SublimeServidor}}estoque"
+          ],
+          "path": [
+            "20"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/servicos Copy",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}servicos/",
+          "host": [
+            "{{SublimeServidor}}servicos"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/servicos/id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}servicos/98",
+          "host": [
+            "{{SublimeServidor}}servicos"
+          ],
+          "path": [
+            "98"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/servicos/id-nao-encontrado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}servicos/103",
+          "host": [
+            "{{SublimeServidor}}servicos"
+          ],
+          "path": [
+            "103"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/caixa",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}caixa/",
+          "host": [
+            "{{SublimeServidor}}caixa"
+          ],
+          "path": [
+            ""
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/caixa/id",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}caixa/146",
+          "host": [
+            "{{SublimeServidor}}caixa"
+          ],
+          "path": [
+            "146"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    },
+    {
+      "name": "/caixa/id-nao-encontrado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {",
+              "    pm.response.to.have.status(404);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{SublimeServidor}}caixa/200",
+          "host": [
+            "{{SublimeServidor}}caixa"
+          ],
+          "path": [
+            "200"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GET /clientes",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/caixa",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "caixa"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Date",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "WSGIServer/0.2 CPython/3.9.6"
+            },
+            {
+              "key": "Content-Type",
+              "value": "text/html; charset=utf-8"
+            },
+            {
+              "key": "Expires",
+              "value": "Wed, 21 Jan 2026 21:16:22 GMT"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "max-age=0, no-cache, no-store, must-revalidate, private"
+            },
+            {
+              "key": "Vary",
+              "value": "Cookie"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
+            },
+            {
+              "key": "Content-Length",
+              "value": "3621"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Cross-Origin-Opener-Policy",
+              "value": "same-origin"
+            },
+            {
+              "key": "Set-Cookie",
+              "value": "csrftoken=Ji2YgHJbZchEtzUsMGF8wfUQeqV2fgKB; expires=Wed, 20 Jan 2027 21:16:22 GMT; Max-Age=31449600; Path=/; SameSite=Lax"
+            }
+          ],
+          "cookie": [],
+          "body": "\n<!doctype html><html lang=\"pt-BR\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"><link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/static/general/css/base.css\"><link rel=\"stylesheet\" href=\"/static/general/css/general.css\"><link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'><title></title></head><body><div class=\"sidebar\"><div class=\"logo-details\"><div class=\"logo_name\">SUBLIME CAIXA</div><i class='bx bx-menu' id=\"btn\" ></i></div><ul class=\"nav-list\">\n<!-- <p style=\"color:white;\">Usuário autenticado: False</p> COMENTADO-->\n            \n\n        \n</ul>\n<div class=\"sidebar-footer\">\n    <br>\n    <br>\n        \n</div>\n<!-- \n        \n        \n        <p style=\"color:white;\">Usuário autenticado: False</p>-->\n    \n</div>\n<section class=\"home-section\">\n    <div class=\"container fluid\" style=\"background-color: #292929;\">\n        <div class=\"row\">\n            <div class=\"col\">\n                <br>\n                <h2 class=\"mb-1\">🔐 Login</h2>\n                <small class=\"text-muted\">Por favor, digite seu nome de usuário e senha para acessar.</small>\n                <hr style=\"border-top: 1px solid #555;\">\n\n        \n            </div>\n            <div class=\"col-12\">\n                <h3>Entrar</h3>\n                <br>\n                <form method=\"post\">\n                    <input type=\"hidden\" name=\"csrfmiddlewaretoken\" value=\"ExXwmELB2KTrIPCPMkFei9LNIP6lZ9UfdFPksbkCRM0V1em7oQacEevtM5Rd4fuG\">\n                    <p>\n                        <label for=\"id_username\">Usuário:</label>\n                        <input type=\"text\" name=\"username\" autofocus autocapitalize=\"none\" autocomplete=\"username\" maxlength=\"150\" required id=\"id_username\">\n    \n    \n  \n                    </p>\n                    <p>\n                        <label for=\"id_password\">Senha:</label>\n                        <input type=\"password\" name=\"password\" autocomplete=\"current-password\" required id=\"id_password\">\n    \n    \n      \n    \n  \n                    </p>\n                    <button type=\"submit\" class=\"btn btn-success\">Login</button>\n                </form>\n            </div>\n        </section>\n        <script src=\"/static/general/js/base.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js\"></script> -->\n        <script src=\"https://code.jquery.com/jquery-3.6.0.min.js\"></script>\n        <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js\"></script>\n        <!-- <script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js\"></script> -->\n        <!-- Inputmask (para o NIF) -->\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js\"></script>\n        <!-- Intl-Tel-Input CSS e JS -->\n        <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css\"/>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js\"></script>\n        <script src=\"https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js\"></script>\n        <!-- DataTables CSS -->\n        <link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css\">\n        <!-- DataTables JS -->\n        <script src=\"https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js\"></script>\n    </body>\n</html>"
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
