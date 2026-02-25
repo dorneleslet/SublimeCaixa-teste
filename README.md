@@ -14,6 +14,32 @@ O projeto serviu como prática para consolidar meus conhecimentos em Python (Dja
 - Backend: Python + Django  
 - Frontend: HTML, CSS, JavaScript  
 - Banco de Dados: PostgreSQL  
+- Testes de API REST: Postman
+
+## Testes de API
+
+Foram realizados testes manuais utilizando Postman, contemplando:
+
+- Validação de status codes (200, 201, 400, 404, 405, 409)
+- Testes positivos e negativos
+- Validação de regras de negócio (ex: estoque insuficiente, NIF duplicado)
+- Testes de integridade de dados (criação + consulta posterior)
+- Testes de métodos HTTP incorretos (GET/POST inválidos)
+- Validação de entrada de dados e JSON inválido
+
+## API REST
+
+O projeto possui endpoints REST organizados por módulo:
+- /api/clientes/
+- /api/caixa/
+- /api/servicos/
+- /api/estoque/
+
+Com suporte a:
+- GET (listagem e detalhe)
+- POST (criação com validação)
+- Tratamento padronizado de erros
+
 
 ## Estrutura do Projeto
 - clientes/ → módulo de cadastro e edição de clientes  
@@ -32,7 +58,10 @@ Durante o desenvolvimento deste projeto, pude reforçar conhecimentos em:
 - Manipulação e organização de dados  
 - Testes práticos de interface e usabilidade  
 - Identificação de cenários de erro e entradas inválidas  
-- Atenção a detalhes em formulários e fluxos do sistema  
+- Atenção a detalhes em formulários e fluxos do sistema
+- Estruturação de endpoints REST
+- Testes manuais de API
+- Identificação e tratamento de erros 4xx e 5xx  
 
 ## Como executar o projeto
 1. Clone este repositório:  
