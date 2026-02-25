@@ -9,7 +9,6 @@ urlpatterns = [
     path('estoque/', include('estoque.urls')),
     path('caixa/', include('caixa.urls')),
     path('configuracoes/', include('configuracoes.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('api/clientes/', include('clientes.api_urls')),
 
-    
 ]

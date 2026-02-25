@@ -7,7 +7,7 @@ from django.db.models import Q
 from decimal import Decimal, InvalidOperation
 from urllib.parse import urlencode
 from django.contrib import messages
-from accounts.decorators import grupo_required
+
 
 def novo_servico(request):
     if request.method == "POST":

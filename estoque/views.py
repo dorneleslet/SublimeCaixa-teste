@@ -8,8 +8,6 @@ from django.db.models import Sum, Q, F
 from django.utils.dateparse import parse_date
 from clientes.models import Cliente
 from decimal import Decimal, InvalidOperation
-from django.contrib.auth.decorators import login_required
-from accounts.decorators import grupo_required
 from django.db.models.functions import TruncDate
 import time
 

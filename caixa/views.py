@@ -9,7 +9,7 @@ from django.db.models import Q
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
-from accounts.decorators import grupo_required 
+
 
 
 

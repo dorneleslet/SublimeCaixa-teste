@@ -23,31 +23,6 @@
             <i class='bx bx-menu' id="btn" ></i>
         </div>
         <ul class="nav-list">
-          {% if 'Colaborador' in grupos_usuario %}
-            <li>
-              <a href="{% url 'caixa_principal' %}">
-                <i class='bx bx-dollar'></i>
-                <span class="links_name">Caixa</span>
-              </a>
-              <span class="tooltip">Caixa</span>
-            </li>
-            <li>
-            <a href="{% url 'clientes' %}">
-              <i class='bx bx-user' ></i>
-              <span class="links_name">Clientes</span>
-            </a>
-            <span class="tooltip">Clientes</span>
-            </li>
-            <li>
-              <a href="https://buk.pt/espaco-sublime/dashboard/calendar/week" target="_blank" rel="noopener noreferrer">
-                <i class='bx bx-calendar' ></i>
-                <span class="links_name">Agenda</span>
-              </a>
-              <span class="tooltip">Agenda</span>
-            </li>
-          {% endif %}
-
-          {% if 'Administrador' in grupos_usuario %}
             <li>
               <a href="{% url 'caixa_principal' %}">
                 <i class='bx bx-dollar'></i>
@@ -104,30 +79,13 @@
               </a>
               <span class="tooltip">Mensagens</span>
             </li>
-          {% endif %} 
+          
         </ul>
 
         <div class="sidebar-footer">
-          {% if user.is_authenticated %}
-            <li>
-              <a href="{% url 'logout' %}">
-                <i class='bx bx-log-out'></i>
-                <span class="links_name">Sair</span>
-              </a>
-              <span class="tooltip">Sair</span>
-                
-            </li>
-          {% endif %}
+          
 
-          {% if user.is_authenticated %}
-          <li>
-            <a href="#">
-                  <i class='bx bx-user'></i>
-                  <span class="links_name"><strong>{{ user.username }}</strong></span>
-            </a>
-            <span class="tooltip">{{ user.username }}</span>
-          </li>
-          {% endif %}
+          
           <br><br>
         </div>  
     </div>

@@ -11,7 +11,7 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.db.models import Q
 from django.utils import timezone
 from django.template.loader import render_to_string
-from accounts.decorators import grupo_required
+
 
 
 def dados_cliente(request, id): 

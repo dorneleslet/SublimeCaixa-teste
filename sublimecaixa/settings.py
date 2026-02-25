@@ -33,12 +33,7 @@ INSTALLED_APPS = [
     'estoque',
     'caixa',
     'configuracoes',
-    'accounts',
 ]
-
-LOGIN_URL = '/accounts/login/' #se tentar acessar algo protegido sem login vai para esta pagina
-LOGIN_REDIRECT_URL = '/caixa/' # pra onde o usuario vai depois de logar
-LOGOUT_REDIRECT_URL = '/accounts/login/' # para logout volta pra login
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,7 +43,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'sublimecaixa.middleware.LoginRequiredMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
@@ -65,7 +59,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'accounts.context_processors.grupos_usuario',
             ],
         },
     },
