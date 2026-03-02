@@ -39,7 +39,7 @@
                     <br>
                     <label for="telefone">Telefone:<span style="color: red;">*</span></label>
                     <br>
-                    <input data-test="telefone-cadastro" type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}">
+                    <input data-test="telefone-cadastro" type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}" minlength="9" maxlength="15">
                     
                     <div class="'invalid-feedback" id="'erro_telefone" style="color: red;">
                         {% if erro_telefone %}{{ erro_telefone }}{% endif %}
@@ -229,7 +229,7 @@
                     <br>
                     <label for="edit-telefone">Telefone:<span style="color: red;">*</span></label>
                     <br>
-                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" required disabled>
+                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" minlength="9" maxlength="15" required disabled >
                     <div id="erro_edit-telefone" class="invalid-feedback" style="color: red;"></div>
                     <script>
                         let itiEdicao = null;

@@ -3,6 +3,7 @@ Sistema de Caixa, Estoque e Gestão de Clientes
 Este é um sistema interno desenvolvido para um salão de beleza, com foco em controle de caixa, gerenciamento de estoque e cadastro de clientes e serviços.  
 O projeto serviu como prática para consolidar meus conhecimentos em Python (Django), JavaScript, HTML e CSS, além de reforçar habilidades importantes para QA, como organização de dados, validação de entradas e usabilidade.
 
+
 ## Funcionalidades
 - Cadastro e edição de clientes (com fichas técnicas de acompanhamentos)  
 - Cadastro e edição de serviços  
@@ -10,11 +11,13 @@ O projeto serviu como prática para consolidar meus conhecimentos em Python (Dja
 - Gestão de estoque (entradas e saídas de produtos)  
 - Interface amigável com formulários dinâmicos  
 
+
 ## Tecnologias Utilizadas
 - Backend: Python + Django  
 - Frontend: HTML, CSS, JavaScript  
 - Banco de Dados: PostgreSQL  
 - Testes de API REST: Postman
+
 
 ## Testes de API
 
@@ -24,21 +27,22 @@ Foram realizados testes manuais utilizando Postman, contemplando:
 - Testes positivos e negativos
 - Validação de regras de negócio (ex: estoque insuficiente, NIF duplicado)
 - Testes de integridade de dados (criação + consulta posterior)
-- Testes de métodos HTTP incorretos (GET/POST inválidos)
-- Validação de entrada de dados e JSON inválido
+- Tratamento de dados inválidos
 
-## API REST
+A collection e o environment do Postman utilizados para os testes estão disponíveis na pasta:
 
-O projeto possui endpoints REST organizados por módulo:
-- /api/clientes/
-- /api/caixa/
-- /api/servicos/
-- /api/estoque/
+postman/
 
-Com suporte a:
-- GET (listagem e detalhe)
-- POST (criação com validação)
-- Tratamento padronizado de erros
+Arquivos:
+- postman/SublimeCaixa.postman_collection.json
+- postman/SublimeCaixa.postman_environment.json
+
+Para utilizar:
+
+1. Importar os arquivos no Postman
+2. Definir a variável `base_url` como:
+   http://127.0.0.1:8000
+3. Executar as requisições conforme os cenários documentados
 
 
 ## Estrutura do Projeto
@@ -63,6 +67,7 @@ Durante o desenvolvimento deste projeto, pude reforçar conhecimentos em:
 - Testes manuais de API
 - Identificação e tratamento de erros 4xx e 5xx  
 
+
 ## Como executar o projeto
 1. Clone este repositório:  
    git clone https://github.com/dorneleslet/SublimeCaixa-teste.git
@@ -82,6 +87,7 @@ python manage.py runserver
 6. Acesse no navegador:
 http://127.0.0.1:8000
 
+## Conclusão
 Status do Projeto
 Concluído – atualmente em uso no salão de beleza e disponível para melhorias futuras.
 

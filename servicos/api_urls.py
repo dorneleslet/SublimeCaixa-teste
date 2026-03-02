@@ -4,4 +4,7 @@ from . import api_views
 urlpatterns = [
     path('', api_views.listar_servicos_api, name='api_listar_estoque'),
     path('<int:id>/', api_views.dados_servico_api, name='api_dados_produto'),
+    path('criar/', api_views.criar_servico_api, name='criar_servico_api'),
+
+
 ]

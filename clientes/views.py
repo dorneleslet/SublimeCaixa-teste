@@ -57,9 +57,8 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
         if not telefone or not telefone.startswith("+") or not telefone[1:].isdigit() or len(telefone) < 10 or len(telefone) > 15:
             contexto['erro_telefone'] = 'Por favor, indique um número para contato.'
             
-           
-        # if not nif:
-        #     contexto['erro_nif'] = 'Por favor, indique o número de contribuinte.'
+        if not nif:
+            contexto['erro_nif'] = 'Por favor, indique o número de contribuinte.'
         # elif len(nif) != 9 or not nif.isdigit():
         #     contexto['erro_nif'] = 'O NIF deve conter exatamente 9 dígitos numéricos.'
 
@@ -75,12 +74,9 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
         else:
             nascimento = None    
 
-        if 'erro_nome' in contexto or 'erro_telefone' in contexto or 'erro_nascimento' in contexto: #'erro_nif' in contexto or 
+        if 'erro_nome' in contexto or 'erro_telefone' in contexto or 'erro_nif' in contexto or 'erro_nascimento' in contexto:
             return render(request, 'clientes.html', contexto)
         
-        
-
-    
         # Verifica se o cliente já existe
         cliente = Cliente.objects.filter(nif=nif)
         if cliente.exists():
@@ -140,8 +136,13 @@ def update_cliente(request, id): #atualiza dados via json
         erros['erro_edit-nome'] = 'Por favor, indique o nome do cliente.'
     if not telefone:
         erros['erro_edit-telefone'] = 'Por favor, indique um número para contato.'
+    elif not telefone.startswith("+") or not telefone[1:].isdigit() or len(telefone) < 10 or len(telefone) > 15:
+        erros['erro_edit-telefone'] = 'O telefone deve estar no formato internacional e ter entre 10 e 15 dígitos.'
+    
     if not nif:
         erros['erro_edit-nif'] = 'Por favor, indique o número de contribuinte.'
+    # elif len(nif) != 9 or not nif.isdigit():
+    #     erros['erro_edit-nif'] = 'O NIF deve conter exatamente 9 dígitos numéricos.'
     if nascimento_str:
         try:
             nascimento = datetime.strptime(nascimento_str, '%d/%m/%Y').date()
