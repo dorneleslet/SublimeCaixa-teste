@@ -213,7 +213,7 @@
 
 
                 <p></p> <!-- BARRA DE PESQUISA -->
-                <input type="text" id="search-bar" class="form-control mb-3" placeholder="Procurar nome, telefone ou NIF" oninput="filtrarClientes()">
+                <input data-test="barra-pesquisa-clientes" type="text" id="search-bar" class="form-control mb-3" placeholder="Procurar nome, telefone ou NIF" oninput="filtrarClientes()">
                 <!-- LISTA DE CLIENTES -->
                 <div id="lista-clientes" class="list-group list-group-flush"></div>
 
@@ -224,12 +224,12 @@
                     <hr>
                     <input type="hidden" id="id_cliente">
                     <label for="edit-nome">Nome Completo:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="Nome do cliente" id="edit-nome" name="edit-nome" maxlength="50" required disabled>
+                    <input type="text" class="form-control" placeholder="Nome do cliente" id="edit-nome" data-test="nome-edicao" name="edit-nome" maxlength="50" required disabled>
                     <div class="invalid-feedback" style="color: red;"></div>
                     <br>
                     <label for="edit-telefone">Telefone:<span style="color: red;">*</span></label>
                     <br>
-                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" name="edit-telefone" minlength="9" maxlength="15" required disabled >
+                    <input type="tel" class="form-control" placeholder="___ ___ ___" id="edit-telefone" data-test="telefone-edicao" name="edit-telefone" minlength="9" maxlength="15" required disabled >
                     <div id="erro_edit-telefone" class="invalid-feedback" style="color: red;"></div>
                     <script>
                         let itiEdicao = null;
@@ -262,7 +262,7 @@
                     </script>
                     <br><br>
                     <label for="edit-nif">NIF:<span style="color: red;">*</span></label>
-                    <input type="text" class="form-control" placeholder="___.___.___" id="edit-nif" name="edit-nif" required disabled>
+                    <input type="text" class="form-control" placeholder="___.___.___" id="edit-nif" data-test="nif-edicao" name="edit-nif" required disabled>
                     <div class="invalid-feedback" style="color: red;"></div>
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
@@ -293,7 +293,7 @@
                     </script>
                     <br>
                     <p>Nascimento:</p>
-                    <input id="edit-nascimento" type="text" class='form-control' name="edit-nascimento" value="" disabled>
+                    <input id="edit-nascimento" data-test="nascimento-edicao" type="text" class='form-control' name="edit-nascimento" value="" disabled>
                     <div class="invalid-feedback" id="erro_edit-nascimento"></div>
                     <script>
                         // máscara e validação nascimento dd/mm/aaaa
@@ -345,13 +345,13 @@
                     </script>
                     <br>
                     <p>E-mail</p>
-                    <input id="edit-email" type="email" class='form-control' name="edit-email" value="" maxlength="50" disabled>
+                    <input id="edit-email" data-test="email-edicao" type="email" class='form-control' name="edit-email" value="" maxlength="50" disabled>
 
                     <hr style="background-color:gray;">
                     <br>
-                    <button id="btn-editar-dados" type="button" onclick="habilitarEdicaoCliente()" class="btn btn-secondary">Editar dados</button>
-                    <input id="btn-salvar-alteracoes" onclick="update_cliente()" type="button" value="Salvar alterações" class="btn btn-success" style="display: none;">
-                    <button id="btn-excluir-cliente" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value)" >Excluir</button>
+                    <button id="btn-editar-dados" data-test="btn-editar" type="button" onclick="habilitarEdicaoCliente()" class="btn btn-secondary">Editar dados</button>
+                    <input id="btn-salvar-alteracoes" data-test="btn-salvar-edicao" onclick="update_cliente()" type="button" value="Salvar alterações" class="btn btn-success" style="display: none;">
+                    <button id="btn-excluir-cliente" data-test="btn-excluir" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value)" >Excluir</button>
 
                     <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert" style="display: none;">
                         <p>Dados alterados com sucesso!</p>
@@ -361,8 +361,8 @@
                         justify-content: center; align-items: center; z-index: 1000;"> <!--esse background rgba deixa o fundo esmaecido da cor que colocar)-->
                         <div style="background: rgb(255, 255, 255); padding: 20px; border-radius: 8px; max-width: 320px; text-align: center; color: #333;">
                             <p>Tem certeza que deseja excluir este cliente?</p>
-                            <button type="button" id="btn-confirm-hide" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value, event)">Excluir</button>
-                            <button id="btn-cancel-hide" class="btn btn-secondary">Cancelar</button>
+                            <button type="button" id="btn-confirm-hide" data-test="btn-confirmar" class="btn btn-danger ocultar-cliente" data-id="{{ cliente.id }}" onclick="ocultarCliente(document.getElementById('id_cliente').value, event)">Excluir</button>
+                            <button id="btn-cancel-hide" data-test="btn-cancelar" class="btn btn-secondary">Cancelar</button>
                         </div>
 
                     </div>
@@ -371,7 +371,7 @@
 
                 </div>
                 <!-- FICHA DO CLIENTE -->
-                <div id="ficha-container" style="display: none;">
+                <div id="ficha-container" data-test="btn-ficha-cliente" style="display: none;">
                     <hr>
                     <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#fichaCliente" aria-expanded="false" aria-controls="historico">
                         📑 Ver ficha do cliente
@@ -387,7 +387,7 @@
                                 
                                 <div class="mb-2">
                                     <label>Data do procedimento:<span style="color: red;">*</span></label>
-                                    <input type="text" id="data-proced" name="data" class="form-control" placeholder="dd/mm/aaaa" required>
+                                    <input type="text" id="data-proced" data-test="data-proced" name="data" class="form-control" placeholder="dd/mm/aaaa" required>
                                     <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
                                 </div>
                                 <script>
@@ -438,26 +438,26 @@
                                 </script>
                                 <div class="mb-2">
                                     <label>Profissional que realizou:</label>
-                                    <input type="text" name="profissional" class="form-control" maxlength="50" placeholder="Nome do profissional">
+                                    <input type="text" name="profissional" data-test="profissional" class="form-control" maxlength="50" placeholder="Nome do profissional">
                                 </div>
                                 <div class="mb-2">
                                     <label>Valor pago:<span style="color: red;">*</span></label>
-                                    <input type="text" id="add-ficha-valor" maxlength="15" name="valor" inputmode="numeric" class="form-control" placeholder="0,00" required>
+                                    <input type="text" id="add-ficha-valor" data-test="valor-ficha" maxlength="15" name="valor" inputmode="numeric" class="form-control" placeholder="0,00" required>
                                 </div>
                                 <div class="mb-2">
                                     <label>Procedimento realizado:</label>
-                                    <textarea name="procedimento" class="form-control" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                                    <textarea name="procedimento" data-test="procedimento" class="form-control" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
                                 </div>
                                 <div class="mb-2">
                                     <label>Linha home care:</label>
-                                    <textarea name="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                                    <textarea name="homecare" data-test="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
                                 </div>
                                 <div class="mb-2">
                                     <label>Observações:</label>
-                                    <textarea name="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
+                                    <textarea name="observacao" data-test="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-success">Adicionar ficha</button>
+                                <button type="button" data-test="btn-adicionar-ficha" class="btn btn-success">Adicionar ficha</button>
                             </form>
                             {% if ficha_sucesso %}
                                 <div id="mensagem-sucesso-ficha" class="alert alert-success mt-3" role="alert">
@@ -468,7 +468,7 @@
                             <hr style="background-color:gray;">
                             
                             <h5>Histórico do Cliente</h5>
-                            <div id="historico-fichas">
+                            <div id="historico-fichas" data-test="historico-fichas">
                                 {% include 'clientes/fichashistorico.html' with fichas=fichas %}
                             </div>
                         </div>
@@ -484,7 +484,7 @@
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
                     <h5 class="modal-title">Editar Ficha Técnica</h5>
-                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Fechar"></button>
+                    <button type="button" data-test="btn-editar-ficha" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-edit-ficha">
@@ -492,7 +492,7 @@
 
                         <div class="mb-2">
                             <label class="form-label">Data do procedimento:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="data" id="edit-ficha-data" placeholder="dd/mm/aaaa" required>
+                            <input type="text" class="form-control" name="data" id="edit-ficha-data" data-test="edit-ficha-data" placeholder="dd/mm/aaaa" required>
                             <div id="erro-data-edit" class="invalid-feedback" style="color: red;"></div>
                         </div>
                         <script>
@@ -545,29 +545,29 @@
 
                         <div class="mb-2">
                             <label class="form-label">Profissional que realizou:</label>
-                            <input type="text" class="form-control" name="profissional" id="edit-ficha-profissional" maxlength="50">
+                            <input type="text" class="form-control" name="profissional" id="edit-ficha-profissional" data-test="edit-ficha-profissional" maxlength="50">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Valor pago:<span style="color: red;">*</span></label>
-                            <input type="text" maxlength="15" class="form-control" name="valor" id="edit-ficha-valor" inputmode="numeric" placeholder="0,00" required>
+                            <input type="text" maxlength="15" class="form-control" name="valor" id="edit-ficha-valor" data-test="edit-ficha-valor" inputmode="numeric" placeholder="0,00" required>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Procedimento realizado:</label>
-                            <textarea class="form-control" name="procedimento" id="edit-ficha-procedimento" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                            <textarea class="form-control" name="procedimento" id="edit-ficha-procedimento" data-test="edit-ficha-procedimento" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Linha home care:</label>
-                            <textarea class="form-control" name="homecare" id="edit-ficha-homecare" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                            <textarea class="form-control" name="homecare" id="edit-ficha-homecare" data-test="edit-ficha-homecare" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Observações:</label>
-                            <textarea class="form-control" name="observacao" id="edit-ficha-observacao" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
+                            <textarea class="form-control" name="observacao" id="edit-ficha-observacao" data-test="edit-ficha-observacao" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" onclick="salvarEdicaoFicha()">Salvar Alterações</button>
+                    <button type="button" data-test="btn-cancelar-edit-ficha" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" data-test="btn-salvar-edit-ficha" class="btn btn-success" onclick="salvarEdicaoFicha()">Salvar Alterações</button>
                 </div>
             </div>
         </div>

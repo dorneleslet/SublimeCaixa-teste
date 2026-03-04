@@ -3,7 +3,7 @@
 ## Ambiente e Dados de Teste
 
 ### URL do Sistema
-https://sublimecaixa-teste.onrender.com/accounts/login/
+http://127.0.0.1:8000/caixa
 
 -**Ambiente de Testes:**``
 
