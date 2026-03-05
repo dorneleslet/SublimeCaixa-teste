@@ -400,7 +400,7 @@ function adicionarFicha(event) {
                 // mostra mensagem de sucesso
                 const msg = document.createElement('div');
                 msg.className = 'alert alert-success mt-3';
-                msg.textContent = 'Ficha adicionada com sucesso!';
+                msg.textContent = 'Ficha do cliente adicionada com sucesso!';
                 form.parentNode.insertBefore(msg, form);
                 
 
@@ -507,8 +507,16 @@ function ocultarCliente(id, event) {
         .then(res => res.json())
         .then(data => {
             if (data.success) {
-                //remove e mostra listagem de clientes
-                voltarParaLista();
+                const msg = document.getElementById("mensagem-exclusao-sucesso");
+                if (msg) {
+                    msg.style.display = 'block';
+                }
+                setTimeout(() => {
+                    if (msg) msg.style.display = 'none';
+                    listarClientes();
+                    voltarParaLista();
+                }, 2000);
+
             } else {
                 alert('Erro: ' + data.error);
             }

@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --dark-color: #1a1a1a;
+    --darker-color: #111111;
+    --accent-color: #f2b2a6; /* A teal/green color similar to the example */
+    --text-color: #f0f0f0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+}
+
+.bg-darker {
+    background-color: var(--darker-color);
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 100px 0;
+    background-color: var(--darker-color);
+}
+
+.hero-section h1 {
+    font-weight: 700;
+    color: #fff;
+}
+
+.hero-section .lead {
+    max-width: 700px;
+    margin: 15px auto 30px;
+    font-weight: 300;
+    font-size: 1.25rem;
+}
+
+.btn-cta {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: #f2b2a6; /* Darker shade of accent color */
+    border-color: #f2b2a6;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Features Section */
+#features {
+    background-color: var(--dark-color);
+}
+
+.feature-box {
+    padding: 20px;
+}
+
+.feature-box i {
+    font-size: 4rem;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.feature-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-weight: 300;
+}
+
+/* About Section */
+#about p {
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* Pricing Section */
+.pricing-card {
+    max-width: 400px;
+    background-color: var(--darker-color);
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.pricing-card .price {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.pricing-card .price .period {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.pricing-card ul {
+    margin: 30px 0;
+}
+
+.pricing-card ul li {
+    padding: 10px 0;
+    font-size: 1.1rem;
+}
+
+.pricing-card ul li i {
+    color: var(--accent-color);
+    margin-right: 10px;
+}
+
+/* FAQ Section */
+#faq .card {
+    background-color: #2c2c2c;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+#faq .card-header {
+    background-color: #2c2c2c;
+    border: 0;
+    padding: 0;
+}
+
+#faq .card-header .btn-link {
+    color: var(--text-color);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 15px;
+}
+
+#faq .card-header .btn-link:hover {
+    color: var(--accent-color);
+}
+
+#faq .card-header .btn-link:after {
+    content: '\ea4a'; /* boxicon plus */
+    font-family: 'Boxicons';
+    float: right;
+    transition: all 0.3s;
+}
+
+#faq .card-header .btn-link[aria-expanded="true"]:after {
+    content: '\ea1a'; /* boxicon minus */
+    transform: rotate(180deg);
+}
+
+#faq .card-body {
+    background-color: var(--dark-color);
+    color: #ccc;
+    font-weight: 300;
+}
+
+/* Footer */
+footer {
+    background-color: var(--darker-color);
+    color: #888;
+}

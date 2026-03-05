@@ -1,0 +1,208 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'general/css/landing_page.css' %}">
+    
+    <title>Sublime Cursos</title>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4">Transforme a qualidade dos seus procedimentos</h1>
+            <p class="lead">Aprenda os segredos da naturalidade e da excelência em cabelos para encantar e fidelizar até as clientes mais exigentes.</p>
+            <img src="https://via.placeholder.com/450x280.png?text=Dashboard+Sublime+Caixa" alt="Dashboard do Sublime Caixa" class="img-fluid my-4 rounded shadow-lg">
+            <br>
+            <a href="#pricing" class="btn btn-cta btn-lg mt-3">Quero experimentar agora!</a>
+            <p class="mt-2"><small>Acesso imediato. Cancele quando quiser.</small></p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Features Section -->
+        <section id="features" class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-5">O que você vai dominar com o Cabelos Sublime</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="feature-box">
+                            <i class='bx bx-user-circle'></i>
+                            <h3>Gestão de Clientes</h3>
+                            <p>Cadastre clientes, veja o histórico de atendimentos e mantenha um relacionamento próximo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-box">
+                            <i class='bx bx-dollar-circle'></i>
+                            <h3>Controle de Caixa</h3>
+                            <p>Registre todas as entradas e saídas, controle formas de pagamento e feche o caixa sem dor de cabeça.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-box">
+                            <i class='bx bx-package'></i>
+                            <h3>Gestão de Estoque</h3>
+                            <p>Saiba exatamente quais produtos você tem, receba alertas de estoque baixo e nunca perca uma venda.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="feature-box">
+                            <i class='bx bx-line-chart'></i>
+                            <h3>Relatórios Inteligentes</h3>
+                            <p>Acompanhe o desempenho do seu negócio com relatórios de faturamento, serviços mais populares e muito mais.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5 bg-darker">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center">
+                        <img src="https://via.placeholder.com/300" class="img-fluid rounded-circle" alt="Foto do criador">
+                    </div>
+                    <div class="col-md-8">
+                        <h3>Criado por quem entende de cabelos</h3>
+                        <p>Craudia Lima é especialista em cabeleleila leila, com mais de 20 anos de experiência na área de cabeleireiros. Já formou mais de 20 mil alunas e dedica-se a ajudar profissionais a evoluírem de assistentes para cabeleireiras de qualidade.</p>
+                        <p>Nossa missão é dar a você, profissional da beleza, mais técnicas para focar no que faz de melhor: encantar seus clientes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-5 text-center">
+            <div class="container">
+                <h2>Um investimento que se paga sozinho</h2>
+                <p class="lead mb-5">Comece a transformar sua técnica hoje mesmo.</p>
+                <div class="card pricing-card mx-auto">
+                    <div class="card-body">
+                        <h3 class="card-title">Acesso Completo</h3>
+                        <p class="price"><sup>€</sup>29<span class="period">/mês</span></p>
+                        <ul class="list-unstyled">
+                            <li><i class='bx bx-check'></i> Aprenda uma lavagem sublime</li>
+                            <li><i class='bx bx-check'></i> Loiros e Iluminados</li>
+                            <li><i class='bx bx-check'></i> Melhores tratamentos capilares</li>
+                            <li><i class='bx bx-check'></i> Técnicas de finalização</li>
+                            <li><i class='bx bx-check'></i> Módulos separados por procedimento</li>
+                            <li><i class='bx bx-check'></i> Especializando em cachos</li>
+                        </ul>
+                        <a href="#" class="btn btn-cta btn-block">Assinar agora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-5 bg-darker">
+            <div class="container">
+                <h2 class="text-center mb-5">Perguntas Frequentes</h2>
+                <div class="accordion mx-auto" id="faqAccordion" style="max-width: 800px;">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Esse curso serve para iniciantes?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Não! O Curso Sublime é uma especialização em procedimentos para quem já trabalha com cabelos, logo ele não é recomendado para iniciantes.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Quanto tempo de acesso ao curso?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                O acesso do Curso Sublime é de 1 ano pela plataforma da Hotmart.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    O curso tem suporte?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Sim, o suporte do curso é pela plataforma da Hotmart durante todo período de acesso. Sempre que surgir uma dúvida ela pode ser deixada abaixo da aula que será respondida o mais breve possível.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    As aulas são ao vivo?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Não, todas as aulas são gravadas e liberadas de forma gradual para que nenhuma etapa do aprendizado seja negligenciada.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFive">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Após efetuar o pagamento, como eu acesso às aulas?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Assim que o pagamento for compensado a Hotmart enviará um e-mail com o título “Seu acesso ao CURSO SUBLIME chegou”. Clicando nesse e-mail você terá todas as informações necessárias para acessar as aulas.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingSix">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Tem garantia?
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                Sim, o prazo de garantia do curso é de 07 dias úteis.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-4">
+        <div class="container">
+            <p>&copy; {% now "Y" %} Sublime Caixa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

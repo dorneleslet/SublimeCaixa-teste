@@ -75,3 +75,6 @@ def criar_grupos_iniciais():
 
 def message(request):
     return render(request, 'message.html')
+
+def landing_page_view(request):
+    return render(request, 'landing_page.html')
