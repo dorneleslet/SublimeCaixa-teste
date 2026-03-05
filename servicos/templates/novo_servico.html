@@ -10,11 +10,11 @@
 {% block dashboard %}
 <div class="container">
     <div class="row">
-        <div onclick="exibir_form('1')" class="col-md card-dashboard">
+        <div onclick="exibir_form('1')" class="col-md card-dashboard" data-test="btn-adicionar-servico">
             <p class="text-card">Novo serviço</p>
         </div>
 
-        <div onclick="exibir_form('2')" class="col-md card-dashboard">
+        <div onclick="exibir_form('2')" class="col-md card-dashboard" data-test="btn-editar-servico">
             <p class="text-card">Editar serviços</p>
         </div>
     </div>
@@ -30,12 +30,12 @@
             <div class="row">
                 <div class="col-md">
                     <label for="nome">Nome do Serviço:<span style="color: red;">*</span></label>
-                    <input data-test="servico-cadastro" type="text" class="form-control" placeholder="Nome do serviço" name="nome" maxlength="50" required>
+                    <input data-test="nome-servico-cadastro" type="text" class="form-control" placeholder="Nome do serviço" name="nome" maxlength="50" required>
                 </div>
             
                 <div class="col-md">
                     <label for="preco">Preço:<span style="color: red;">*</span></label>
-                    <input data-test="preco-cadastro" type="text" id="preco" class="form-control" placeholder="0,01" min="0" maxlength="7" name="preco" required>
+                    <input data-test="preco-servico-cadastro" type="text" id="preco" class="form-control" placeholder="0,01" min="0" maxlength="7" name="preco" required>
                     <div class="invalid-feedback" id="erro-preco" style="color: red;"></div>
                     
 
@@ -87,7 +87,7 @@
 
             <hr style="background-color:gray;"> 
             <br>
-            <input data-test="botao-cadastro" type="submit" id="btn-gravar" value="Cadastrar" class="btn btn-success">
+            <input data-test="btn-cadastro-servico" type="submit" id="btn-gravar" value="Cadastrar" class="btn btn-success">
             <br><br>
             {% if messages %}
                 {% for message in messages %}
@@ -145,7 +145,7 @@
          </style>
 
          <p></p> <!-- BARRA DE PESQUISA -->
-         <input type="text" id="search-bar-servico" class="form-control mb-3" placeholder="Procurar serviço..." oninput="filtrarServicos()">
+         <input type="text" data-test="barra-pesquisa-servicos" id="search-bar-servico" class="form-control mb-3" placeholder="Procurar serviço..." oninput="filtrarServicos()">
          <!-- LISTA DE SERVIÇOS -->
          <div id="lista-servicos" class="list-group list-group-flush">
             {% for servico in servicos %}
@@ -162,15 +162,15 @@
             <hr>
             <input type="hidden" id="id_servico">
             <label for="nome">Nome do Serviço:<span style="color: red;">*</span></label>
-            <input id="nome" type="text" class="form-control" maxlength="50" required>
+            <input id="nome" data-test="nome-servico-edicao" type="text" class="form-control" maxlength="50" required>
             <br>
             <label for="preco">Preço:<span style="color: red;">*</span></label>
-            <input id="preco-edit" type="text" step="0.01" min="0" maxlength="7" class="form-control" required>
+            <input id="preco-edit" data-test="preco-servico-edicao" type="text" step="0.01" min="0" maxlength="7" class="form-control" required>
 
             <hr style="background-color:gray;">
             <br>
-            <input id="btn-salvar-servico" onclick="update_servico()" type="button" value="Salvar alterações" class="btn btn-success">
-            <button id="btn-excluir-servico" class="btn btn-danger" onclick="excluirServico(document.getElementById('id_servico').value)">Excluir</button>
+            <input id="btn-salvar-servico" data-test="btn-salvar-edicao" onclick="update_servico()" type="button" value="Salvar alterações" class="btn btn-success">
+            <button id="btn-excluir-servico" data-test="btn-excluir-servico" class="btn btn-danger" onclick="excluirServico(document.getElementById('id_servico').value)">Excluir</button>
 
             <div id="mensagem-sucesso-servico" class="alert alert-success mt-3" role="alert" style="display: none;">
                 <p>Dados alterados com sucesso!</p>
