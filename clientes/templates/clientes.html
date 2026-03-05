@@ -119,7 +119,7 @@
                     <br>
                     <p>Nascimento:</p>
                     <input data-test="nascimento-cadastro" type="text" class="form-control {% if erro_nascimento %}is-invalid{% endif %}" placeholder="dd/mm/aaaa" name="nascimento" id="nascimento" value="{{nascimento|date:'d/m/Y'}}">
-                        <div class="invalid-feedback" style="color: red;">
+                        <div id="erro_nascimento" class="invalid-feedback" style="color: red; display:none;">
                             {% if erro_nascimento %}{{ erro_nascimento }}{% endif %}
                         </div>
                     <script>

@@ -154,6 +154,9 @@ function update_cliente(){  // envia alterações para o backend | atualiza os d
                     input.classList.add('is-invalid');
                     input.nextElementSibling.innerHTML = data.erros['erro_edit-nascimento'];
                 }
+                
+                btn.disabled = false;
+                btn.value = originalText;
                 return;
             }
 
