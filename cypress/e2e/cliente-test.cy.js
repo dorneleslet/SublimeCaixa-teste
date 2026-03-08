@@ -18,10 +18,10 @@ describe('Cadastrar novo cliente, serviço e realizar venda com sucesso', () => 
   it('Acessar a página de serviços e cadastrar um serviço com sucesso', () => {
     cy.visit('http://127.0.0.1:8000/servicos/novo/');
 
-    cy.get('[data-test="servico-cadastro"]').type('Serviço Teste');
-    cy.get('[data-test="preco-cadastro"]').type('45');
+    cy.get('[data-test="nome-servico-cadastro"]').type('Serviço Teste');
+    cy.get('[data-test="preco-servico-cadastro"]').type('45');
 
-    cy.get('[data-test="botao-cadastro"]').click();
+    cy.get('[data-test="btn-cadastro-servico"]').click();
     cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
   })
 

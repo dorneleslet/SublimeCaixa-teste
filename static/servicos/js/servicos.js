@@ -218,19 +218,22 @@ function excluirServico(id) {
         .then(res => res.json())
         .then(data => {
             if (data.status === "200") {
-                //remover botão da lista
-                document.getElementById(`servico-${id}`).remove();
-                location.reload();
+                //remover o item da lista visualmente
+                const servicoItem = document.getElementById(`servico-${id}`);
+                if (servicoItem) {
+                    servicoItem.remove();
+                }
+
                 //mostrar mensagem de sucesso temporária
                 const msg = document.getElementById('mensagem-sucesso-servico');
                 msg.innerHTML = '<p>Serviço excluído com sucesso!</p>';
                 msg.style.display = 'block';
 
+                // Após 2 segundos, esconde a mensagem e volta para a lista
                 setTimeout(() => {
                     msg.style.display = 'none';
-                    // limpar formulário após exclusão (opcional)
-                    // limparFormularioServico();
-                });
+                    voltarLista(); // Esconde o formulário de edição e mostra a lista
+                }, 2000);
             } else {
                 alert("Erro ao excluir.");
             }
@@ -378,4 +381,3 @@ document.getElementById('search-bar-servico').addEventListener('input', function
         }
     });
 });
-
