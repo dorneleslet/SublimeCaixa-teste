@@ -12,3 +12,19 @@ cypress/downloads/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# macOS / logs
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
