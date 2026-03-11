@@ -10,10 +10,10 @@
 {% block dashboard %}
     <div class="container">
         <div class="row">
-            <div onclick="exibirFormEstoque('1')" class="col-md card-dashboard" style="cursor: pointer;">
+            <div onclick="exibirFormEstoque('1')" class="col-md card-dashboard" data-test="btn-adicionar-produto" style="cursor: pointer;">
                 <p class="text-card">Novo produto</p>
             </div>
-            <div onclick="exibirFormEstoque('2')" class="col-md card-dashboard" style="cursor: pointer;">
+            <div onclick="exibirFormEstoque('2')" class="col-md card-dashboard" data-test="btn-editar-produto" style="cursor: pointer;">
                 <p class="text-card">Editar produto</p>
             </div>
         </div>
@@ -25,15 +25,15 @@
                 <div class="row">
                     <div class="col-md">
                         <label for="nome">Nome do Produto:<span style="color: red;">*</span></label>
-                        <input type="text" class="form-control" name="nome" placeholder="Nome do produto" maxlength="50" required>
+                        <input type="text" data-test="nome-produto-cadastro" class="form-control" name="nome" placeholder="Nome do produto" maxlength="50" required>
                     </div>
                     <div class="col-md">
                         <label for="quantidade">Quantidade:<span style="color: red;">*</span></label>
-                        <input type="text" class="form-control" name="quantidade" maxlength="5" placeholder="Quantidade" inputmode="numeric" pattern="\d{1,5}" required>
+                        <input type="text" data-test="quantidade-produto-cadastro" class="form-control" name="quantidade" maxlength="5" placeholder="Quantidade" inputmode="numeric" pattern="\d{1,5}" required>
                     </div>
                     <div class="col-md">
                         <label for="preco_unitario">Preço Unitário:<span style="color: red;">*</span></label>
-                        <input type="text" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                        <input type="text" data-test="preco-produto-cadastro" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
                     </div>
                     <script>
                         const precoInput = document.getElementById('preco_unitario');
@@ -70,14 +70,14 @@
                 <div class="row mt-3">
                     <div class="col-md">
                         <label for="descricao">Descrição:</label>
-                        <textarea class="form-control" name="descricao" rows="2" maxlength="200" placeholder="Descrição do produto (opcional)"></textarea>
+                        <textarea class="form-control" data-test="descricao-produto-cadastro" name="descricao" rows="2" maxlength="200" placeholder="Descrição do produto (opcional)"></textarea>
                     </div>
                 </div>
 
                 <hr style="background-color:gray;"> 
 
                 <br>
-                <input type="submit" id="btn-salvar-produto" class="btn btn-success" value="Cadastrar">
+                <input type="submit" id="btn-salvar-produto" data-test="btn-cadastro-produto" class="btn btn-success" value="Cadastrar">
                 <!-- <hr>
                 <a href="{% url 'relatorio_estoque' %}"> Ver Relatório do Estoque </a> -->
             </form>
@@ -124,7 +124,7 @@
         <div id="form-editar-produto" style="display: none;">
             {% csrf_token %}
             <p></p><!-- BARRA DE PESQUISA -->
-            <input type="text" id="search-bar-produto" class="form-control mb-3" placeholder="Procurar produto..." oninput="filtrarProdutos()">
+            <input type="text" id="search-bar-produto" data-test="barra-pesquisa-produtos" class="form-control mb-3" placeholder="Procurar produto..." oninput="filtrarProdutos()">
             <!-- LISTA DE PRODUTOS -->
             <div id="lista-produtos" class="list-group list-group-flush">
                 {% for produto in produtos %}
@@ -147,23 +147,23 @@
                     <input type="hidden" id="produto_id" name="id">
 
                     <label for="editar_nome">Nome do Produto:<span style="color: red;">*</span></label>
-                    <input type="text" id="editar_nome" name="nome" class="form-control" maxlength="50" required>
+                    <input type="text" data-test="nome-produto-edicao" id="editar_nome" name="nome" class="form-control" maxlength="50" required>
 
                     <label for="editar_quantidade" class="mt-2">Quantidade atual:</label>
                     <input type="number" id="editar_quantidade" name="quantidade" class="form-control" value="{{ produto.quantidade }}" readonly>
                     
                     <label for="nova_entrada" class="mt-2">Adicionar ao Estoque:</label>
-                    <input type="text" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar"> 
+                    <input type="text" data-test="adcQuantidade-produto-edicao" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar"> 
 
                     <label for="editar_preco_unitario" class="mt-2">Preço Unitário:<span style="color: red;">*</span></label>
-                    <input type="text" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0" maxlength="7" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                    <input type="text" data-test="preco-produto-edicao" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0" maxlength="7" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
 
                     <label for="editar_descricao" class="mt-2">Descrição:</label>
-                    <textarea id="editar_descricao" name="descricao" class="form-control" rows="2" maxlength="200"></textarea>
+                    <textarea id="editar_descricao" data-test="descricao-produto-edicao" name="descricao" class="form-control" rows="2" maxlength="200"></textarea>
 
                     <br>
-                    <input type="button" class="btn btn-success" value="Salvar alterações" onclick="atualizarProduto()">
-                    <button type="button" class="btn btn-danger" onclick="confirmarExcluirProduto()">Excluir</button>
+                    <input type="button" data-test="btn-salvar-edicao" class="btn btn-success" value="Salvar alterações" onclick="atualizarProduto()">
+                    <button type="button" data-test="btn-excluir-produto" class="btn btn-danger" onclick="confirmarExcluirProduto()">Excluir</button>
                 
                 <div id="mensagem-sucesso-produto" class="alert alert-success mt-3" style="display: none;">
                     <p>Produto atualizado com sucesso!</p>
@@ -180,8 +180,8 @@
                 justify-content: center; align-items: center; z-index: 1000;">
             <div style="background: white; padding: 20px; border-radius: 8px; max-width: 320px; text-align: center; color: #333;">
                 <p>Tem certeza que deseja excluir este produto?</p>
-                <button id="btn-confirm-delete-produto" class="btn btn-danger">Apagar</button>
-                <button id="btn-cancel-delete-produto" class="btn btn-secondary">Cancelar</button>
+                <button id="btn-confirm-delete-produto" data-test="btn-confirmar-excluir-produto" class="btn btn-danger">Apagar</button>
+                <button id="btn-cancel-delete-produto" data-test="btn-cancelar-excluir-produto" class="btn btn-secondary">Cancelar</button>
             </div>
         </div>
 

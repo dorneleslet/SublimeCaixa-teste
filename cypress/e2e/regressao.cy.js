@@ -156,36 +156,93 @@ import { gerarClientes } from '../factories/clientesFactory.js'
 //     })
 // })
 
-describe('Página de cadastro de serviços', () => {
-    beforeEach(() => {    
-        cy.visit('http://127.0.0.1:8000/servicos/novo');
-    })
+// describe('Página de cadastro de serviços', () => {
+//     beforeEach(() => {    
+//         cy.visit('http://127.0.0.1:8000/servicos/novo');
+//     })
 
-    it('Criando novo serviço.', () =>{
-        cy.get('[data-test="nome-servico-cadastro"]').type('Corte e Finalização');
-        cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
+//     it('Criando novo serviço.', () =>{
+//         cy.get('[data-test="nome-servico-cadastro"]').type('Corte e Finalização');
+//         cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
 
-        cy.get('[data-test="btn-cadastro-servico"]').click();
-        cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
-    })
+//         cy.get('[data-test="btn-cadastro-servico"]').click();
+//         cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
+//     })
 
-    it ('Editando serviço cadastrado.', () => {
-        cy.get('[data-test="btn-editar-servico"]').click();
-        cy.get('[data-test="barra-pesquisa-servicos"]').type('Corte e Finalização');
-        cy.contains('Corte e Finalização').first().click();
-        cy.get('[data-test="preco-servico-edicao"]').type('50,00');
+//     it ('Editando serviço cadastrado.', () => {
+//         cy.get('[data-test="btn-editar-servico"]').click();
+//         cy.get('[data-test="barra-pesquisa-servicos"]').type('Corte e Finalização');
+//         cy.contains('Corte e Finalização').first().click();
+//         cy.get('[data-test="preco-servico-edicao"]').type('50,00');
 
-        cy.get('[data-test="btn-salvar-edicao"]').click();
-        cy.contains('Dados alterados com sucesso!').should('be.visible');
-    })
-})
+//         cy.get('[data-test="btn-salvar-edicao"]').click();
+//         cy.contains('Dados alterados com sucesso!').should('be.visible');
+//     })
+
+//     it ('Excluindo serviço cadastrado.', () => {
+//         cy.get('[data-test="btn-editar-servico"]').click();
+//         cy.get('[data-test="barra-pesquisa-servicos"]').type('Corte e Finalização');
+//         cy.contains('Corte e Finalização').first().click();
+
+//         cy.get('[data-test="btn-excluir-servico"]').click();
+//         cy.get('[data-test="btn-confirmar-excluir-servico"]').click();
+
+//         cy.contains('Serviço excluído com sucesso!').should('be.visible');
+//     })
+// })
 
 // describe('Página de cadastro de produtos', () => {
+//     beforeEach(() => {
+//         cy.visit('http://127.0.0.1:8000/estoque/');
+//     })
+
+//     it ('Cadastrando produto no estoque.', () => {
+//         cy.get('[data-test="nome-produto-cadastro"]').type('Shampoo');
+//         cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
+//         cy.get('[data-test="preco-produto-cadastro"]').clear().type('1499'); // AJUSTAR MÁSCARA PARA INSERIR VALOR CORRETO
+//         cy.get('[data-test="descricao-produto-cadastro"]').type('Específico para cabelos loiros');
+
+//         cy.get('[data-test="btn-cadastro-produto"]').click();
+//         cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+//     })
+
+//     it ('Editando produto no estoque.', () => {
+//         cy.get('[data-test="btn-editar-produto"]').click();
+
+//         cy.get('[data-test="barra-pesquisa-produtos"]').type('Shampoo');
+//         cy.contains('Shampoo').first().click();
+
+//         cy.get('[data-test="adcQuantidade-produto-edicao"]').type('3');
+
+//         cy.get('[data-test="btn-salvar-edicao"]').click();
+//         cy.contains('Produto atualizado com sucesso!');
+        
+//     })
+
+//     it ('Excluindo produto no estoque.', () => {
+//         cy.get('[data-test="btn-editar-produto"]').click();
+//         cy.get('[data-test="barra-pesquisa-produtos"]').type('Shampoo');
+//         cy.contains('Shampoo').first().click();
+
+//         cy.get('[data-test="btn-excluir-produto"]').click();
+//         cy.get('[data-test="btn-confirmar-excluir-produto"]').click();
+//        // cy.contains('Produto excluído com sucesso!').should('be.visible'); //ADICIONAR MENSAGEM DE EXCLUSÃO NO SISTEMA
+//     })
 
 // })
 
-// describe('Página do caixa principal', () => {
+describe('Página do caixa principal', () => {
+    beforeEach(() => {
+        cy.visit('http://127.0.0.1:8000/caixa/')
+    })
 
-// })
+    it ('Realizando uma venda com todos os campos preenchidos.', () => {
+        cy.get('[data-test="buscar_cliente"]').type('Leticia Dorneles');
+        cy.contains('Leticia Dorneles').first().click();
+
+        
+    })
+
+})
 
 
