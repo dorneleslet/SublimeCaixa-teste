@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-md">
                         <label for="preco_unitario">Preço Unitário:<span style="color: red;">*</span></label>
-                        <input type="text" data-test="preco-produto-cadastro" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                        <input type="text" data-test="preco-produto-cadastro" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0.01" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
                     </div>
                     <script>
                         const precoInput = document.getElementById('preco_unitario');
