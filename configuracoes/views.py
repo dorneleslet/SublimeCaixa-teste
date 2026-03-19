@@ -78,3 +78,6 @@ def message(request):
 
 def landing_page_view(request):
     return render(request, 'landing_page.html')
+
+def embaralhar_lista(request):
+    return render(request, 'embaralhar.html')

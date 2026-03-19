@@ -16,6 +16,7 @@ O projeto serviu como prática para consolidar meus conhecimentos em Python (Dja
 - Backend: Python + Django  
 - Frontend: HTML, CSS, JavaScript  
 - Banco de Dados: PostgreSQL  
+- Testes automatizados: Cypress
 - Testes de API REST: Postman
 
 
@@ -91,4 +92,4 @@ http://127.0.0.1:8000
 Status do Projeto
 Concluído – atualmente em uso no salão de beleza e disponível para melhorias futuras.
 
-Desenvolvido por Letícia Dorneles – em transição de carreira para QA Tester.
+Desenvolvido por Letícia Dorneles ✨

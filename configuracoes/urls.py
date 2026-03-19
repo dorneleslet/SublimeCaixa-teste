@@ -10,6 +10,8 @@ urlpatterns = [
     path('usuarios/<int:user_id>/excluir/', views.excluir_usuario, name='excluir_usuario'),
     path('message/', views.message, name='message'),
     path('landingpage/', views.landing_page_view, name='landing_page'),
+    path('embaralhar/', views.embaralhar_lista, name='embaralhar'),
+
 
 
 

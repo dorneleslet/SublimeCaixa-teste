@@ -46,6 +46,12 @@
                     <a href="{% url 'usuarios' %}"> Configurar acessos</a><hr>
                     <a href="{% url 'adicionar_usuario' %}"> Adicionar acessos</a>
                 </div>
+                <button class="collapse-btn" style="color: #fff;">Ferramentas</button>
+                <div class="collapse-content">
+                    <a href="{% url 'embaralhar' %}"> Marketing - Criação de conteúdos para redes sociais</a><hr>
+                    <a href="{% url 'message' %}"> Envio de mensagens</a><hr>
+                    <a href="{% url 'landing_page' %}"> Landing Page Cursos Sublime</a>
+                </div>
 
                 <script>
                     const buttons = document.querySelectorAll('.collapse-btn');
