@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{% static 'general/css/landing_page.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'general/img/favicon.png' %}">
     
     <title>Sublime Cursos</title>
 </head>
@@ -198,7 +199,12 @@
 
     <footer class="text-center py-4">
         <div class="container">
-            <p>&copy; {% now "Y" %} Sublime Caixa. Todos os direitos reservados.</p>
+            <div class="mb-3">
+                <a href="https://www.instagram.com/espaco_sublime.pt" target="_blank" class="text-dark mx-2" title="Instagram"><i class='bx bxl-instagram bx-sm'></i></a>
+                <a href="https://www.facebook.com/espacosublimept" target="_blank" class="text-dark mx-2" title="Facebook"><i class='bx bxl-facebook bx-sm'></i></a>
+                <a href="https://wa.me/351910496885" target="_blank" class="text-dark mx-2" title="WhatsApp"><i class='bx bxl-whatsapp bx-sm'></i></a>
+            </div>
+            <p>&copy; {% now "Y" %} Sublime Cursos. Todos os direitos reservados.</p>
         </div>
     </footer>
 

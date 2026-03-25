@@ -1,75 +1,86 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Message | Sublime Caixa{% endblock %}
+{% block title %}Mensagens | Sublime Caixa{% endblock %}
 
 {% block dashboard %}
 
-<div class="container">
-    <br>
-    <div class="card shadow-sm p-4 mb-4 bg-dark text-white">
-        <h4 class="p-4 text-center mb-3">Personalizar Mensagens</h4>
-        <div class="row g-2">
-            <div class="col-md-3">
-                <input type="text" id="template-titulo" class="form-control" placeholder="Título (ex: Confirmação)">
-            </div>
-            <div class="col-md-7">
-                <textarea rows="1" type="text" id="template-conteudo" class="form-control" placeholder="Mensagem (use @nome, @data, @hora, @semana)"></textarea>
-            </div>
-            <div class="col-md-2">
-                <input type="hidden" id="template-index" value="">
-                <div class="d-flex">
-                    <button id="btn-salvar-template" class="btn btn-success w-100 mr-1" onclick="salvarTemplate()">Salvar</button>
-                    <button id="btn-cancelar-template" class="btn btn-danger" onclick="cancelarEdicao()" style="display: none;">✕</button>
-                </div>
-            </div>
-        </div>
-        <div class="mt-3">
-            <ul id="lista-templates" class="list-group list-group-flush"></ul>
+<div class="container" style="background-color: #292929; min-height: 100vh; padding: 20px;">
+    <div class="row">
+        <div class="col">
+            <h2 class="mb-1">💬 Envio de Mensagens</h2>
+            <small class="text-muted">Personalize e envie mensagens via WhatsApp para seus clientes.</small>
+            <hr style="border-top: 1px solid #555;">
         </div>
     </div>
 
-    <div class="card shadow-sm p-4 bg-dark text-white">
-        <h4 class="p-4 text-center mb-4">Envio de Mensagens WhatsApp</h4>
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-3">Personalizar Mensagens</h5>
+            <div class="row g-2 align-items-end">
+                <div class="col-md-3 form-group mb-0">
+                    <input type="text" id="template-titulo" class="form-control" placeholder="Título (ex: Confirmação)">
+                </div>
+                <div class="col-md-7 form-group mb-0">
+                    <textarea rows="1" type="text" id="template-conteudo" class="form-control" placeholder="Mensagem (use @nome, @data, @hora, @semana)"></textarea>
+                </div>
+                <div class="col-md-2 form-group mb-0">
+                    <input type="hidden" id="template-index" value="">
+                    <div class="d-flex">
+                        <button id="btn-salvar-template" class="btn btn-success w-100 mr-1" onclick="salvarTemplate()">Salvar</button>
+                        <button id="btn-cancelar-template" class="btn btn-danger" onclick="cancelarEdicao()" style="display: none;">✕</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <ul id="lista-templates" class="list-group list-group-flush"></ul>
+            </div>
+        </div>
+    </div>
 
-        <table class="table table-dark table-striped align-middle">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Telefone</th>
-                    <th>Data</th>
-                    <th>Dia da semana</th>
-                    <th>Hora</th>
-                    <th>Mensagem</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody id="tabela-mensagens">
-                <tr>
-                    <td><input class="form-control nome" placeholder="Nome da cliente" maxlength="50"></td>
-                    <td><input class="form-control telefone" placeholder="+351 123 456 789" maxlength="16"></td>
-                    <td><input class="form-control data" placeholder="DD/MM" maxlength="5"></td>
-                    <td><input class="form-control semana" placeholder="segunda-feira" maxlength="20"></td>
-                    <td><input class="form-control hora" placeholder="HH:MM" maxlength="5"></td>
-                    <td>
-                        <select class="form-control mensagem-select">
-                            <option value="">Selecione...</option>
-                        </select>
-                    </td>
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-success enviar-btn mr-2">
-                                Enviar
-                            </button>
-                            <button class="btn btn-sm text-danger limpar-btn" title="Limpar linha" style="font-size: 1.2rem;">✕</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <button class="btn btn-secondary mt-3" onclick="adicionarLinha()">
-            + Adicionar Linha
-        </button>
+    <div class="card bg-dark border-secondary">
+        <div class="card-body">
+            <h5 class="card-title text-center mb-3">Envio de Mensagens WhatsApp</h5>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Telefone</th>
+                            <th>Data</th>
+                            <th>Dia da semana</th>
+                            <th>Hora</th>
+                            <th>Mensagem</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-mensagens">
+                        <tr>
+                            <td><input class="form-control nome" placeholder="Nome da cliente" maxlength="50"></td>
+                            <td><input class="form-control telefone" placeholder="+351 123 456 789" maxlength="16"></td>
+                            <td><input class="form-control data" placeholder="DD/MM" maxlength="5"></td>
+                            <td><input class="form-control semana" placeholder="segunda-feira" maxlength="20"></td>
+                            <td><input class="form-control hora" placeholder="HH:MM" maxlength="5"></td>
+                            <td>
+                                <select class="form-control mensagem-select">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <button class="btn btn-success enviar-btn mr-2">
+                                        Enviar
+                                    </button>
+                                    <button class="btn btn-sm text-danger limpar-btn" title="Limpar linha" style="font-size: 1.2rem;">✕</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-secondary mt-3" onclick="adicionarLinha()">
+                + Adicionar Linha
+            </button>
+        </div>
     </div>
 </div>
 

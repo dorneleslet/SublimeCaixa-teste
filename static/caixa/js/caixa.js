@@ -338,16 +338,21 @@ function inicializarBuscaProduto(bloco) {
     const dados = bloco.querySelector('.dados_produto');
     const valor = bloco.querySelector('.produto_valor');
    
+    let timeout = null; // Variável para controlar o tempo de espera (debounce)
+
     input.addEventListener('input', function() {
         const termo = this.value.trim();
+        
+        clearTimeout(timeout); // Cancela a busca anterior se o usuário ainda estiver digitando
 
         if (termo.length < 1) {
             lista.innerHTML = '';
             return;
         }
         
-
-        fetch(`/caixa/buscar-produtos/?q=${encodeURIComponent(termo)}`)
+        // Aguarda 400ms após a última digitação para fazer a busca
+        timeout = setTimeout(() => {
+            fetch(`/caixa/buscar-produtos/?q=${encodeURIComponent(termo)}`)
             .then(response => response.json())
             .then(data => {
                 //lista.innerHTML = '';
@@ -400,6 +405,7 @@ function inicializarBuscaProduto(bloco) {
                     lista.appendChild(li);
                 });
             });
+        }, 400);
     });
 }
 

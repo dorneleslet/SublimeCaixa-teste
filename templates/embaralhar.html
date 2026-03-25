@@ -1,189 +1,83 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Procedimentos</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-        }
+{% extends "base.html" %}
+{% load static %}
 
-        .container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 800px;
-        }
+{% block title %}Gestão de conteúdos | Sublime Caixa{% endblock %}
 
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        .input-group {
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr 1fr auto;
-            gap: 10px;
-            margin-bottom: 20px;
-            align-items: end;
-        }
-
-        .form-control {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-            color: #666;
-            font-weight: bold;
-        }
-
-        input, select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.3s;
-            height: 42px; /* Alinhar com inputs */
-        }
-
-        #btnAdd {
-            background-color: #28a745;
-            color: white;
-        }
-
-        #btnAdd:hover {
-            background-color: #218838;
-        }
-
-        .actions {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-        }
-
-        #btnShuffle {
-            background-color: #007bff;
-            color: white;
-        }
-
-        #btnShuffle:hover {
-            background-color: #0056b3;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        /* Responsividade para telas menores */
-        @media (max-width: 600px) {
-            .input-group {
-                grid-template-columns: 1fr;
-            }
-            button {
-                width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Lista de Procedimentos</h1>
+{% block dashboard %}
+<div class="container" style="background-color: #292929; min-height: 100vh; padding: 20px;">
+    <div class="row">
+        <div class="col">
+            <h2 class="mb-1">⚡ Gestão de Conteúdos</h2>
+            <small class="text-muted">Gerenciamento da lista de procedimentos postados nas redes sociais em uma ordem aleatória.</small>
+            <hr style="border-top: 1px solid #555;">
+        </div>
+    </div>
 
     <!-- Área de Inserção -->
-    <div class="input-group">
-        <div class="form-control">
-            <label for="procId">Procedimento</label>
-            <select id="procId">
-                <option value="" disabled selected>Selecione um procedimento</option>
-                <option value="Corte">Corte</option>
-                <option value="Liso">Liso</option>
-                <option value="Coloração">Coloração</option>
-                <option value="Iluminado">Iluminado</option>
-                <option value="Loiro">Loiro</option>
-                <option value="Tratamento">Tratamento</option>
-            </select>
+    <div class="card bg-dark border-secondary mb-4">
+        <div class="card-body">
+            <div class="form-row align-items-end">
+                <div class="form-group col-md-3">
+                    <label for="procId">Procedimento</label>
+                    <select id="procId" class="form-control">
+                        <option value="" disabled selected>Selecione um procedimento</option>
+                        <option value="Corte">Corte</option>
+                        <option value="Liso">Liso</option>
+                        <option value="Coloração">Coloração</option>
+                        <option value="Iluminado">Iluminado</option>
+                        <option value="Loiro">Loiro</option>
+                        <option value="Tratamento">Tratamento</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="procCurvature">Curvatura</label>
+                    <select id="procCurvature" class="form-control">
+                        <option value="cacho">Cacho</option>
+                        <option value="liso">Liso</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="procName">Nome</label>
+                    <input type="text" id="procName" class="form-control" placeholder="Ex: Ana Moraes">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="procType">Tipo</label>
+                    <select id="procType" class="form-control">
+                        <option value="Reels">Reels</option>
+                        <option value="Feed">Feed</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <button id="btnAdd" class="btn btn-secondary btn-block" onclick="addProcedure()">Adicionar</button>
+                </div>
+            </div>
         </div>
-        <div class="form-control">
-            <label for="procCurvature">Curvatura</label>
-            <select id="procCurvature">
-                <option value="cacho">Cacho</option>
-                <option value="liso">Liso</option>
-            </select>
-        </div>
-        <div class="form-control">
-            <label for="procName">Nome</label>
-            <input type="text" id="procName" placeholder="Ex: Ana Moraes">
-        </div>
-       
-        <div class="form-control">
-            <label for="procType">Tipo</label>
-            <select id="procType">
-                <option value="Reels">Reels</option>
-                <option value="Feed">Feed</option>
-            </select>
-        </div>
-        <button id="btnAdd" onclick="addProcedure()">Adicionar</button>
     </div>
 
     <!-- Área de Ações -->
-    <div class="actions">
-        <button id="btnShuffle" type="button" class="btn btn-secondary" onclick="shuffleProcedures()">
-            ⚡ Misturar / Embaralhar
-        </button>
+    <div class="row mb-3">
+        <div class="col text-right">
+            <button id="btnShuffle" type="button" class="btn btn-light" style="background-color: #f2b1a6; border-color: #f2b1a6; color: #fff;" onclick="shuffleProcedures()">
+                ⚡ Misturar / Embaralhar
+            </button>
+        </div>
     </div>
 
-    <!-- Tabela de Listagem -->
-    <table>
-        <thead>
-            <tr>
-                <th>Procedimento</th>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Curvatura</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- Os itens aparecerão aqui -->
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Procedimento</th>
+                    <th>Nome</th>
+                    <th>Curvatura</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Os itens aparecerão aqui -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
@@ -224,7 +118,7 @@
         tbody.innerHTML = ''; // Limpa a tabela atual
 
         if (procedures.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#888;">Nenhum procedimento cadastrado.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#bbb;">Nenhum procedimento cadastrado.</td></tr>';
             return;
         }
 
@@ -234,7 +128,7 @@
                 <td><strong>${proc.id}</strong></td>
                 <td>${proc.name}</td>
                 <td>${proc.curvature.charAt(0).toUpperCase() + proc.curvature.slice(1)}</td>
-                <td><span style="background:#eee; padding:2px 6px; border-radius:4px; font-size:0.9em;">${proc.type}</span></td>
+                <td><span class="badge badge-light">${proc.type}</span></td>
             `;
             tbody.appendChild(row);
         });
@@ -254,7 +148,6 @@
             alert("Adicione pelo menos 2 itens para embaralhar.");
             return;
         }
-
         // 1. Separar em quatro pools (tipo/curvatura) e embaralhar
         const pools = {
             Feed: {
@@ -303,8 +196,7 @@
 
             // Se não encontrar (todos iguais), pega o primeiro mesmo (caso limite)
             if (selectedIndex === -1) selectedIndex = 0;
-            
-            // 5. Adiciona o item selecionado ao resultado e remove do pool
+             // 5. Adiciona o item selecionado ao resultado e remove do pool
             const selectedItem = pool.splice(selectedIndex, 1)[0];
             result.push(selectedItem);
         }
@@ -323,9 +215,4 @@
         }
     });
 </script>
-
-
-
-</body>
-</html>
-
+{% endblock %}
