@@ -249,7 +249,7 @@ describe('Página do caixa principal', () => {
         cy.get('[data-test="sinal"]').type('10');
         cy.get('[data-test="fatura"]').select('Sim');
         cy.get('[data-test="pagamento"]').select('Multibanco');
-        cy.get('[data-test="pagamento"]').type('Desconto de 5€, a cliente tem pouco cabelo');
+        cy.get('[data-test="observacoes"]').type('Desconto de 5€, a cliente tem pouco cabelo');
         
         cy.get('[data-test="finalizar-venda"]').click();
         cy.contains('Venda registrada com sucesso!').should('be.visible');

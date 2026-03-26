@@ -266,7 +266,7 @@ Validar o fluxo de cadastro de cliente utilizando um email inválida.
 | 4 | O usuário preenche o campo "NIF" com o valor "333222111" da massa de dados. | - |
 | 5 | O usuário NÃO preenche o campo "Nascimento". | - |
 | 6 | O usuário preenche o campo "Email" com o valor "joana.com" ou "joana@". | Aparece a mensagem "**Inclua um "@" no endereço de email.**" ou "**Insira uma parte após "@".**" |
-| 7 | O usuário clica no botão "Cadastrar". | Aparece a mensagen de erro. |
+| 7 | O usuário clica no botão "Cadastrar". | Aparece a mensagem de erro. |
 3. Não é possível fazer o cadastro do cliente com o email com formato inválido e o usuário permanece na tela de cadastro de clientes.
 
 ---
@@ -384,7 +384,7 @@ Validar o fluxo de adicionar ficha técnica de cliente na edição de cadastro.
 | 9 | O usuário preenche o campo "Linha home care" com o valor "Kit Absolut Repair Molecular - Shampoo e Máscara". | - |
 | 10 | O usuário preenche o campo "Observações" com o valor "Tem 3 adicionais". | - |
 | 11 | O usuário clica no botão "Adicionar ficha". | Aparece uma mensagem de sucesso "**Ficha do cliente adicionada com sucesso!**" e abaixo mostra a ficha no histórico do cliente com um botão de "Excluir". |
-3. A ficha técnina do cliente é adicionada ao histórico do cliente.
+3. A ficha técnica do cliente é adicionada ao histórico do cliente.
 
 ---
 
@@ -412,7 +412,7 @@ Validar o fluxo de adicionar ficha técnica de cliente na edição de cadastro s
 | 9 | O usuário preenche o campo "Linha home care" com o valor "Kit Absolut Repair Molecular - Shampoo e Máscara". | - |
 | 10 | O usuário preenche o campo "Observações" com o valor "Tem 3 adicionais". | - |
 | 11 | O usuário clica no botão "Adicionar ficha". | Aparece um alerta de erro "**Preencha todos os campos obrigatórios.**" com um botão "Ok". |
-3. Não é possível adicionar uma nova ficha técnica sem preencher os campos obrigatórios e o usuário permanece na tela de edição decadastro de clientes.
+3. Não é possível adicionar uma nova ficha técnica sem preencher os campos obrigatórios e o usuário permanece na tela de edição de cadastro de clientes.
 
 ---
 
@@ -481,7 +481,7 @@ Validar o tratamento de erro do sistema quando um serviço não é cadastrado co
 
 ---
 
-### CT018: Edição de serviço com Sucesso (Completo)
+### CT019: Edição de serviço com Sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -503,7 +503,7 @@ Validar o fluxo de edição do cadastro de serviço bem-sucedido.
 
 ---
 
-### CT019: Edição de serviços sem preencher os dados obrigatórios
+### CT020: Edição de serviços sem preencher os dados obrigatórios
 
 ### **Objetivo** 
 
@@ -525,7 +525,7 @@ Validar o fluxo de edição de serviços sem preencher os dados obrigatórios, n
 
 ---
 
-### CT020: Exclusão de serviço com sucesso (Completo)
+### CT021: Exclusão de serviço com sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -548,7 +548,7 @@ Validar o fluxo de exclusão de serviço na edição de cadastro de serviços.
 
 ## 📑 Casos de Teste: Estoque
 
-### CT021: Cadastro de produto com Sucesso (Completo)
+### CT022: Cadastro de produto com Sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -571,7 +571,7 @@ Validar o fluxo de cadastro de produto bem-sucedido.
 
 ---
 
-### CT022: Cadastro de produto sem preencher os campos obrigatórios
+### CT023: Cadastro de produto sem preencher os campos obrigatórios
 
 ### **Objetivo**
 
@@ -592,7 +592,7 @@ Validar o tratamento de erro do sistema quando um produto não é cadastrado cor
 
 ---
 
-### CT023: Edição de produto com Sucesso (Completo)
+### CT024: Edição de produto com Sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -614,7 +614,7 @@ Validar o fluxo de edição do cadastro de produto bem-sucedido.
 
 ---
 
-### CT024: Edição de produtos sem preencher os dados obrigatórios
+### CT025: Edição de produtos sem preencher os dados obrigatórios
 
 ### **Objetivo** 
 
@@ -636,7 +636,7 @@ Validar o fluxo de edição de produtos sem preencher os dados obrigatórios, no
 
 ---
 
-### CT025: Adicionar produto no estoque com sucesso (Completo)
+### CT026: Adicionar produto no estoque com sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -660,7 +660,7 @@ Validar o fluxo de adicionar produto ao estoque na edição de cadastro de produ
 
 ## 📑 Casos de Teste: Configurações
 
-### CT026: Configurar acesso de usuário com Sucesso (Completo)
+### CT027: Configurar acesso de usuário com Sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -681,12 +681,12 @@ Validar o fluxo de configuração de acesso bem-sucedido.
 | 6 | O usuário seleciona no campo "Grupo" a opção "Administrador [acesso geral]" da massa de dados. | - |
 | 7 | O usuário clica no botão "Adicionar usuário". | Aparece uma mensagem de sucesso **Usuário "user_teste" criado com sucesso!** |
 3. A página é atualizada para a página de configurar acessos mostrando todos os usuários já cadastrados.
-4. O grupo "Admnistrador" tem acesso a todas as páginas do sistema Caixa, Clientes, Agenda, Serviços, Estoque, Configurações.
+4. O grupo "Administrador" tem acesso a todas as páginas do sistema Caixa, Clientes, Agenda, Serviços, Estoque, Configurações.
 5. O grupo "Colaborador" tem acesso apenas as páginas de Caixa, Clientes e Agenda.
 
 ---
 
-### CT027: Configurar acesso de usuário sem preencher os campos obrigatórios
+### CT028: Configurar acesso de usuário sem preencher os campos obrigatórios
 
 ### **Objetivo** 
 
@@ -708,7 +708,7 @@ Validar o fluxo de configuração de acesso sem preencher os dados obrigatórios
 
 ---
 
-### CT028: Configurar edição de usuário com sucesso
+### CT029: Configurar edição de usuário com sucesso
 
 ### **Objetivo** 
 
@@ -731,7 +731,7 @@ Validar o fluxo de configuração de edição de usuário.
 
 ---
 
-### CT029: Configurar edição de usuário sem usuário
+### CT030: Configurar edição de usuário sem usuário
 
 ### **Objetivo** 
 
@@ -753,7 +753,7 @@ Validar o fluxo de configuração de edição de usuário sem preencher o campo 
 
 ---
 
-### CT030: Exclusão de usuário com sucesso (Completo)
+### CT031: Exclusão de usuário com sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -776,7 +776,7 @@ Validar o fluxo de exclusão de usuário na edição de usuários do sistema.
 
 ## 📑 Casos de Teste: Caixa
 
-### CT031: Realizando uma venda no caixa com Sucesso (Completo)
+### CT032: Realizando uma venda no caixa com Sucesso (Completo)
 
 ### **Objetivo** 
 
@@ -803,7 +803,7 @@ Validar o fluxo de realizar venda no caixa bem-sucedida.
 
 ---
 
-### CT032: Realizando uma venda no caixa sem dados do cliente
+### CT033: Realizando uma venda no caixa sem dados do cliente
 
 ### **Objetivo** 
 
@@ -830,7 +830,7 @@ Validar o fluxo de realizar venda no caixa sem os dados do cliente.
 
 ---
 
-### CT033: Realizando uma venda no caixa sem produto no estoque
+### CT034: Realizando uma venda no caixa sem produto no estoque
 
 ### **Objetivo** 
 
@@ -858,7 +858,7 @@ Validar o fluxo de realizar venda no caixa sem produto no estoque.
 
 ---
 
-### CT034: Realizando uma venda no caixa com o valor total zerado
+### CT035: Realizando uma venda no caixa com o valor total zerado
 
 ### **Objetivo** 
 
@@ -885,7 +885,7 @@ Validar o fluxo de realizar venda no caixa com o valor total zerado.
 
 ---
 
-### CT035: Realizando uma venda no caixa sem um método de pagamento
+### CT036: Realizando uma venda no caixa sem um método de pagamento
 
 ### **Objetivo** 
 
