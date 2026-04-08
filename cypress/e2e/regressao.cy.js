@@ -19,7 +19,7 @@ describe('Página de cadastro de clientes', () => {
     it('Criando novo cliente com todos os campos preenchidos.', () => {
         const cliente = gerarClientes();
 
-        cy.get('[data-test="nome-cadastro"]').clear().type('QA Cliente 01');
+        cy.get('[data-test="nome-cadastro"]').clear().type(cliente.nome);
         cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
         cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
         cy.get('[data-test="nascimento-cadastro"]').clear().type(cliente.nascimento);
@@ -32,7 +32,7 @@ describe('Página de cadastro de clientes', () => {
     it('Criando novo cliente com campos obrigatórios e nascimento.', () => {
         const cliente = gerarClientes();
 
-        cy.get('[data-test="nome-cadastro"]').clear().type('Cliente Teste');
+        cy.get('[data-test="nome-cadastro"]').clear().type(cliente.nome);
         cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
         cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
         cy.get('[data-test="nascimento-cadastro"]').clear().type(cliente.nascimento);
@@ -54,10 +54,21 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Atualizando dados de cadastro do cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('Cliente Teste').click();
-        cy.contains('Cliente Teste').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-editar"]').click();
         cy.get('[data-test="email-edicao"]').click().clear().type('clienteteste@email.com');
@@ -67,10 +78,21 @@ describe('Página de cadastro de clientes', () => {
     })
     
     it('Excluindo cadastro do cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('Cliente Teste').click();
-        cy.contains('Cliente Teste').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-excluir"]').click();
 
@@ -79,10 +101,21 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Adicionando ficha técnica com todos os campos preenchidos ao cadastro de cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('QA Cliente 01').click();
-        cy.contains('QA Cliente 01').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-ficha-cliente"]').click();
         cy.get('#fichaCliente').should('be.visible');
@@ -99,10 +132,21 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Adicionando ficha técnica com apenas com campos obrigatórios ao cadastro de cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('QA Cliente 01').click();
-        cy.contains('QA Cliente 01').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-ficha-cliente"]').click();
         cy.get('#fichaCliente').should('be.visible');
@@ -116,25 +160,83 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Editando ficha técnica de cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
+        // Criando ficha técnica para teste
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('QA Cliente 01').click();
-        cy.contains('QA Cliente 01').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
+
+        cy.get('[data-test="btn-ficha-cliente"]').click();
+        cy.get('#fichaCliente').should('be.visible');
+
+        cy.get('[data-test="data-proced"]').type('05/03/2026');
+        cy.get('[data-test="valor-ficha"]').type(2500);
+        cy.get('[data-test="homecare"]').type('Kit shampoo, máscara e óleo finalizador');
+
+        cy.get('[data-test="btn-adicionar-ficha"]').click();
+        cy.contains('Ficha do cliente adicionada com sucesso!').should('be.visible');
+
+        // Editando a ficha
+        cy.visit('http://127.0.0.1:8000/clientes/');
+        cy.get('[data-test="btn-atualizar-cliente"]').click();
+
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-ficha-cliente"]').click();
         cy.get('#fichaCliente').should('be.visible');
 
         cy.get('[data-test="btn-editar-ficha"]').first().click();
-        cy.get('[data-test="edit-ficha-observacao"]').type('Tratamento em casa');;
+        cy.get('[data-test="edit-ficha-observacao"]').clear().type('Tratamento em casa');;
 
         cy.get('[data-test="btn-salvar-edit-ficha"]').click(); 
     })
 
     it('Excluindo ficha técnica de cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
+        // Criando ficha técnica para teste
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('QA Cliente 01').click();
-        cy.contains('QA Cliente 01').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
+
+        cy.get('[data-test="btn-ficha-cliente"]').click();
+        cy.get('#fichaCliente').should('be.visible');
+
+        cy.get('[data-test="data-proced"]').type('05/03/2026');
+        cy.get('[data-test="valor-ficha"]').type(2500);
+        cy.get('[data-test="homecare"]').type('Kit shampoo, máscara e óleo finalizador');
+
+        cy.get('[data-test="btn-adicionar-ficha"]').click();
+        cy.contains('Ficha do cliente adicionada com sucesso!').should('be.visible');
+
+        // Excluindo ficha técnica
+        cy.visit('http://127.0.0.1:8000/clientes/');
+        cy.get('[data-test="btn-atualizar-cliente"]').click();
+
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-ficha-cliente"]').click();
         cy.get('#fichaCliente').should('be.visible');
@@ -144,10 +246,38 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Cancelando exclusão de ficha técnica de cliente.', () => {
+        // Criando cliente para teste
+        const cliente = gerarClientes();
+        const nomeCliente = `Cliente ${Date.now()}`
+
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
+        // Criando ficha técnica para teste
         cy.get('[data-test="btn-atualizar-cliente"]').click();
 
-        cy.get('[data-test="barra-pesquisa-clientes"]').click().type('QA Cliente 01').click();
-        cy.contains('QA Cliente 01').click();
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
+
+        cy.get('[data-test="btn-ficha-cliente"]').click();
+        cy.get('#fichaCliente').should('be.visible');
+
+        cy.get('[data-test="data-proced"]').type('05/03/2026');
+        cy.get('[data-test="valor-ficha"]').type(2500);
+        cy.get('[data-test="homecare"]').type('Kit shampoo, máscara e óleo finalizador');
+
+        cy.get('[data-test="btn-adicionar-ficha"]').click();
+        cy.contains('Ficha do cliente adicionada com sucesso!').should('be.visible');
+
+        // Cancelando exclusão de ficha técnica
+        cy.get('[data-test="btn-atualizar-cliente"]').click();
+
+        cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
+        cy.contains(nomeCliente).should('be.visible').click();
 
         cy.get('[data-test="btn-ficha-cliente"]').click();
         cy.get('#fichaCliente').should('be.visible');
@@ -159,11 +289,13 @@ describe('Página de cadastro de clientes', () => {
 
 describe('Página de cadastro de serviços', () => {
     beforeEach(() => {    
-        cy.visit('http://127.0.0.1:8000/servicos/novo');
+        cy.visit('http://127.0.0.1:8000/servicos/novo/');
     })
 
     it('Criando novo serviço.', () =>{
-        cy.get('[data-test="nome-servico-cadastro"]').type('Corte e Finalização');
+        const nomeServico = `Servico ${Date.now()}`;
+
+        cy.get('[data-test="nome-servico-cadastro"]').type(nomeServico);
         cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
 
         cy.get('[data-test="btn-cadastro-servico"]').click();
@@ -171,9 +303,19 @@ describe('Página de cadastro de serviços', () => {
     })
 
     it ('Editando serviço cadastrado.', () => {
+        // Criando serviço para teste
+        const nomeServico = `Servico ${Date.now()}`;
+
+        cy.get('[data-test="nome-servico-cadastro"]').type(nomeServico);
+        cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
+
+        cy.get('[data-test="btn-cadastro-servico"]').click();
+        cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
+
+        // Editando serviço
         cy.get('[data-test="btn-editar-servico"]').click();
-        cy.get('[data-test="barra-pesquisa-servicos"]').type('Corte e Finalização');
-        cy.contains('Corte e Finalização').first().click();
+        cy.get('[data-test="barra-pesquisa-servicos"]').should('be.visible').type(nomeServico);
+        cy.contains(nomeServico).should('be.visible').click();
         cy.get('[data-test="preco-servico-edicao"]').type('50,00');
 
         cy.get('[data-test="btn-salvar-edicao"]').click();
@@ -181,9 +323,19 @@ describe('Página de cadastro de serviços', () => {
     })
 
     it ('Excluindo serviço cadastrado.', () => {
+        // Criando serviço para teste
+        const nomeServico = `Servico ${Date.now()}`;
+
+        cy.get('[data-test="nome-servico-cadastro"]').type(nomeServico);
+        cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
+
+        cy.get('[data-test="btn-cadastro-servico"]').click();
+        cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
+
+        // Excluindo serviço
         cy.get('[data-test="btn-editar-servico"]').click();
-        cy.get('[data-test="barra-pesquisa-servicos"]').type('Corte e Finalização');
-        cy.contains('Corte e Finalização').first().click();
+        cy.get('[data-test="barra-pesquisa-servicos"]').should('be.visible').type(nomeServico);
+        cy.contains(nomeServico).should('be.visible').click();
 
         cy.get('[data-test="btn-excluir-servico"]').click();
         cy.get('[data-test="btn-confirmar-excluir-servico"]').click();
@@ -198,9 +350,10 @@ describe('Página de cadastro de produtos', () => {
     })
 
     it ('Cadastrando produto no estoque.', () => {
-        cy.get('[data-test="nome-produto-cadastro"]').type('Shampoo');
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
         cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
-        cy.get('[data-test="preco-produto-cadastro"]').clear().type('1499'); // AJUSTAR MÁSCARA PARA INSERIR VALOR CORRETO
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
         cy.get('[data-test="descricao-produto-cadastro"]').type('Específico para cabelos loiros');
 
         cy.get('[data-test="btn-cadastro-produto"]').click();
@@ -208,10 +361,21 @@ describe('Página de cadastro de produtos', () => {
     })
 
     it ('Editando produto no estoque.', () => {
+        // Criando produto para teste
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
+        cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
+        cy.get('[data-test="descricao-produto-cadastro"]').type('Específico para cabelos loiros');
+
+        cy.get('[data-test="btn-cadastro-produto"]').click();
+        cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+
+        // Edição do produto
         cy.get('[data-test="btn-editar-produto"]').click();
 
-        cy.get('[data-test="barra-pesquisa-produtos"]').type('Shampoo');
-        cy.contains('Shampoo').first().click();
+        cy.get('[data-test="barra-pesquisa-produtos"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
 
         cy.get('[data-test="adcQuantidade-produto-edicao"]').type('3');
 
@@ -221,9 +385,20 @@ describe('Página de cadastro de produtos', () => {
     })
 
     it ('Excluindo produto no estoque.', () => {
+        // Criando produto para teste
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
+        cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
+        cy.get('[data-test="descricao-produto-cadastro"]').type('Específico para cabelos loiros');
+
+        cy.get('[data-test="btn-cadastro-produto"]').click();
+        cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+
+        // Excluindo produto
         cy.get('[data-test="btn-editar-produto"]').click();
-        cy.get('[data-test="barra-pesquisa-produtos"]').type('Shampoo');
-        cy.contains('Shampoo').first().click();
+        cy.get('[data-test="barra-pesquisa-produtos"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
 
         cy.get('[data-test="btn-excluir-produto"]').click();
         cy.get('[data-test="btn-confirmar-excluir-produto"]').click();
@@ -233,17 +408,46 @@ describe('Página de cadastro de produtos', () => {
 })
 
 describe('Página do caixa principal', () => {
-    beforeEach(() => {
-        cy.visit('http://127.0.0.1:8000/caixa/')
-    })
 
     it ('Realizando uma venda com todos os campos preenchidos.', () => {
-        cy.get('[data-test="buscar_cliente"]').type('QA Cliente 01');
-        cy.contains('QA Cliente 01').first().click();
-        cy.get('[data-test="buscar_servico"]').type('Corte e Finalização');
-        cy.contains('Corte e Finalização').first().click();
-        cy.get('[data-test="buscar-produto"]').type('Shampoo');
-        cy.contains('Shampoo').first().click();
+        // Criando cliente para teste
+        cy.visit('http://127.0.0.1:8000/clientes/');
+        const nomeCliente = `Cliente ${Date.now()}`;
+        const cliente = gerarClientes();
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
+        // Criando serviço para teste
+        cy.visit('http://127.0.0.1:8000/servicos/novo/');
+        const nomeServico = `Servico ${Date.now()}`;
+        cy.get('[data-test="nome-servico-cadastro"]').type(nomeServico);
+        cy.get('[data-test="preco-servico-cadastro"]').type('45,99');
+
+        cy.get('[data-test="btn-cadastro-servico"]').click();
+        cy.contains('Serviço cadastrado com sucesso!').should('be.visible');
+
+        // Criando produto para teste
+        cy.visit('http://127.0.0.1:8000/estoque/');
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
+        cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
+
+        cy.get('[data-test="btn-cadastro-produto"]').click();
+        cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+
+        // Realizando a venda no caixa
+        cy.visit('http://127.0.0.1:8000/caixa/');
+        cy.get('[data-test="buscar_cliente"]').type(nomeCliente);
+        cy.contains(nomeCliente).should('be.visible').click();
+        cy.get('[data-test="buscar_servico"]').type(nomeServico);
+        cy.contains(nomeServico).should('be.visible').click();
+        cy.get('[data-test="buscar-produto"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
         cy.get('[data-test="profissional"]').type('Sara');
         cy.get('[data-test="desconto"]').type('5');
         cy.get('[data-test="sinal"]').type('10');
@@ -257,38 +461,76 @@ describe('Página do caixa principal', () => {
     })
 
     it ('Realizando venda com campos obrigatórios.', () => {
-        cy.get('[data-test="buscar_cliente"]').type('QA Cliente 01');
-        cy.contains('QA Cliente 01').first().click();
-        cy.get('[data-test="buscar-produto"]').type('Shampoo');
-        cy.contains('Shampoo').first().click();
+        // Criando cliente para teste
+        cy.visit('http://127.0.0.1:8000/clientes/');
+        const nomeCliente = `Cliente ${Date.now()}`;
+        const cliente = gerarClientes();
+        cy.get('[data-test="nome-cadastro"]').clear().type(nomeCliente);
+        cy.get('[data-test="telefone-cadastro"]').clear().type(cliente.telefone);
+        cy.get('[data-test="nif-cadastro"]').clear().type(cliente.nif);
+        
+        cy.get('[data-test="btn-salvar"]').click();
+        cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
+
+        // Criando produto para teste
+        cy.visit('http://127.0.0.1:8000/estoque/');
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
+        cy.get('[data-test="quantidade-produto-cadastro"]').type('6');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
+
+        cy.get('[data-test="btn-cadastro-produto"]').click();
+        cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+
+        // Realizando a venda
+        cy.visit('http://127.0.0.1:8000/caixa/');
+        cy.get('[data-test="buscar_cliente"]').type(nomeCliente);
+        cy.contains(nomeCliente).should('be.visible').click();
+        cy.get('[data-test="buscar-produto"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
         cy.get('[data-test="pagamento"]').select('Multibanco');
 
         cy.get('[data-test="finalizar-venda"]').click();
         cy.contains('Venda registrada com sucesso!').should('be.visible');
     })
 
-    it ('Cadastrando produto zerado no estoque para erro de venda.', () => {
-        cy.visit('http://127.0.0.1:8000/estoque/')
-        cy.get('[data-test="nome-produto-cadastro"]').type('Mascara');
+    it ('Tentativa de venda sem estoque.', () => {
+        // Criando produto para teste
+        cy.visit('http://127.0.0.1:8000/estoque/');
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
         cy.get('[data-test="quantidade-produto-cadastro"]').type('0');
-        cy.get('[data-test="preco-produto-cadastro"]').clear().type('0');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('14,99');
 
         cy.get('[data-test="btn-cadastro-produto"]').click();
         cy.contains('Produto cadastrado com sucesso!').should('be.visible');
-    })
 
-    it ('Tentativa de venda sem estoque.', () => {
-        cy.get('[data-test="buscar-produto"]').type('Mascara');
-        cy.contains('Mascara').first().click();
+        // Realizando venda sem estoque
+        cy.visit('http://127.0.0.1:8000/caixa/');
+        cy.get('[data-test="buscar-produto"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
         cy.get('[data-test="pagamento"]').select('Dinheiro');
 
         cy.get('[data-test="finalizar-venda"]').click();
-        cy.contains('O produto "Mascara" está sem estoque disponível e não pode ser vendido.').should('be.visible'); // AJUSTAR PARA NÃO SER ALERT, ABRIR UM MODAL PARA CONFIRMAR
+        cy.contains(`Produto "${nomeProduto}" sem estoque disponível para venda.`).should('be.visible');
     })
 
     it ('Tentativa de venda com valor zerado.', () => {
-        cy.get('[data-test="buscar-produto"]').type('Mascara');
-        cy.contains('Mascara').first().click();
+        // Criando produto para teste
+        cy.visit('http://127.0.0.1:8000/estoque/');
+        const nomeProduto = `Produto ${Date.now()}`;
+        cy.get('[data-test="nome-produto-cadastro"]').type(nomeProduto);
+        cy.get('[data-test="quantidade-produto-cadastro"]').type('5');
+        cy.get('[data-test="preco-produto-cadastro"]').clear().type('10,00');
+
+        cy.get('[data-test="btn-cadastro-produto"]').click();
+        cy.contains('Produto cadastrado com sucesso!').should('be.visible');
+
+        // Realizando venda
+        cy.visit('http://127.0.0.1:8000/caixa/');
+        cy.get('[data-test="buscar-produto"]').type(nomeProduto);
+        cy.contains(nomeProduto).should('be.visible').click();
+        cy.get('[data-test="desconto"]').type('10');
         cy.get('[data-test="pagamento"]').select('Dinheiro');
 
         cy.get('[data-test="finalizar-venda"]').click();
@@ -296,5 +538,4 @@ describe('Página do caixa principal', () => {
     })
 
 })
-
 

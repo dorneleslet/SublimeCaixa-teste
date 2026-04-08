@@ -19,15 +19,20 @@ function exibirFormEstoque(tipo) {
 function cadastrarProduto(event) {
     event.preventDefault();
 
-    let form = document.getElementById('form-novo-produto');
-    let precoUnitario = form.querySelector('[name="preco_unitario"]').value;
+    const form = document.getElementById('form-novo-produto');
+    const precoInput = form.querySelector('[name="preco_unitario"]');
+    const erroDiv = document.getElementById('erro-preco');
 
-    // substitui virgula por ponto, se tiver
-    let precoFormatado = precoUnitario.replace(',', '.');
+    precoInput.classList.remove('is-invalid');
+    if (erroDiv) erroDiv.style.display = 'none';
 
-    // Verifica se tem decimal (ponto e pelo menos um número depois)
-    if (!/\.\d{1,2}$/.test(precoFormatado)) {
-        alert('Por favor, digite um preço com decimais (ex: 10,50).');
+    // Remove pontos de milhar e substitui vírgula por ponto
+    let precoFormatado = precoInput.value.replace(/\./g, '').replace(',', '.');
+
+    // Verifica se o valor é válido e maior que zero
+    if (isNaN(precoFormatado) || Number(precoFormatado) <= 0) {
+        precoInput.classList.add('is-invalid');
+        if (erroDiv) erroDiv.style.display = 'block';
         return; // não envia o formulário
     }
 
@@ -52,6 +57,7 @@ function cadastrarProduto(event) {
 
                     let div = document.createElement('div');
                     div.classList.add('invalid-feedback');
+                    div.classList.add('error-message'); // Adiciona a classe para consistência
                     div.style.color = 'red';
                     div.innerText = data.erros[campo];
 
@@ -225,6 +231,12 @@ function atualizarProduto() {
     let preco_unitario = document.getElementById('editar_preco_unitario').value;
     let descricao = document.getElementById('editar_descricao').value;
     let novaEntrada = parseInt(document.getElementById('nova_entrada').value) || 0;
+    
+    const precoInput = document.getElementById('editar_preco_unitario');
+    const erroDiv = document.getElementById('erro-editar-preco');
+
+    precoInput.classList.remove('is-invalid');
+    if (erroDiv) erroDiv.style.display = 'none';
 
 
     // validação rápida
@@ -237,9 +249,10 @@ function atualizarProduto() {
         return;
     }
     // converter virgula para ponto
-    preco_unitario = String(preco_unitario).replace(',', '.');
+    preco_unitario = String(preco_unitario).replace(/\./g, '').replace(',', '.');
     if (isNaN(preco_unitario) || Number(preco_unitario) <= 0) {
-        alert('Digite um preço válido! Exemplo: 10,50');
+        precoInput.classList.add('is-invalid');
+        if (erroDiv) erroDiv.style.display = 'block';
         return;
     }
 

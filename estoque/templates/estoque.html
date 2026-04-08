@@ -33,37 +33,38 @@
                     </div>
                     <div class="col-md">
                         <label for="preco_unitario">Preço Unitário:<span style="color: red;">*</span></label>
-                        <input type="text" data-test="preco-produto-cadastro" step="0.01" class="form-control" name="preco_unitario" id="preco_unitario" min="0.01" maxlength="7" placeholder="0,01" inputmode="numeric" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                        <input type="text" data-test="preco-produto-cadastro" class="form-control mascara-dinheiro" name="preco_unitario" id="preco_unitario" min="0.01" maxlength="10" placeholder="0,00" inputmode="numeric" required>
+                        <div id="erro-preco" class="error-message" style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1">O preço unitário deve ser maior que zero (ex: 1,99).</div>
                     </div>
                     <script>
-                        const precoInput = document.getElementById('preco_unitario');
-
-                        precoInput.addEventListener('input', function () {
-                            let valor = precoInput.value.replace(/\D/g, '');
-
+                        function aplicarMascaraDinheiro(input) {
+                            let valor = input.value.replace(/\D/g, '');
                             if (!valor) {
-                                precoInput.value = '';
+                                input.value = '';
                                 return;
                             }
+                            // Remove zeros à esquerda e limita dígitos
+                            valor = (parseInt(valor, 10) || 0).toString();
+                            if (valor.length > 9) valor = valor.slice(0, 9);
 
-                            if (valor.length > 7) {
-                                valor = valor.slice(0, 7);
-                            }
+                            let parteInteira = '0';
+                            let parteDecimal = '00';
 
-                            let parteInteira = '';
-                            let parteDecimal = '';
-
-                            if (valor.length <= 2) {
-                                parteInteira = '0';
-                                parteDecimal = valor.padStart(2, 0);
+                            if (valor.length === 1) {
+                                parteDecimal = '0' + valor;
+                            } else if (valor.length === 2) {
+                                parteDecimal = valor;
                             } else {
                                 parteInteira = valor.slice(0, -2);
                                 parteDecimal = valor.slice(-2);
                             }
                             parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                            input.value = parteInteira + ',' + parteDecimal;
+                        }
 
-                            precoInput.value = `${parteInteira},${parteDecimal}`;
-                        })
+                        document.querySelectorAll('.mascara-dinheiro, #editar_preco_unitario').forEach(el => {
+                            el.addEventListener('input', function() { aplicarMascaraDinheiro(this); });
+                        });
                     </script>
                 </div>
                 
@@ -88,6 +89,17 @@
                     const btn = document.getElementById("btn-salvar-produto");
 
                     form.addEventListener("submit", function(event){
+                        const precoInput = document.getElementById('preco_unitario');
+                        const erroDiv = document.getElementById('erro-preco');
+                        // Remove pontos de milhar e converte vírgula em ponto para validação numérica
+                        const precoValor = precoInput.value.replace(/\./g, '').replace(',', '.');
+
+                        if (!precoValor || parseFloat(precoValor) <= 0 || isNaN(parseFloat(precoValor))) {
+                            precoInput.classList.add('is-invalid');
+                            erroDiv.style.display = 'block';
+                            event.preventDefault(); // Cancela o envio do formulário
+                            return;
+                        }
                         //Muda texto e desativa botão
                         btn.disabled = true;
                         const originalText = btn.value;
@@ -98,6 +110,12 @@
                             btn.disabled = false;
                             btn.value = originalText;
                         }, 3000);
+                    });
+
+                    // Limpa a mensagem de erro quando o usuário começa a digitar
+                    document.getElementById('preco_unitario').addEventListener('input', function() {
+                        this.classList.remove('is-invalid');
+                        document.getElementById('erro-preco').style.display = 'none';
                     });
                     // Mensagem de sucesso desaparece após 2 segundos
                     const msg = document.getElementById("mensagem-sucesso");
@@ -156,7 +174,15 @@
                     <input type="text" data-test="adcQuantidade-produto-edicao" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar"> 
 
                     <label for="editar_preco_unitario" class="mt-2">Preço Unitário:<span style="color: red;">*</span></label>
-                    <input type="text" data-test="preco-produto-edicao" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0" maxlength="7" inputmode="decimal" pattern="^\d{1,7}([.,]\d{1,2})?$" required>
+                    <input type="text" data-test="preco-produto-edicao" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0.01" maxlength="10" inputmode="numeric" required>
+                    <div id="erro-editar-preco" class="error-message" style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1">O preço unitário deve ser maior que zero (ex: 1,99).</div>
+
+                    <script>
+                        document.getElementById('editar_preco_unitario').addEventListener('input', function() {
+                            this.classList.remove('is-invalid');
+                            document.getElementById('erro-editar-preco').style.display = 'none';
+                        });
+                    </script>
 
                     <label for="editar_descricao" class="mt-2">Descrição:</label>
                     <textarea id="editar_descricao" data-test="descricao-produto-edicao" name="descricao" class="form-control" rows="2" maxlength="200"></textarea>

@@ -64,35 +64,61 @@ function finalizarVenda() {
     const botao = document.getElementById('btnFinalizar');
     botao.disabled = true; // desativa o botão
 
+    // Limpa todas as mensagens de erro e classes 'is-invalid'
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+    document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+
     // pega o total da tela
     const totalElem = document.getElementById('total');
     let total = parseFloat(totalElem.textContent.replace('€', '').replace(',', '.').trim());
+    const erroTotalDiv = document.getElementById('erro-total-venda'); // Assumindo que este div existe no HTML
 
-        if (total <= 0) {
-            alert('O total da venda não pode ser zero ou negativo!');
-            botao.disabled = false; // ativa o botão
-            return;
+    if (total <= 0) {
+        // Não adicionamos 'is-invalid' ao totalElem se for um span/div, apenas mostramos a mensagem
+        if (erroTotalDiv) {
+            erroTotalDiv.textContent = 'O total da venda não pode ser zero ou negativo!';
+            erroTotalDiv.style.display = 'block';
         }
+        botao.disabled = false;
+        return;
+    }
 
     // forma de pagamento, vindo do select do HTML
-    const formaPagamento = document.getElementById('forma_pagamento').value;
-        if (!formaPagamento) {
-            alert('Por favor, selecione uma forma de pagamento!')
-            botao.disabled = false; // ativa o botão
-            return;
-        } 
+    const formaPagamentoSelect = document.getElementById('forma_pagamento');
+    const formaPagamento = formaPagamentoSelect.value;
+    const erroFormaPagamentoDiv = document.getElementById('erro-forma-pagamento'); // Assumindo que este div existe no HTML
 
-    for (const p of document.querySelectorAll('.produto-selecionado[data-id]')) {
+    if (!formaPagamento) {
+        if (formaPagamentoSelect) formaPagamentoSelect.classList.add('is-invalid');
+        if (erroFormaPagamentoDiv) {
+            erroFormaPagamentoDiv.textContent = 'Por favor, selecione uma forma de pagamento!';
+            erroFormaPagamentoDiv.style.display = 'block';
+        }
+        botao.disabled = false;
+        return;
+    }
+
+    let hasStockError = false;
+    document.querySelectorAll('.bloco-produto.produto-selecionado').forEach(p => {
         const estoqueDisponivel = parseInt(p.dataset.estoque, 10) || 0; // Use o estoque real disponível
         const nome = p.dataset.nome || 'Produto sem nome';
 
+        const inputElement = p.querySelector('.buscar_produto');
             if (estoqueDisponivel <= 0) {
-                alert(`O produto "${nome}" está sem estoque disponível e não pode ser vendido.`);
-                botao.disabled = false;
-                return;
+                if (inputElement) inputElement.classList.add('is-invalid');
+                const errorDiv = p.querySelector('.erro-estoque-produto'); // Assumindo que este div existe no HTML
+                if (errorDiv) {
+                    errorDiv.textContent = `Produto "${nome}" sem estoque disponível para venda.`;
+                    errorDiv.style.display = 'block';
+                }
+                hasStockError = true;
             }
+    });
+
+    if (hasStockError) {
+        botao.disabled = false;
+        return;
     }
-        
 
     // pega o cliente, se não tiver manda null
     const clienteId = document.getElementById('cliente_id').value;
@@ -140,6 +166,7 @@ function finalizarVenda() {
     .then(data => {
         
         if (data.success) {
+            // Limpa todos os erros após sucesso
             const msg = document.getElementById('mensagem-sucesso');
             msg.style.display = 'block';
 
@@ -341,6 +368,11 @@ function inicializarBuscaProduto(bloco) {
     let timeout = null; // Variável para controlar o tempo de espera (debounce)
 
     input.addEventListener('input', function() {
+        // Limpa erros anteriores ao digitar
+        this.classList.remove('is-invalid');
+        const errorDiv = bloco.querySelector('.erro-estoque-produto');
+        if (errorDiv) errorDiv.style.display = 'none';
+
         const termo = this.value.trim();
         
         clearTimeout(timeout); // Cancela a busca anterior se o usuário ainda estiver digitando
@@ -385,6 +417,9 @@ function inicializarBuscaProduto(bloco) {
                         dados.style.display = 'block';
 
                         // esconde a lista ao selecionar
+                        // Limpa erros ao selecionar um produto válido
+                        input.classList.remove('is-invalid');
+                        if (errorDiv) errorDiv.style.display = 'none';
                         lista.replaceChildren();
 
 
@@ -419,6 +454,12 @@ document.addEventListener('click', function(e){
         bloco.querySelector('.buscar_produto').value = '';
         bloco.querySelector('.produto_valor').value = '';
         bloco.querySelector('.estoque_produto').value = '';
+
+        // Limpa erros ao limpar o campo
+        const inputElement = bloco.querySelector('.buscar_produto');
+        const errorDiv = bloco.querySelector('.erro-estoque-produto');
+        if (inputElement) inputElement.classList.remove('is-invalid');
+        if (errorDiv) errorDiv.style.display = 'none';
         //remove marcação do dataset
         bloco.classList.remove('produto-selecionado');
         bloco.removeAttribute('data-id');
@@ -470,6 +511,10 @@ function getNumericValue(input) {
 }
 
 function calcularTotal() {
+    // Limpa o erro do total ao recalcular
+    const erroTotalDiv = document.getElementById('erro-total-venda');
+    if (erroTotalDiv) erroTotalDiv.style.display = 'none';
+
     let total = 0;
     // somar serviço
     document.querySelectorAll('.servico_valor').forEach(input => {
@@ -506,6 +551,12 @@ function calcularTotal() {
 }
 //Atualiza sempre que algum campo mudar
 document.addEventListener('input', calcularTotal);
+// Adiciona listener para o select de forma de pagamento para limpar o erro
+document.getElementById('forma_pagamento').addEventListener('change', function() {
+    this.classList.remove('is-invalid');
+    const erroDiv = document.getElementById('erro-forma-pagamento');
+    if (erroDiv) erroDiv.style.display = 'none';
+});
 document.addEventListener('change', calcularTotal);
 
 
