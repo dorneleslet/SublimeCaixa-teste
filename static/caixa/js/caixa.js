@@ -636,14 +636,51 @@ function carregarHistoricoFicha(clienteId) {
 
 
 function abrirModalFicha() {
+    const clienteId = document.getElementById('cliente_id').value;
+    
+    // Se não houver cliente, mostra o aviso na página principal e não abre o modal
+    if (!clienteId) {
+        const aviso = document.getElementById('aviso-cliente-ficha');
+        aviso.textContent = 'Selecione um cliente antes de adicionar a ficha!';
+        aviso.style.display = 'block';
+        setTimeout(() => aviso.style.display = 'none', 3500);
+        return;
+    }
+
     const modal = document.getElementById('modalFicha');
+    const sidebar = document.querySelector('.sidebar');
+    const homeSection = document.querySelector('.home-section');
+    const footer = document.querySelector('.fixed-footer');
+
     modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Impede rolagem do fundo
+
+    // Esconde a sidebar e expande o conteúdo principal
+    if (sidebar) sidebar.style.display = 'none';
+    if (homeSection) {
+        homeSection.style.left = '0';
+        homeSection.style.width = '100%';
+    }
+    if (footer) footer.style.left = '0';
 }
 
 function fecharModalFicha() {
     const modal = document.getElementById('modalFicha');
+    const sidebar = document.querySelector('.sidebar');
+    const homeSection = document.querySelector('.home-section');
+    const footer = document.querySelector('.fixed-footer');
+
     modal.style.display = 'none';
     document.getElementById('form-ficha-caixa').reset();
+    document.body.style.overflow = 'auto'; // Restaura rolagem
+
+    // Volta a exibir a sidebar e restaura o layout original
+    if (sidebar) sidebar.style.display = 'flex';
+    if (homeSection) {
+        homeSection.style.left = '';
+        homeSection.style.width = '';
+    }
+    if (footer) footer.style.left = '';
 }
 
 //adicionar e carregar fichas no caixa
@@ -655,7 +692,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const clienteId = document.getElementById('cliente_id').value; 
 
         if (!clienteId) {
-            alert('Selecione um cliente antes de adicionar a ficha!');
+            // Caso ocorra um erro inesperado dentro do modal
+            const erroModal = document.getElementById('erro-ficha-modal');
+            erroModal.textContent = 'Erro: Cliente não selecionado.';
+            erroModal.style.display = 'block';
+            setTimeout(() => erroModal.style.display = 'none', 3500);
             return;
         }
 

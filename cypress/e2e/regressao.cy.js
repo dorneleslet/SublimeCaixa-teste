@@ -117,8 +117,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-add-ficha-cliente"]').click();
+        cy.get('[data-test="data-proced"]').should('be.visible');
 
         cy.get('[data-test="data-proced"]').type('05/03/2026');
         cy.get('[data-test="profissional"]').type('Sara');
@@ -148,8 +148,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-add-ficha-cliente"]').click();
+        cy.get('[data-test="data-proced"]').should('be.visible');
 
         cy.get('[data-test="data-proced"]').type('05/03/2026');
         cy.get('[data-test="valor-ficha"]').type(2500);
@@ -177,8 +177,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-add-ficha-cliente"]').click();
+        cy.get('[data-test="data-proced"]').should('be.visible');
 
         cy.get('[data-test="data-proced"]').type('05/03/2026');
         cy.get('[data-test="valor-ficha"]').type(2500);
@@ -194,8 +194,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-ver-ficha-cliente"]').click();
+        cy.get('[data-test="historico-fichas"]').should('be.visible');
 
         cy.get('[data-test="btn-editar-ficha"]').first().click();
         cy.get('[data-test="edit-ficha-observacao"]').clear().type('Tratamento em casa');;
@@ -221,8 +221,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-add-ficha-cliente"]').click();
+        cy.get('[data-test="data-proced"]').should('be.visible');
 
         cy.get('[data-test="data-proced"]').type('05/03/2026');
         cy.get('[data-test="valor-ficha"]').type(2500);
@@ -238,8 +238,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-ver-ficha-cliente"]').click();
+        cy.get('[data-test="historico-fichas"]').should('be.visible');
 
         cy.get('[data-test="btn-excluir-ficha"]').first().click();
         cy.on('window:confirm', () => false); // AJUSTAR PARA NÃO SER ALERT, ABRIR UM MODAL PARA CONFIRMAR EXCLUSÃO
@@ -263,8 +263,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-add-ficha-cliente"]').click();
+        cy.get('[data-test="data-proced"]').should('be.visible');
 
         cy.get('[data-test="data-proced"]').type('05/03/2026');
         cy.get('[data-test="valor-ficha"]').type(2500);
@@ -279,8 +279,8 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="barra-pesquisa-clientes"]').click().type(nomeCliente).click();
         cy.contains(nomeCliente).should('be.visible').click();
 
-        cy.get('[data-test="btn-ficha-cliente"]').click();
-        cy.get('#fichaCliente').should('be.visible');
+        cy.get('[data-test="btn-ver-ficha-cliente"]').click();
+        cy.get('[data-test="historico-fichas"]').should('be.visible');
 
         cy.get('[data-test="btn-excluir-ficha"]').first().click();
         cy.on('window:confirm', () => false); // AJUSTAR PARA NÃO SER ALERT, ABRIR UM MODAL PARA CONFIRMAR EXCLUSÃO

@@ -41,9 +41,11 @@
                     <br>
                     <input data-test="telefone-cadastro" type="tel" class="form-tel {% if erro_telefone %}is-invalid{% endif %}" id="telefone" name="telefone" value="{{telefone}}" minlength="9" maxlength="15">
                     
-                    <div class="'invalid-feedback" id="'erro_telefone" style="color: red;">
-                        {% if erro_telefone %}{{ erro_telefone }}{% endif %}
-                    </div>
+                    {% if erro_telefone %}
+                        <div class="invalid-feedback" style="color: red; display: block;">
+                            {{ erro_telefone }}
+                        </div>
+                    {% endif %}
                     <script>
                         let itiCadastro = null;
                         document.addEventListener("DOMContentLoaded", function () {
@@ -375,109 +377,123 @@
 
                 </div>
                 <!-- FICHA DO CLIENTE -->
-                <div id="ficha-container" style="display: none;">
-                    <hr>
-                    <button class="btn btn-secondary" data-test="btn-ficha-cliente" type="button" data-toggle="collapse" data-target="#fichaCliente" aria-expanded="false" aria-controls="historico">
-                        📑 Ver ficha do cliente
-                    </button>
-                    <div class="collapse" id="fichaCliente">
-                        <div class="table-responsive">
-                            <br>
-                            <!-- Adicionar nova ficha -->
-                            <h5>Adicionar nova ficha</h5>
-                            <form method="post" id="form-ficha">
-                                {% csrf_token %}
-                                <input type="hidden" id="id_cliente" name="id_cliente" value="{{ cliente.id }}">
-                                
-                                <div class="mb-2">
-                                    <label>Data do procedimento:<span style="color: red;">*</span></label>
-                                    <input type="text" id="data-proced" data-test="data-proced" name="data" class="form-control" placeholder="dd/mm/aaaa" required>
-                                    <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
-                                </div>
-                                <script>
-                                    // máscara e validação da data dd/mm/aaaa
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        const dataProced = document.getElementById('data-proced');
-                                        const erro = document.getElementById('erro-data');
+                    <div id="ficha-container" style="display: none;">
+                        <hr>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <button class="btn btn-secondary w-100" data-test="btn-ver-ficha-cliente" type="button" data-toggle="collapse" data-target="#collapseHistoricoFichas" aria-expanded="false">
+                                    📑 Ver ficha/histórico
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-secondary w-100" data-test="btn-add-ficha-cliente" type="button" data-toggle="collapse" data-target="#collapseAdicionarFicha" aria-expanded="false">
+                                    📝 Adicionar ficha
+                                </button>
+                            </div>
+                            
+                        </div>
 
-                                        dataProced.addEventListener('input', function () {
-                                            let data = dataProced.value.replace(/\D/g, ""); // só aceita números
-                                            if (data.length > 8) data = data.slice(0, 8);
+                        <!-- SEÇÃO: ADICIONAR NOVA FICHA -->
+                        <div class="collapse mb-3" id="collapseAdicionarFicha">
+                            <div class="card card-body text-white border-secondary" style="background: #2A2A2A;">
+                                <h5>Adicionar nova ficha</h5>
+                                <form method="post" id="form-ficha">
+                                    {% csrf_token %}
+                                    <input type="hidden" id="id_cliente" name="id_cliente" value="{{ cliente.id }}">
+                                    
+                                    <div class="mb-2">
+                                        <label>Data do procedimento:<span style="color: red;">*</span></label>
+                                        <input type="text" id="data-proced" data-test="data-proced" name="data" class="form-control" placeholder="dd/mm/aaaa" required>
+                                        <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
+                                    </div>
+                                    <script>
+                                        // máscara e validação da data dd/mm/aaaa
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            const dataProced = document.getElementById('data-proced');
+                                            const erro = document.getElementById('erro-data');
 
-                                            let formatado = "";
-                                            if (data.length > 4) {
-                                                formatado = data.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
-                                            } else if (data.length > 2) {
-                                                formatado = data.replace(/(\d{2})(\d{0,2})/, "$1/$2");
-                                            } else {
-                                                formatado = data;
-                                            }
-                                            dataProced.value = formatado;
-                                        });
+                                            dataProced.addEventListener('input', function () {
+                                                let data = dataProced.value.replace(/\D/g, ""); // só aceita números
+                                                if (data.length > 8) data = data.slice(0, 8);
 
-                                        dataProced.addEventListener('blur', function () {
-                                            const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
-                                            if (dataProced.value && !regex.test(dataProced.value)) {
-                                                erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
-                                                erro.style.display = 'block';
-                                                return;
-                                            } 
+                                                let formatado = "";
+                                                if (data.length > 4) {
+                                                    formatado = data.replace(/(\d{2})(\d{2})(\d{0,4})/, '$1/$2/$3');
+                                                } else if (data.length > 2) {
+                                                    formatado = data.replace(/(\d{2})(\d{0,2})/, "$1/$2");
+                                                } else {
+                                                    formatado = data;
+                                                }
+                                                dataProced.value = formatado;
+                                            });
 
-                                            // pega o ano atual
-                                            if (dataProced.value) {
-                                                const anoAtual = new Date().getFullYear();
-                                                const partes = dataProced.value.split('/');
-                                                const ano = parseInt(partes[2]);
-
-                                                if (ano > anoAtual) {
-                                                    erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                            dataProced.addEventListener('blur', function () {
+                                                const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                                                if (dataProced.value && !regex.test(dataProced.value)) {
+                                                    erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
                                                     erro.style.display = 'block';
                                                     return;
-                                                }
-                                            }    
-                                            // se passou em todas validações
-                                            erro.style.display = 'none';
-                                        });
-                                    });
-                                </script>
-                                <div class="mb-2">
-                                    <label>Profissional que realizou:</label>
-                                    <input type="text" name="profissional" data-test="profissional" class="form-control" maxlength="50" placeholder="Nome do profissional">
-                                </div>
-                                <div class="mb-2">
-                                    <label>Valor pago:<span style="color: red;">*</span></label>
-                                    <input type="text" id="add-ficha-valor" data-test="valor-ficha" maxlength="15" name="valor" inputmode="numeric" class="form-control" placeholder="0,00" required>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Procedimento realizado:</label>
-                                    <textarea name="procedimento" data-test="procedimento" class="form-control" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Linha home care:</label>
-                                    <textarea name="homecare" data-test="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
-                                </div>
-                                <div class="mb-2">
-                                    <label>Observações:</label>
-                                    <textarea name="observacao" data-test="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
-                                </div>
-                                <br>
-                                <button type="button" data-test="btn-adicionar-ficha" class="btn btn-success">Adicionar ficha</button>
-                            </form>
-                            {% if ficha_sucesso %}
-                                <div id="mensagem-sucesso-ficha" class="alert alert-success mt-3" role="alert">
-                                    <p>Ficha do cliente adicionada com sucesso!</p>
-                                </div>
-                            {% endif %} 
+                                                } 
 
-                            <hr style="background-color:gray;">
-                            
-                            <h5>Histórico do Cliente</h5>
-                            <div id="historico-fichas" data-test="historico-fichas">
-                                {% include 'clientes/fichashistorico.html' with fichas=fichas %}
+                                                // pega o ano atual
+                                                if (dataProced.value) {
+                                                    const anoAtual = new Date().getFullYear();
+                                                    const partes = dataProced.value.split('/');
+                                                    const ano = parseInt(partes[2]);
+
+                                                    if (ano > anoAtual) {
+                                                        erro.textContent = `Ano inválido. Não pode ser maior que ${anoAtual}.`;
+                                                        erro.style.display = 'block';
+                                                        return;
+                                                    }
+                                                }    
+                                                // se passou em todas validações
+                                                erro.style.display = 'none';
+                                            });
+                                        });
+                                    </script>
+                                    <div class="mb-2">
+                                        <label>Profissional que realizou:</label>
+                                        <input type="text" name="profissional" data-test="profissional" class="form-control" maxlength="50" placeholder="Nome do profissional">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Valor pago:<span style="color: red;">*</span></label>
+                                        <input type="text" id="add-ficha-valor" data-test="valor-ficha" maxlength="15" name="valor" inputmode="numeric" class="form-control" placeholder="0,00" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Procedimento realizado:</label>
+                                        <textarea name="procedimento" data-test="procedimento" class="form-control" maxlength="200" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Linha home care:</label>
+                                        <textarea name="homecare" data-test="homecare" class="form-control" maxlength="200" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Observações:</label>
+                                        <textarea name="observacao" data-test="observacao" class="form-control" rows="2" maxlength="200" placeholder="Notas internas (opcional)..."></textarea>
+                                    </div>
+                                    <br>
+                                    <button type="button" data-test="btn-adicionar-ficha" class="btn btn-success">Adicionar ficha</button>
+                                </form>
+                                {% if ficha_sucesso %}
+                                    <div id="mensagem-sucesso-ficha" class="alert alert-success mt-3" role="alert">
+                                        <p>Ficha do cliente adicionada com sucesso!</p>
+                                    </div>
+                                {% endif %} 
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO: HISTÓRICO DE FICHAS -->
+                        <div class="collapse" id="collapseHistoricoFichas">
+                            <div class="card card-body text-white border-secondary" style="background: #2A2A2A;">
+                                <h5>Histórico do Cliente</h5>
+                                <div class="table-responsive">
+                                <div id="historico-fichas" data-test="historico-fichas">
+                                    {% include 'clientes/fichashistorico.html' with fichas=fichas %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             
         </div>
     </div>
