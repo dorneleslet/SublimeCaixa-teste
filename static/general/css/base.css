@@ -301,63 +301,56 @@
     margin-top: 5px;
 }
 
-.bloco-servico .mb-3 {
-    flex: 0 0 947px; /* largura fixa da barra */
-}
-/* .bloco-servico .dados_servico {
-    width: 150px; /* largura fixa do preço */
+/* .bloco-servico .mb-3 {
+    flex: 1 1 300px; /* flexível, mínimo 300px */ /* aqui deixa a barra de serviços do caixa menor */
 /*} */
+
 .bloco-servico .dados_servico {
-    flex: 0 0 150px; /* largura fixa da barra */
+    flex: 0 1 150px;
+    min-width: 120px;
 }
 
 
 /* estética do botao x de serviços */
 .btn-remove-servico {
-    background: #dc3545;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 14px;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
+    color: #dc3545;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 38px;
     padding: 0 9px;
+    margin-top: 34px;
 }
 
-.btn-remove-servico:hover {
+/* .btn-remove-servico:hover {
     background: #bb2d3b;
     transform: scale(1.1);
-}
+} */
 
 /* estética do botao limpar x de serviços */
 .btn-clear-servico {
-    background: #dc3545;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 14px;
-    border-radius: 50%;
-    width: 26px;
-    height: 26px;
+    color: #dc3545;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 38px;
-    padding: 0 9px;
+    padding: 0 5px;
+    margin-top: 34px;
     /* margin-left: 114px; */
 }
 
-.btn-clear-servico:hover {
+/* .btn-clear-servico:hover {
     background: #bb2d3b;
     transform: scale(1.1);
-}
+} */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* caixa parte produtos */
 .bloco-produto {
@@ -373,51 +366,43 @@
 
 /* estética do botão x de produtos */
 .btn-remove-produto {
-    background: #dc3545;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 14px;
-    border-radius: 50%; /* faz virar bolinha */
-    width: 26px; /* largura da bolinha */
-    height: 26px; /* altura da bolinha */
+    color: #dc3545;
+    font-size: 1.5rem;
     display: flex;
     align-items: center; /* centraliza verticalmente o x */
     justify-content: center; /* centraliza horizontalmente o x */
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 36px; /* mantém alinhamento com os campos */
-    padding: 0 8px;
+    padding: 0 5px;
 }
 
 
-.btn-remove-produto:hover {
+/* .btn-remove-produto:hover {
     background: #bb2d3b;
     transform: scale(1.1);
-}
+} */
 
 /* estética do botão limpar x de produtos */
 .btn-clear-produto {
-    background: #dc3545;
+    background: transparent;
     border: none;
-    color: white;
-    font-size: 14px;
-    border-radius: 50%; /* faz virar bolinha */
-    width: 26px; /* largura da bolinha */
-    height: 26px; /* altura da bolinha */
+    color: #dc3545;
+    font-size: 1.5rem;
     display: flex;
     align-items: center; /* centraliza verticalmente o x */
     justify-content: center; /* centraliza horizontalmente o x */
     cursor: pointer;
     transition: 0.2s;
-    margin-top: 36px; /* mantém alinhamento com os campos */
-    padding: 0 8px;
+    padding: 0 5px;
 }
 
 
-.btn-clear-produto:hover {
+/* .btn-clear-produto:hover {
     background: #bb2d3b;
     transform: scale(1.1);
-}
+} */
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 /* Container de cada bloco (cliente, serviço, produto) */
 .item-bloco {
@@ -469,9 +454,8 @@
 
 /* Só a barra de busca de clientes */
 input.form-control.buscar_cliente {
-    min-width: 1106px;   /* igual a de serviços */
-    width: 50%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 100%;
     padding: 6px 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
@@ -488,7 +472,7 @@ input.form-control.buscar_cliente {
     overflow-y: auto;
     background: #fff;
     color: #2A2A2A;
-    width: 1106px; /* pra lista de clientes ficar do mesmo tamanho que a barra de busca!!!! */
+    width: 100%;
 }
 
 .lista_clientes li {
@@ -516,20 +500,7 @@ input.form-control.buscar_cliente {
     padding: 6px 8px; /* o texto dentro do campo não fica tão grudado na lateral */
     border-radius: 4px;
     color: #606060;
-    width: 100%; /* ocupa a largura da coluna */
-    max-width: 284px; /* não deixa o campo passar desse tamanho */
-    box-sizing: border-box;
-}
-
-/* tamanho da barra de busca do caixa (sem a parte do preço)*/
-.cliente-bloco .mb-3 input {
-  min-width: 1106px; /* ajusta conforme achar o tamanho bom (o tamanho da lista é separado) */
-}
-/*.bloco-servico .mb-3 input {
-  /*min-width: 976px; /* ajusta conforme achar o tamanho bom */
-/*}*/
-.bloco-produto .mb-3 input {
-  min-width: 876px; /* ajusta conforme achar o tamanho bom */
+    width: 100%;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -587,6 +558,8 @@ input.form-control.buscar_cliente {
   white-space: nowrap;     /* impede o label de quebrar */
 }
 
+
+
 .bloco-pagamento {
   display: flex;
   align-items: flex-end;
@@ -620,7 +593,31 @@ input.form-control.buscar_cliente {
 }
 
 .observacao-bloco {
-  width: 1150px;
+  width: 100%;
+}
+
+.home-section {
+    padding-bottom: 100px; /* espaço para não cobrir conteúdo com o footer */
+}
+
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 78px; /* largura da sidebar fechada */
+    right: 0;
+    background: #1e1e1e;
+    padding: 15px 0;
+    border-top: 2px solid var(--main-color);
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    transition: all 0.5s ease;
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar.open ~ .home-section .fixed-footer {
+    left: 250px; /* ajusta quando a sidebar abre */
 }
 
 .mensagem-sucesso {
@@ -649,5 +646,6 @@ input.form-control.buscar_cliente {
   opacity: 0 !important; /* controla a transparência do fundo */
   /* backdrop-filter: blur(10px) !important;
   background-color: rgba(0, 0, 0, 0.5) !important; */
+  z-index: 1040 !important;
 }
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

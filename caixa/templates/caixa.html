@@ -7,7 +7,7 @@
 {% block dashboard %}
 
 <div class="container">
-<!-- BLOCO DE CLIENTES -->
+    <!-- BLOCO DE CLIENTES -->
     <br>
     <div class="cliente-bloco">
         <input type="hidden" id="cliente_id">
@@ -18,70 +18,73 @@
         <div class="card-body">
 
             <!-- CAMPO DE BUSCA -->
-             <div class="mb-3">
+            <div class="mb-3 w-100">
                 <label class="form-label">Buscar cliente:</label>
-                <input data-test="buscar_cliente" type="text" class="form-control campo-busca buscar_cliente" placeholder="Informe o nome, telefone ou NIF...">
+                <input data-test="buscar_cliente" type="text" class="form-control campo-busca buscar_cliente"
+                    placeholder="Informe o nome, telefone ou NIF...">
                 <input type="hidden" id="cliente_id">
                 <!-- Lista da barra de pesquisa -->
-                <ul class="lista_clientes" ></ul>
-             </div>
-             
+                <ul class="lista_clientes"></ul>
+            </div>
 
-              <!-- CAMPOS CONGELADOS  -->
-               <div class="dados_cliente" style="display: none;">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Telefone</label>
-                            <input type="text" class="form-control cliente_telefone" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">NIF</label>
-                            <input type="text" class="form-control cliente_nif" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">E-mail</label>
-                            <input type="text" class="form-control cliente_email" readonly>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nascimento</label>
-                            <input type="text" class="form-control cliente_nascimento" readonly>
-                        </div>
+
+            <!-- CAMPOS CONGELADOS  -->
+            <div class="dados_cliente" style="display: none;">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Telefone</label>
+                        <input type="text" class="form-control cliente_telefone" readonly>
                     </div>
-               </div>
+                    <div class="col-md-6">
+                        <label class="form-label">NIF</label>
+                        <input type="text" class="form-control cliente_nif" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">E-mail</label>
+                        <input type="text" class="form-control cliente_email" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nascimento</label>
+                        <input type="text" class="form-control cliente_nascimento" readonly>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 
-<!-- BLOCO DE SERVIÇOS -->
+    <!-- BLOCO DE SERVIÇOS -->
     <div class="servico-bloco">
         <div class="card-header">
             <h5 class="mb-0">Serviços</h5>
         </div>
-        <div class="card-body" > 
+        <div class="card-body">
             <!-- CAMPO DE BUSCA -->
             <div id="container_servicos">
-                <div class="bloco-servico servico-selecionado d-flex align-items-start gap-2">
+                <div class="bloco-servico servico-selecionado d-flex flex-wrap align-items-start gap-2 mb-3">
                     <!-- barra de pesquisa ocupa mais espaço -->
-                     <div class="mb-3 flex-grow-1">
+                    <div class="mb-3 flex-grow-1">
                         <label for="buscar_servico" class="form-label">Buscar procedimento:</label>
-                        <input data-test="buscar_servico" type="text" class="form-control campo-busca buscar_servico" placeholder="Informe o procedimento...">
+                        <input data-test="buscar_servico" type="text" class="form-control campo-busca buscar_servico"
+                            placeholder="Informe o procedimento...">
                         <!-- Lista da barra de pesquisa -->
                         <ul id="lista_servicos" class="lista_servicos"></ul>
-                     </div>
-                    
+                    </div>
+
                     <!-- valor ocupa menos espaço à direita -->
-                    <div class="dados_servico">
-                            <label class="form-label servico-preco">Preço (€):</label><br>
-                            <input type="text" class="form-control servico_valor" readonly>                  
+                    <div class="dados_servico mb-3">
+                        <label class="form-label servico-preco">Preço (€):</label><br>
+                        <input type="text" class="form-control servico_valor" readonly>
                     </div>
                     <!-- botão x para limpar primeiro bloco -->
-                     <div class="d-flex align-items-end gap-2">
-                        <button type="button" class="btn btn-danger btn-sm btn-clear-servico">x</button>
+                    <div class="d-flex align-items-end mb-3">
+                        <button type="button" class="btn btn-sm text-danger btn-clear-servico" title="Limpar">✕</button>
                     </div>
                     <!-- botão x só aparece nos clones -->
-                     <div class="d-flex align-items-end gap-2">
-                        <button type="button" class="btn btn-danger btn-sm btn-remove-servico" style="display: none;">x</button>
-                     </div>
+                    <div class="d-flex align-items-end">
+                        <button type="button" class="btn btn-sm text-danger btn-remove-servico"
+                            style="display: none;" title="Remover">✕</button>
+                    </div>
                 </div>
             </div>
 
@@ -93,29 +96,31 @@
 
     </div>
 
-<!-- BLOCO DOS PRODUTOS -->
-     <div class="produto-bloco">
+    <!-- BLOCO DOS PRODUTOS -->
+    <div class="produto-bloco">
         <div class="card-header">
             <h5 class="mb-0">Produtos</h5>
         </div>
         <div class="card-body">
             <!-- CAMPO DE BUSCA -->
             <div id="container_produtos">
-                <div class="bloco-produto d-flex align-items-start gap-2">
+                <div class="bloco-produto d-flex flex-wrap align-items-start gap-2 mb-3">
                     <!-- barra de produtos ocupa mais espaço -->
-                     <div class="mb-3">
+                    <div class="mb-3 flex-grow-1">
                         <label for="buscar_produto" class="form-label">Buscar produto:</label>
-                        <input type="text" data-test="buscar-produto" class="form-control campo-busca buscar_produto" placeholder="Informe o produto...">
+                        <input type="text" data-test="buscar-produto" class="form-control campo-busca buscar_produto"
+                            placeholder="Informe o produto...">
                         <!-- NOVO: Div para mensagem de erro de estoque do produto -->
-                        <div class="invalid-feedback erro-estoque-produto error-message" style="display: none; color: #dc3545; font-size: 0.875em;"></div>
+                        <div class="invalid-feedback erro-estoque-produto error-message"
+                            style="display: none; color: #dc3545; font-size: 0.875em;"></div>
                         <!-- Lista da barra de pesquisa -->
                         <ul id="lista_produtos" class="lista_produtos">
                         </ul>
-                     </div>
+                    </div>
 
-                     <!-- valor do produto -->
-                    <div class="dados_produto">
-                        <div class="produto-info d-flex gap-2 align-items-end">
+                    <!-- valor do produto -->
+                    <div class="dados_produto mb-3">
+                        <div class="produto-info d-flex flex-wrap gap-2 align-items-end">
                             <div class="produto-estoque">
                                 <label>Estoque</label>
                                 <input type="text" class="form-control estoque_produto" readonly>
@@ -125,15 +130,16 @@
                                 <input type="text" class="form-control produto_valor" readonly>
                             </div>
                             <!-- botão x para limpar primeiro bloco -->
-                            <div class="d-flex align-items-end gap-2">
-                                <button type="button" class="btn btn-danger btn-sm btn-clear-produto">x</button>
+                            <div class="d-flex align-items-end">
+                                <button type="button" class="btn btn-sm text-danger btn-clear-produto" title="Limpar">✕</button>
                             </div>
                             <!-- botão x só aparece nos clones -->
                             <div class="produto-remover">
-                                <button type="button" class="btn btn-danger btn-sm btn-remove-produto" style="display: none;">x</button>
+                                <button type="button" class="btn btn-sm text-danger btn-remove-produto"
+                                    style="display: none;" title="Remover">✕</button>
                             </div>
-                        </div>    
-                        
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -142,38 +148,41 @@
                 + Adicionar produto
             </button>
         </div>
-     </div>
+    </div>
 
-<!-- BLOCO DE FICHA TÉCNICA -->
-     <div class="ficha-bloco">
+    <!-- BLOCO DE FICHA TÉCNICA -->
+    <div class="ficha-bloco">
         <input type="hidden" id="cliente_id" name="cliente_id">
         <div class="card-header">
             <h5 class="mb-0">Ficha Técnica</h5>
         </div>
         <div class="card-body">
-            <button class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modalFicha">
-                + Adicionar ficha
-            </button>
-            <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseFichas">
-                + Ver ficha
-            </button>
+            <div class="d-flex flex-md-row">
+                <button class="btn btn-secondary btn-sm mr-1" data-toggle="modal" data-target="#modalFicha">
+                    + Adicionar ficha
+                </button>
+                <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseFichas">
+                    + Ver ficha
+                </button>   
+            </div>
 
             <!-- COLLAPSE COM HISTÓRICO -->
-             <div class="collapse mt-2" id="collapseFichas">
+            <div class="collapse mt-2" id="collapseFichas">
                 <div id="historico-fichas" class="border rounded p-3 bg-dark text-white">
                     <p class="text-muted">Nenhuma ficha carregada ainda.</p>
                 </div>
-             </div>
+            </div>
         </div>
-     </div>
+    </div>
 
-     <!-- MODAL DE ADICIONAR FICHA -->
-      <div class="modal fade" id="modalFicha" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+    <!-- MODAL DE ADICIONAR FICHA -->
+    <div class="modal fade" id="modalFicha" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content bg-dark text-white">
                 <div class="modal-header">
                     <h5 class="modal-title">Adicionar Ficha Técnica</h5>
-                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Fechar"></button>
+                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal"
+                        aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
                     <form id="form-ficha-caixa">
@@ -181,8 +190,10 @@
                         <input type="hidden" name="id_cliente_caixa" id="id_cliente_caixa">
 
                         <div class="mb-2">
-                            <label for="ficha_data" class="form-label">Data do procedimento:<span style="color: red;">*</span></label>
-                            <input type="text" class="form-control" name="data" id="ficha_data" placeholder="dd/mm/yyyy" required>
+                            <label for="ficha_data" class="form-label">Data do procedimento:<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" class="form-control" name="data" id="ficha_data" placeholder="dd/mm/yyyy"
+                                required>
                             <div id="erro-data" class="invalid-feedback" style="color: red;"></div>
                         </div>
                         <script>
@@ -212,7 +223,7 @@
                                         erro.textContent = 'Data inválida. Use o formato DD/MM/AAAA'
                                         erro.style.display = 'block';
                                         return;
-                                    } 
+                                    }
 
                                     // pega o ano atual
                                     if (dataProced.value) {
@@ -225,7 +236,7 @@
                                             erro.style.display = 'block';
                                             return;
                                         }
-                                    }    
+                                    }
                                     // se passou em todas validações
                                     erro.style.display = 'none';
                                 });
@@ -234,27 +245,33 @@
 
                         <div class="mb-2">
                             <label for="ficha_profissional" class="form-label">Profissional que realizou:</label>
-                            <input type="text" class="form-control" name="profissional" maxlength="50" id="ficha_profissional" placeholder="Nome do profissional">
+                            <input type="text" class="form-control" name="profissional" maxlength="50"
+                                id="ficha_profissional" placeholder="Nome do profissional">
                         </div>
 
                         <div class="mb-2">
-                            <label for="ficha_valor" class="form-label">Valor pago:<span style="color: red;">*</span></label>
-                            <input type="text" step="0.01" min="0" maxlength="7" class="form-control" name="valor" id="ficha_valor" placeholder="0,01" required>
+                            <label for="ficha_valor" class="form-label">Valor pago:<span
+                                    style="color: red;">*</span></label>
+                            <input type="text" step="0.01" min="0" maxlength="7" class="form-control" name="valor"
+                                id="ficha_valor" placeholder="0,01" required>
                         </div>
 
                         <div class="mb-2">
                             <label for="ficha_procedimento" class="form-label">Procedimento realizado:</label>
-                            <textarea class="form-control" name="procedimento" maxlength="200" id="ficha_procedimento" placeholder="Informe o procedimento que a cliente realizou..."></textarea>
+                            <textarea class="form-control" name="procedimento" maxlength="200" id="ficha_procedimento"
+                                placeholder="Informe o procedimento que a cliente realizou..."></textarea>
                         </div>
 
                         <div class="mb-2">
                             <label for="ficha_homecare" class="form-label">Linha home care:</label>
-                            <textarea class="form-control" name="homecare" maxlength="200" id="ficha_homecare" placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
+                            <textarea class="form-control" name="homecare" maxlength="200" id="ficha_homecare"
+                                placeholder="Informe as linhas de produtos que a cliente levou..."></textarea>
                         </div>
 
                         <div class="mb-2">
                             <label for="ficha_observacao" class="form-label">Observações:</label>
-                            <textarea class="form-control" name="observacao" rows="2" maxlength="200" id="ficha_observacao" placeholder="Notas internas (opcional)..."></textarea>
+                            <textarea class="form-control" name="observacao" rows="2" maxlength="200"
+                                id="ficha_observacao" placeholder="Notas internas (opcional)..."></textarea>
                         </div>
                     </form>
                 </div>
@@ -264,23 +281,25 @@
                 </div>
             </div>
         </div>
-      </div>
+    </div>
 
-<!-- PROFISSIONAL -->
-       <div class="profissional-bloco">
-            <div class="card-body">
-                <div class="bloco-profissional d-flex align-items-start gap-3">
-                        <div class="profissional">
-                            <label for="profissional" class="form-label">Procedimento realizado por:<span style="color: red;">*</span></label>
-                            <input data-test="profissional" type="text" maxlength="50" id="profissional" class="form-control profissional" placeholder="Nome do profissional" required>
-                        </div>
+    <!-- PROFISSIONAL -->
+    <div class="profissional-bloco">
+        <div class="card-body">
+            <div class="bloco-profissional d-flex align-items-start gap-3">
+                <div class="profissional">
+                    <label for="profissional" class="form-label">Procedimento realizado por:<span
+                            style="color: red;">*</span></label>
+                    <input data-test="profissional" type="text" maxlength="50" id="profissional"
+                        class="form-control profissional" placeholder="Nome do profissional" required>
                 </div>
             </div>
-       </div>    
+        </div>
+    </div>
 
 
 
-<!-- BLOCO DE PAGAMENTO -->
+    <!-- BLOCO DE PAGAMENTO -->
     <div class="pagamento-bloco">
         <div class="card-header">
             <h5 class="mb-0">Pagamento</h5>
@@ -291,13 +310,15 @@
                 <!-- Desconto -->
                 <div class="pagamento-desconto">
                     <label for="desconto" class="form-label">Desconto (€):</label>
-                    <input data-test="desconto" type="number" step="0.01" min="0" id="desconto" class="form-control pagamento-input">
+                    <input data-test="desconto" type="number" step="0.01" min="0" id="desconto"
+                        class="form-control pagamento-input">
                 </div>
 
                 <!-- Sinal -->
                 <div class="pagamento-sinal">
                     <label for="sinal" class="form-label">Sinal (€):</label>
-                    <input data-test="sinal" type="number" step="0.01" min="0" id="sinal" class="form-control pagamento-input">
+                    <input data-test="sinal" type="number" step="0.01" min="0" id="sinal"
+                        class="form-control pagamento-input">
                 </div>
             </div>
             <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">
@@ -312,66 +333,64 @@
                     </select>
                 </div>
             </div>
-            <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">    
+            <div class="bloco-pagamento d-flex align-items-start gap-3 mt-3">
                 <!-- Forma de pagamento -->
                 <div class="pagamento-forma">
-                        <label for="forma_pagamento" class="form-label">Forma de pagamento:<span style="color: red;">*</span></label>
-                        <br>
-                        <select data-test="pagamento" id="forma_pagamento" class="form-select pagamento-input">
-                            <option value="" disabled selected>Selecione...</option>
-                            <option value="dinheiro">Dinheiro</option>
-                            <option value="mbway">MB Way</option>
-                            <option value="multibanco">Multibanco</option>
-                            <option value="Transferência">Transferência</option>
-                            <option value="misto">Misto</option>
-                            <option value="pendente">Pagamento pendente</option>
-                            <option value="saida">Saída Espaço Sublime</option>
-                        </select>
-                        <!-- NOVO: Div para mensagem de erro da forma de pagamento -->
-                        <div id="erro-forma-pagamento" class="error-message" style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1"></div> 
+                    <label for="forma_pagamento" class="form-label">Forma de pagamento:<span
+                            style="color: red;">*</span></label>
+                    <br>
+                    <select data-test="pagamento" id="forma_pagamento" class="form-select pagamento-input">
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="mbway">MB Way</option>
+                        <option value="multibanco">Multibanco</option>
+                        <option value="Transferência">Transferência</option>
+                        <option value="misto">Misto</option>
+                        <option value="pendente">Pagamento pendente</option>
+                        <option value="saida">Saída Espaço Sublime</option>
+                    </select>
+                    <!-- NOVO: Div para mensagem de erro da forma de pagamento -->
+                    <div id="erro-forma-pagamento" class="error-message"
+                        style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1"></div>
                 </div>
 
             </div>
-        </div>    
+        </div>
     </div>
 
-<!-- OBSERVAÇÕES -->
-     <div class="observacao-bloco">
+    <!-- OBSERVAÇÕES -->
+    <div class="observacao-bloco">
         <div class="card-header">
             <div class="row mt-3">
                 <div class="card-body">
                     <label for="observacoes">Notas internas:</label>
-                    <textarea class="form-control" data-test="observacoes" name="observacoes" rows="2" placeholder="(Opcional)"></textarea>
+                    <textarea class="form-control" data-test="observacoes" name="observacoes" rows="2"
+                        placeholder="(Opcional)"></textarea>
                 </div>
             </div>
-        </div> 
-     </div>
-
-<!-- BLOCO TOTAL -->
-    <div class="total-bloco">
-        <div class="card-header">
-            <div class="pagamento-total mt-3">
-                <h3>Total: <span id="total" class="fw-bold">0,00€</span></h3>
-                <!-- NOVO: Div para mensagem de erro do total da venda -->
-                <div id="erro-total-venda" class="error-message" style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1"></div>
-                
-            </div>
-        <hr>    
-        
-        <button data-test="finalizar-venda" id="btnFinalizar" type="button" onclick="finalizarVenda()" class="btn btn-success">
-            Finalizar Venda
-        </button>  
-        <br>
-        <div id="mensagem-sucesso" class="alert alert-success mt-3" role="alert" style="display: none;">
-            <p>Venda registrada com sucesso!</p>
         </div>
-        <br><br>
+    </div>
+
+    <!-- BLOCO TOTAL -->
+    <div class="total-bloco fixed-footer">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div class="pagamento-total mb-2 mb-md-0 text-center text-md-left">
+                <h3 class="mb-0">Total: <span id="total" class="fw-bold text-white">0,00€</span></h3>
+                <div id="erro-total-venda" class="error-message" style="display: none; color: #ff6b6b; font-size: 0.875em;"></div>
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <div id="mensagem-sucesso" class="alert alert-success m-0 mr-3 py-1 px-3" role="alert" style="display: none;">
+                    Venda registrada!
+                </div>
+                <button data-test="finalizar-venda" id="btnFinalizar" type="button" onclick="finalizarVenda()" class="btn btn-success">
+                    Finalizar Venda
+                </button>
+            </div>
         </div>
     </div>
 
 </div>
-
-
 <script src="{% static 'caixa/js/caixa.js' %}"></script>
 
 {% endblock %}
