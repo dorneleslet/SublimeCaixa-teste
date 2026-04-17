@@ -158,7 +158,7 @@
         </div>
         <div class="card-body">
             <div class="d-flex flex-md-row">
-                <button class="btn btn-secondary btn-sm mr-1" data-toggle="modal" data-target="#modalFicha">
+                <button class="btn btn-secondary btn-sm mr-1" onclick="abrirModalFicha()">
                     + Adicionar ficha
                 </button>
                 <button class="btn btn-secondary btn-sm" data-toggle="collapse" data-target="#collapseFichas">
@@ -176,15 +176,13 @@
     </div>
 
     <!-- MODAL DE ADICIONAR FICHA -->
-    <div class="modal fade" id="modalFicha" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content bg-dark text-white">
-                <div class="modal-header">
-                    <h5 class="modal-title">Adicionar Ficha Técnica</h5>
-                    <button type="button" class="btn-close btn-close-white" data-dismiss="modal"
-                        aria-label="Fechar"></button>
+    <div id="modalFicha" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(252, 209, 209, 0.5); backdrop-filter: blur(5px); justify-content: center; align-items: center; z-index: 2000; padding: 15px;">
+        <div style="background: #2A2A2A; padding: 25px; border-radius: 8px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; color: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="modal-title fw-bold">Adicionar Ficha Técnica</h5>
+                    <button type="button" class="btn-close" onclick="fecharModalFicha()" style="color: #ffffff; border:none; background:none; font-size: 1.5rem;">✕</button>
                 </div>
-                <div class="modal-body">
+                <div class="custom-modal-body">
                     <form id="form-ficha-caixa">
                         {% csrf_token %}
                         <input type="hidden" name="id_cliente_caixa" id="id_cliente_caixa">
@@ -275,12 +273,12 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnSalvarFichaCaixa">Salvar</button>
+                <hr>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalFicha()">Cancelar</button>
+                    <button type="button" class="btn btn-success ml-2" id="btnSalvarFichaCaixa">Salvar</button>
                 </div>
             </div>
-        </div>
     </div>
 
     <!-- PROFISSIONAL -->

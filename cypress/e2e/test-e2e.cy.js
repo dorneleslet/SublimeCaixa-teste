@@ -59,7 +59,7 @@ describe('E2E - Venda', () => {
     cy.get('[data-test="pagamento"]').select('Dinheiro');
 
     cy.get('[data-test="finalizar-venda"]').click();
-    cy.contains('Venda registrada com sucesso!').should('be.visible');
+    cy.contains('Venda registrada!').should('be.visible');
   })
 })
 

@@ -610,29 +610,41 @@ function carregarHistoricoFicha(clienteId) {
     });
 }
 
-// fecha modal tentando BS5, depois BS4/jQuery, depois fallback
-function fecharModalById(modalId) {
-    const el = document.getElementById(modalId);
-    if (!el) return;
+// // fecha modal tentando BS5, depois BS4/jQuery, depois fallback
+// function fecharModalById(modalId) {
+//     const el = document.getElementById(modalId);
+//     if (!el) return;
 
-    // tenta bootstrap 4 (jQuery)
-    try {
-        if (window.jQuery && typeof $(el).modal === 'function') {
-            $(el).modal('hide');
-            return;
-        }
-    } catch (e) {
-        console.warn('closeModal: BS4/jQuery hide falhou', e);
-    }
+//     // tenta bootstrap 4 (jQuery)
+//     try {
+//         if (window.jQuery && typeof $(el).modal === 'function') {
+//             $(el).modal('hide');
+//             return;
+//         }
+//     } catch (e) {
+//         console.warn('closeModal: BS4/jQuery hide falhou', e);
+//     }
 
-    // fallback: remove classes / backdrop
-    el.classList.remove('show');
-    el.style.display = 'none';
-    document.body.classList.remove('modal-open');
-    const backdrop = document.querySelector('.modal-backdrop');
-    if (backdrop) backdrop.parentNode.removeChild(backdrop);
+//     // fallback: remove classes / backdrop
+//     el.classList.remove('show');
+//     el.style.display = 'none';
+//     document.body.classList.remove('modal-open');
+//     const backdrop = document.querySelector('.modal-backdrop');
+//     if (backdrop) backdrop.parentNode.removeChild(backdrop);
+// }
+
+
+
+function abrirModalFicha() {
+    const modal = document.getElementById('modalFicha');
+    modal.style.display = 'flex';
 }
 
+function fecharModalFicha() {
+    const modal = document.getElementById('modalFicha');
+    modal.style.display = 'none';
+    document.getElementById('form-ficha-caixa').reset();
+}
 
 //adicionar e carregar fichas no caixa
 document.addEventListener('DOMContentLoaded', function() {
@@ -662,10 +674,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 //adiciona ficha no histórico
                 document.getElementById('historico-fichas').insertAdjacentHTML('afterbegin', data.html_ficha); // afterbegin deixa a ficha "em cima"
 
-                // fechar modal
-                $('#modalFicha').modal('hide');
-               
-
                 // cria aviso visual temporário
                 const flash = document.createElement('div');
                 flash.className = 'alert alert-success mt-3';
@@ -673,9 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const hist = document.getElementById('historico-fichas');
                 hist.parentNode.insertBefore(flash, hist);
                 
-                form.reset(); // limpa os campos
-                //modal.hide(); // fecha o modal
-                fecharModalById('modalFicha');
+                fecharModalFicha();
 
                 setTimeout(() => flash.remove(), 3000);
             } else {

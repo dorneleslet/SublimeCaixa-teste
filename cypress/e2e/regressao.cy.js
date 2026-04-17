@@ -456,7 +456,7 @@ describe('Página do caixa principal', () => {
         cy.get('[data-test="observacoes"]').type('Desconto de 5€, a cliente tem pouco cabelo');
         
         cy.get('[data-test="finalizar-venda"]').click();
-        cy.contains('Venda registrada com sucesso!').should('be.visible');
+        cy.contains('Venda registrada!').should('be.visible');
         
     })
 
@@ -491,7 +491,7 @@ describe('Página do caixa principal', () => {
         cy.get('[data-test="pagamento"]').select('Multibanco');
 
         cy.get('[data-test="finalizar-venda"]').click();
-        cy.contains('Venda registrada com sucesso!').should('be.visible');
+        cy.contains('Venda registrada!').should('be.visible');
     })
 
     it ('Tentativa de venda sem estoque.', () => {
