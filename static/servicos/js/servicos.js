@@ -2,6 +2,27 @@ document.addEventListener("DOMContentLoaded", function() {
     exibir_form("1"); //1 Mostra apenas o formulário de cadastro ao carregar | 2 Mostra a lista de serviços
 });
 
+// New functions for the error modal
+function abrirModalErroServico(mensagem) {
+    const modal = document.getElementById('modalErroServico');
+    const mensagemElement = document.getElementById('modal-erro-servico-mensagem');
+    if (mensagemElement) {
+        mensagemElement.textContent = mensagem;
+    }
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling of the background
+    }
+}
+
+function fecharModalErroServico() {
+    const modal = document.getElementById('modalErroServico');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+}
+
 function exibir_form(tipo){
     add_servico = document.getElementById('adicionar-servico');
     att_servico = document.getElementById('att_servico');
@@ -45,14 +66,24 @@ function dados_servico(id_servico){
         document.getElementById('id_servico').value = data.id;
         document.getElementById('nome').value = data.nome;
         document.getElementById('preco-edit').value = parseFloat(data.preco).toFixed(2);
+
+        // Garante que o formulário inicie bloqueado ao carregar os dados
+        document.getElementById('nome').disabled = true;
+        document.getElementById('preco-edit').disabled = true;
+        document.getElementById('btn-editar-servico').style.display = 'inline-block';
+        document.getElementById('btn-salvar-servico').style.display = 'none';
+        document.getElementById('btn-excluir-servico').style.display = 'none';
     })
     .catch(error => {
         console.error('Erro ao carregar serviço:', error);
+        abrirModalErroServico('Erro ao carregar dados do serviço. Tente novamente.');
 
-        //devolve a lista ao usuário para continuar
+        // Devolve a lista ao usuário para continuar
+        const barra = document.getElementById('search-bar-servico');
+        const lista = document.getElementById('lista-servicos');
         if (barra) barra.style.display = '';
         if (lista) lista.style.display = '';
-    });
+    }); // Changed from '' to 'block' for consistency
 }
 
 
@@ -71,7 +102,7 @@ function update_servico(){
 
     // Validação dos campos obrigatórios
     if (!nome || !preco) {
-        alert("Por favor, preencha todos os campos obrigatórios."); // aparece a mensagem de erro
+        abrirModalErroServico("Por favor, preencha todos os campos obrigatórios."); // Replaced alert
         btn.disabled = false; // faz com que o botão "atualizar" volte a funcionar
         btn.value = originalText;
         return;
@@ -98,27 +129,42 @@ function update_servico(){
             msg.style.display = 'none';
             btn.disabled = false;
             btn.value = originalText;
+
+            // Bloqueia os campos novamente após salvar com sucesso
+            document.getElementById('nome').disabled = true;
+            document.getElementById('preco-edit').disabled = true;
+            document.getElementById('btn-editar-servico').style.display = 'inline-block';
+            document.getElementById('btn-salvar-servico').style.display = 'none';
+            document.getElementById('btn-excluir-servico').style.display = 'none';
+
             // Atualiza a lista sem reload
             listarServicos();
             // Esconde o formulario e mostra a lista
             document.getElementById('form-att-servico').style.display = 'none';
             document.getElementById('lista-servicos').style.display = 'block';
-
         }, 2000);
     } else {
-        alert("Erro ao salvar alterações.");
+        abrirModalErroServico("Erro ao salvar alterações."); // Replaced alert
         btn.disabled = false;
         btn.value = originalText;
         }
     }).catch(error => {
         console.error("Erro na requisição:", error);
-        alert("Erro inesperado ao salvar.");
+        abrirModalErroServico("Erro inesperado ao salvar."); // Replaced alert
     }).finally(() => {
         setTimeout(() => {
             btn.disabled = false;
             btn.value = originalText;
         }, 1000);
     });
+}
+
+function habilitarEdicaoServico() {
+    document.getElementById('nome').disabled = false;
+    document.getElementById('preco-edit').disabled = false;
+    document.getElementById('btn-editar-servico').style.display = 'none';
+    document.getElementById('btn-salvar-servico').style.display = 'inline-block';
+    document.getElementById('btn-excluir-servico').style.display = 'inline-block';
 }
 
 function editarServico(id) {
@@ -176,12 +222,12 @@ function salvarAlteracoes(id) {
             //location.reload(); // ou atualize os campos sem recarregar 
         }, 1500);
         } else {
-            alert("Erro ao salvar alterações.");
+            abrirModalErroServico("Erro ao salvar alterações."); // Replaced alert
         }
     })
     .catch(error => {
         console.error(error);
-        alert("Erro inesperado.");
+        abrirModalErroServico("Erro inesperado."); // Replaced alert
         btnSalvar.disabled = false;
         btnSalvar.textContent = textoOriginal;
     });    
@@ -235,7 +281,7 @@ function excluirServico(id) {
                     voltarLista(); // Esconde o formulário de edição e mostra a lista
                 }, 2000);
             } else {
-                alert("Erro ao excluir.");
+                abrirModalErroServico("Erro ao excluir."); // Replaced alert
             }
         });
     };
@@ -248,7 +294,7 @@ function excluirServico(id) {
 function buscarServico () {
     const query = document.getElementById('search-bar-servico').value;
 
-    if (query.lenght < 2) {
+    if (query.length < 2) {
         document.getElementById('search-results-servico').innerHTML = '';
         return;
     }
@@ -319,6 +365,13 @@ function voltarLista() {
     document.getElementById('lista-servicos').style.display = 'block';
     // Oculta o formulario de edição
     document.getElementById('form-att-servico').style.display = 'none';
+
+    // Reseta o estado do formulário para "bloqueado" ao voltar para a lista
+    document.getElementById('nome').disabled = true;
+    document.getElementById('preco-edit').disabled = true;
+    document.getElementById('btn-editar-servico').style.display = 'inline-block';
+    document.getElementById('btn-salvar-servico').style.display = 'none';
+    document.getElementById('btn-excluir-servico').style.display = 'none';
 }
 
 // Remove acentos na barra de pesquisa

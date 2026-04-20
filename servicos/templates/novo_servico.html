@@ -94,6 +94,7 @@
                     <div class="alert alert-success" id="mensagem-sucesso">{{ message }}</div>
                 {% endfor %}
             {% endif %}
+
         </form>
 
         <script>
@@ -162,19 +163,67 @@
             <hr>
             <input type="hidden" id="id_servico">
             <label for="nome">Nome do Serviço:<span style="color: red;">*</span></label>
-            <input id="nome" data-test="nome-servico-edicao" type="text" class="form-control" maxlength="50" required>
+            <input id="nome" data-test="nome-servico-edicao" type="text" class="form-control" maxlength="50" required disabled>
             <br>
             <label for="preco">Preço:<span style="color: red;">*</span></label>
-            <input id="preco-edit" data-test="preco-servico-edicao" type="text" step="0.01" min="0" maxlength="7" class="form-control" required>
+            <input id="preco-edit" data-test="preco-servico-edicao" type="text" step="0.01" min="0" maxlength="7" class="form-control" required disabled>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const precoEditInput = document.getElementById('preco-edit');
+
+                    if (!precoEditInput) return; // Garante que o script só rode se o elemento existir
+
+                    precoEditInput.addEventListener('input', function () {
+                        let valor = precoEditInput.value.replace(/\D/g, ''); // só aceita números
+
+                        if (!valor) {
+                            precoEditInput.value = '';
+                            return;
+                        }
+
+                        // limita o tamanho para evitar numeros gigantes
+                        if (valor.length > 7) { // até 99999,99
+                            valor = valor.slice(0, 7);
+                        }
+
+                        let parteInteira = '';
+                        let parteDecimal = '';
+
+                        if(valor.length <= 2) {
+                            // menos de 3 digitos > só inteiro, sem virgula
+                            precoEditInput.value = valor;
+                            return;
+                        } else {
+                            // 3 ou mais digitos > separa os dois ultimos como decimais
+                            parteInteira = valor.slice(0, -2);
+                            parteDecimal = valor.slice(-2);
+                        }
+
+                        // adiciona separador de milhar
+                        parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                        precoEditInput.value = parteInteira + ',' + parteDecimal;
+                    });
+                });
+            </script>
 
             <hr style="background-color:gray;">
             <br>
-            <input id="btn-salvar-servico" data-test="btn-salvar-edicao" onclick="update_servico()" type="button" value="Salvar alterações" class="btn btn-success">
-            <button id="btn-excluir-servico" data-test="btn-excluir-servico" class="btn btn-danger" onclick="excluirServico(document.getElementById('id_servico').value)">Excluir</button>
+            <button id="btn-editar-servico" type="button" onclick="habilitarEdicaoServico()" class="btn btn-secondary">Editar dados</button>
+            <input id="btn-salvar-servico" data-test="btn-salvar-edicao" onclick="update_servico()" type="button" value="Salvar alterações" class="btn btn-success" style="display: none;">
+            <button id="btn-excluir-servico" data-test="btn-excluir-servico" class="btn btn-danger" onclick="excluirServico(document.getElementById('id_servico').value)" style="display: none;">Excluir</button>
 
             <div id="mensagem-sucesso-servico" class="alert alert-success mt-3" role="alert" style="display: none;">
                 <p>Dados alterados com sucesso!</p>
             </div>
+        </div>
+    </div>
+
+    <!-- NOVO: Modal de Erro para Serviços (Movido para fora para ser global) -->
+    <div id="modalErroServico" class="custom-modal-overlay error-modal-overlay">
+        <div class="custom-modal-container" style="background: rgb(255, 255, 255); color: #333; text-align: center; max-width: 350px;">
+            <p id="modal-erro-servico-mensagem" class="fw-bold mb-4"></p>
+            <button type="button" class="btn btn-secondary" onclick="fecharModalErroServico()">OK</button>
         </div>
     </div>
 
@@ -187,6 +236,6 @@
         </div>
 
     </div>
-
+    <div class="bottom-space"></div>
 <script src="{% static 'servicos/js/servicos.js' %}"></script>
 {% endblock %}

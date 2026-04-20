@@ -690,3 +690,12 @@ input.form-control.buscar_cliente {
         font-size: 16px !important; /* Evita zoom automático no iOS */
     }
 }
+
+.bottom-space { /* criar um espaçamento no final da página clientes.html */
+    height: 80px;
+}
+
+/* NOVO: Estilo para Modal de Erro com fundo vermelho claro */
+.error-modal-overlay {
+    background: rgba(252, 209, 209, 0.5); /* Fundo vermelho claro esmaecido */
+}

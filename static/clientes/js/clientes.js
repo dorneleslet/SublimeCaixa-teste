@@ -547,8 +547,19 @@ function abrirModalEdicaoFicha(fichaId) {
             document.getElementById('edit-ficha-homecare').value = ficha.homecare;
             document.getElementById('edit-ficha-observacao').value = ficha.observacao;
 
-            // Usando jQuery para abrir o modal (padrão do projeto)
-            $('#modalEditarFicha').modal('show');
+            // Lógica do Modal Customizado (mesmo padrão do Caixa)
+            const modal = document.getElementById('modalEditarFicha');
+            const sidebar = document.querySelector('.sidebar');
+            const homeSection = document.querySelector('.home-section');
+
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Impede rolagem do fundo
+
+            if (sidebar) sidebar.style.display = 'none';
+            if (homeSection) {
+                homeSection.style.left = '0';
+                homeSection.style.width = '100%';
+            }
         } else {
             alert('Erro ao carregar dados da ficha.');
         }
@@ -557,6 +568,26 @@ function abrirModalEdicaoFicha(fichaId) {
         console.error(err);
         alert('Erro ao carregar dados da ficha.');
     });
+}
+
+function fecharModalEdicaoFicha() {
+    const modal = document.getElementById('modalEditarFicha');
+    const sidebar = document.querySelector('.sidebar');
+    const homeSection = document.querySelector('.home-section');
+
+    if (modal) {
+        modal.style.display = 'none';
+        document.getElementById('form-edit-ficha').reset();
+    }
+    
+    document.body.style.overflow = 'auto'; // Restaura rolagem
+
+    // Volta a exibir a sidebar e restaura o layout original
+    if (sidebar) sidebar.style.display = 'flex';
+    if (homeSection) {
+        homeSection.style.left = '';
+        homeSection.style.width = '';
+    }
 }
 
 function salvarEdicaoFicha() {
@@ -583,7 +614,7 @@ function salvarEdicaoFicha() {
     .then(response => response.json())
     .then(result => {
         if (result.status === 'ok') {
-            $('#modalEditarFicha').modal('hide');
+            fecharModalEdicaoFicha();
             const clienteId = document.getElementById('id_cliente').value;
             carregarFichas(clienteId); // Recarrega o histórico para mostrar a alteração
         } else {
