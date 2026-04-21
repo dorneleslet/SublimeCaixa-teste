@@ -6,6 +6,9 @@ from django.contrib import messages
 def configuracoes(request):
     return render(request, 'configuracoes.html')
 
+def dashboard(request):
+    is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
+    return render(request, 'dashboard.html', {'is_admin': is_admin})
 
 def usuarios(request):
     users = User.objects.all()

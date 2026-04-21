@@ -20,19 +20,22 @@
     
     <div class="sidebar">
         <div class="logo-details">
-            <div class="logo_name">SUBLIME CAIXA</div>
-            <i class='bx bx-menu' id="btn" ></i>
+              <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+                <div class="logo_name">SUBLIME CAIXA</div>
+              </a>
+              <i class='bx bx-menu' id="btn" ></i>
+           
         </div>
         <ul class="nav-list">
             <li>
-              <a href="{% url 'caixa_principal' %}">
+              <a href="{% url 'caixa_principal' %}" class="{% if request.resolver_match.url_name == 'caixa_principal' %}active{% endif %}">
                 <i class='bx bx-dollar'></i>
                 <span class="links_name">Caixa</span>
               </a>
               <span class="tooltip">Caixa</span>
             </li>
             <li>
-            <a href="{% url 'clientes' %}">
+            <a href="{% url 'clientes' %}" class="{% if request.resolver_match.url_name == 'clientes' %}active{% endif %}">
               <i class='bx bx-user' ></i>
               <span class="links_name">Clientes</span>
             </a>
@@ -46,14 +49,14 @@
               <span class="tooltip">Agenda</span>
             </li>
             <li>
-              <a href="{% url 'novo_servico' %}">
+              <a href="{% url 'novo_servico' %}" class="{% if request.resolver_match.url_name == 'novo_servico' %}active{% endif %}">
                 <i class='bx bx-cut' ></i>
                 <span class="links_name">Serviços</span>
               </a>
               <span class="tooltip">Serviços</span>
             </li>
             <li>
-              <a href="{% url 'listar_estoque' %}">
+              <a href="{% url 'listar_estoque' %}" class="{% if request.resolver_match.url_name == 'listar_estoque' %}active{% endif %}">
                 <i class='bx bx-package' ></i>
                 <span class="links_name">Estoque</span>
               </a>
@@ -67,7 +70,7 @@
               <span class="tooltip">E-commerce</span>
             </li> -->
             <li>
-              <a href="{% url 'configuracoes' %}">
+              <a href="{% url 'configuracoes' %}" class="{% if request.resolver_match.url_name == 'configuracoes' %}active{% endif %}">
                 <i class='bx bx-cog' ></i>
                 <span class="links_name">Configurações</span>
               </a>

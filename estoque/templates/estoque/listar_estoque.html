@@ -1,0 +1,32 @@
+<div id="container-produtos">
+    {% include "estoque/produtos_items_partial.html" %}
+</div>
+
+{% if produtos.has_next %}
+<div class="text-center mt-4">
+    <button id="btn-carregar-mais" class="btn btn-secondary" data-page="2">
+        Carregar Mais Produtos
+    </button>
+</div>
+{% endif %}
+
+<script>
+    document.getElementById('btn-carregar-mais')?.addEventListener('click', function() {
+        const btn = this;
+        const page = btn.getAttribute('data-page');
+        
+        fetch(`?page=${page}`, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('container-produtos').insertAdjacentHTML('beforeend', data.html);
+            
+            if (data.has_next) {
+                btn.setAttribute('data-page', parseInt(page) + 1);
+            } else {
+                btn.parentElement.remove(); // Remove o botão se não houver mais páginas
+            }
+        });
+    });
+</script>

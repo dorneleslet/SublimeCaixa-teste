@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% csrf_token %}
+
+{% block title %}Página Inicial | Sublime Caixa{% endblock %}
+
+{% block dashboard %}
+<style>
+    .dashboard-home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 150px);
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .welcome-section {
+        margin-bottom: 50px;
+        animation: fadeInDown 0.8s ease-out;
+    }
+
+    .welcome-section h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 10px;
+    }
+
+    .welcome-section p {
+        font-size: 1.25rem;
+        color: #cccccc;
+        font-weight: 300;
+        text-transform: lowercase;
+    }
+
+    .welcome-section p::first-letter {
+        text-transform: uppercase;
+    }
+
+    .quick-access-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        max-width: 1000px;
+        width: 100%;
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .quick-card {
+        background: #333333;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        width: 180px;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #ffffff;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .quick-card i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: var(--main-color, #fcd1d1);
+    }
+
+    .quick-card span {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .quick-card:hover {
+        background: var(--main-color, #fcd1d1);
+        transform: scale(1.08);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+
+    .quick-card:hover i, 
+    .quick-card:hover span {
+        color: #1a1a1a;
+    }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .quick-card {
+            width: 140px;
+            height: 140px;
+        }
+        .welcome-section h1 {
+            font-size: 2.2rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="dashboard-home">
+        <div class="welcome-section">
+            <h1 id="greeting-text">Bom dia, @{{ request.user.username|default:"usuario" }}</h1>
+            <p id="display-date">Carregando data...</p>
+        </div>
+
+        <div class="quick-access-grid">
+            <a href="/caixa/" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-calculator'></i>
+                <span>Caixa</span>
+            </a>
+            <a href="/clientes/" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-group'></i>
+                <span>Clientes</span>
+            </a>
+            <a href="https://buk.pt/espaco-sublime/dashboard/calendar/week" target="_blank" rel="noopener noreferrer" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-calendar'></i>
+                <span>Agenda</span>
+            </a>
+            {% if is_admin %}
+            <a href="/servicos/novo/" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-cut'></i>
+                <span>Serviços</span>
+            </a>
+            <a href="/estoque/" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-package'></i>
+                <span>Estoque</span>
+            </a>
+            <a href="/configuracoes/" class="quick-card" style="text-decoration: none;">
+                <i class='bx bx-bar-chart-alt-2'></i>
+                <span>Relatórios</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const greetingEl = document.getElementById('greeting-text');
+        const dateEl = document.getElementById('display-date');
+        const now = new Date();
+        
+        // Lógica de saudação baseada no horário
+        const hours = now.getHours();
+        let greeting = "Bom dia";
+        if (hours >= 12 && hours < 18) greeting = "Boa tarde";
+        else if (hours >= 18 || hours < 5) greeting = "Boa noite";
+        
+        greetingEl.textContent = `${greeting}, @{{ request.user.username|default:"usuario" }}`;
+
+        // Formatação da Data conforme solicitado: "dia da semana, data DD de mês de YYYY"
+        const diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+        const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+        
+        const diaSemana = diasSemana[now.getDay()];
+        const dia = now.getDate();
+        const mes = meses[now.getMonth()];
+        const ano = now.getFullYear();
+        
+        dateEl.textContent = `${diaSemana}, data ${dia} de ${mes} de ${ano}`;
+    });
+</script>
+
+{% endblock %}

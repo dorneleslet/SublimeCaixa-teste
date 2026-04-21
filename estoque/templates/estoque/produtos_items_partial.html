@@ -1,0 +1,8 @@
+{% for produto in produtos %}
+    <tr>
+        <td>{{ produto.nome }}</td>
+        <td>{{ produto.entradas|default:0 }}</td>
+        <td>{{ produto.saidas|default:0 }}</td>
+        <td>{{ produto.quantidade }}</td>
+    </tr>
+{% endfor %}

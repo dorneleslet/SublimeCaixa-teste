@@ -10,13 +10,18 @@ from clientes.models import Cliente
 from decimal import Decimal, InvalidOperation
 from django.db.models.functions import TruncDate
 import time
+from django.core.paginator import Paginator
+from django.template.loader import render_to_string
+
 
 
 
 def listar_estoque(request):
+    
+
     # produtos = ProdutoEstoque.objects.all().order_by('nome') #produtos em ordem alfabética
     # return render(request, 'estoque.html', {'produtos': produtos})
-    return render(request, 'estoque.html')
+    return render(request, 'estoque.html') #ATIVAR AQUI - RETURN FUNCIONANDO
 
 def novo_produto(request):
     if request.method == 'POST':
@@ -149,7 +154,46 @@ def saida_estoque(request, produto_id):
     return JsonResponse({'status': 'success', 'editar_quantidade': produto.quantidade})
 
 
-def relatorio_estoque(request):
+# def relatorio_estoque(request):
+#     data_inicio = request.GET.get('data_inicio')
+#     data_fim = request.GET.get('data_fim')
+
+#     inicio = parse_date(data_inicio) if data_inicio else None
+#     fim = parse_date(data_fim) if data_fim else None
+
+#     produtos_list = ProdutoEstoque.objects.all().order_by('nome')
+#     paginator = Paginator(produtos_list, 10)
+#     page_number = request.GET.get('page', 1)
+#     produtos = paginator.get_page(page_number)
+
+#     # AJAX
+#     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+#         html = render_to_string('estoque/produtos_items_partial.html', {
+#             'produtos': produtos
+#         })
+#         return JsonResponse({
+#             'html': html,
+#             'has_next': produtos.has_next()
+#         })
+
+#     # HISTÓRICO
+#     historico = MovimentacaoEstoque.objects.select_related('cliente', 'produto')
+
+#     if inicio:
+#         historico = historico.filter(data__date__gte=inicio)
+#     if fim:
+#         historico = historico.filter(data__date__lte=fim)
+
+#     historico = historico.order_by('-data')
+
+#     context = {
+#         'produtos': produtos,
+#         'historico': historico,
+#     }
+
+#     return render(request, 'estoque/relatorio.html', context)
+
+def relatorio_estoque(request): # FUNCIONANDO
     data_inicio = request.GET.get('data_inicio')
     data_fim = request.GET.get('data_fim')
     cliente_id = request.GET.get('cliente')
