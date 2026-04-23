@@ -1,4 +1,5 @@
 name: Cypress Tests
+
 on: 
   push:
     branches:
@@ -7,21 +8,25 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup and Start server
+      - name: Setup Python
         run: |
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+          python manage.py migrate
+
+      - name: Start server
+        run: |
+          source venv/bin/activate
           python manage.py runserver &
 
       - name: Run Cypress Tests
-        uses: cypress-io/github-actions@v6
+        uses: cypress-io/github-actions@v6.6.0
         with:
           spec: |
             cypress/e2e/regressao.cy.js
