@@ -67,10 +67,8 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
                 nascimento = datetime.strptime(nascimento, '%d/%m/%Y').date()
                 if nascimento.year > datetime.now().year:
                     contexto['erro_nascimento'] = f'O ano de nascimento não pode ser maior que {datetime.now().year}.'
-                    return render(request, 'clientes.html', contexto)
             except ValueError:
                 contexto['erro_nascimento'] = 'Data inválida. Use o formato DD/MM/AAAA.'
-                return render(request, 'clientes.html', contexto)
         else:
             nascimento = None    
 

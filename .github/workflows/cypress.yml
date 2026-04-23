@@ -13,9 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Start server
-        run: 
-          venv\Scripts\Activate
+      - name: Setup and Start server
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
           python manage.py runserver &
 
       - name: Run Cypress Tests
