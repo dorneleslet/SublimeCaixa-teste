@@ -4,7 +4,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib import messages
-from django.db.models import Sum, Q, F
+from django.db.models import Sum, Q, F, OuterRef, Subquery, Case, When, Value
+from django.db import models
 from django.utils.dateparse import parse_date
 from clientes.models import Cliente
 from decimal import Decimal, InvalidOperation
@@ -12,13 +13,12 @@ from django.db.models.functions import TruncDate
 import time
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
+from django.db.models.functions import Coalesce
 
 
 
 
 def listar_estoque(request):
-    
-
     # produtos = ProdutoEstoque.objects.all().order_by('nome') #produtos em ordem alfabética
     # return render(request, 'estoque.html', {'produtos': produtos})
     return render(request, 'estoque.html') #ATIVAR AQUI - RETURN FUNCIONANDO
@@ -99,19 +99,39 @@ def excluir_produto(request, id):
 
 
 def lista_produtos(request):
-    produtos = ProdutoEstoque.objects.all()
-    produtos_lista = [ # converter queryset para lista
+    # produtos = ProdutoEstoque.objects.all()
+    # produtos_lista = [ # converter queryset para lista
+    #     {
+    #         'id': p.id,
+    #         'nome': p.nome,
+    #         'quantidade': p.quantidade,
+    #         'preco_unitario': float(p.preco_unitario),
+    #         'descricao': p.descricao or '',
+
+    #     }
+    #     for p in produtos
+    # ]
+    # return JsonResponse(produtos_lista, safe=False)
+    produtos = ProdutoEstoque.objects.annotate(
+        total_entradas=Coalesce(Sum('movimentacoes__quantidade', filter=Q(movimentacoes__tipo='entrada')), 0),
+        total_saidas=Coalesce(Sum('movimentacoes__quantidade', filter=Q(movimentacoes__tipo='saida')), 0)
+        ).annotate(
+            saldo=F('total_entradas') - F('total_saidas')
+        ).order_by('nome')
+    
+    produtos_lista = [
         {
             'id': p.id,
             'nome': p.nome,
-            'quantidade': p.quantidade,
+            'quantidade': p.saldo,
             'preco_unitario': float(p.preco_unitario),
             'descricao': p.descricao or '',
-
         }
         for p in produtos
     ]
+
     return JsonResponse(produtos_lista, safe=False)
+    
 
 def entrada_estoque(request, produto_id):
     produto = get_object_or_404(ProdutoEstoque, id=produto_id)
@@ -193,7 +213,72 @@ def saida_estoque(request, produto_id):
 
 #     return render(request, 'estoque/relatorio.html', context)
 
-def relatorio_estoque(request): # FUNCIONANDO
+# def relatorio_estoque(request): # FUNCIONANDO
+#     data_inicio = request.GET.get('data_inicio')
+#     data_fim = request.GET.get('data_fim')
+#     cliente_id = request.GET.get('cliente')
+#     search = request.GET.get('search')
+
+#     #converte datas
+#     inicio = parse_date(data_inicio) if data_inicio else None
+#     fim = parse_date(data_fim) if data_fim else None
+
+#     # Resumo do relatório
+#     produtos = ProdutoEstoque.objects.all()
+
+#     resumo_estoque = []
+#     for produto in produtos:
+#         movimentacoes = produto.movimentacoes.all()
+#         #entradas = produto.movimentacoes.filter(tipo='entrada').aggregate(total=Sum('quantidade'))['total'] or 0
+#         #saidas = produto.movimentacoes.filter(tipo='saida').aggregate(total=Sum('quantidade'))['total'] or 0
+#         #saldo = produto.quantidade #campo onde guarda o estoque atual
+#         # aplica filtro de data
+#         if inicio:
+#             movimentacoes = movimentacoes.filter(data__date__gte=inicio)
+#         if fim:
+#             movimentacoes = movimentacoes.filter(data__date__lte=fim)
+
+#         entradas = movimentacoes.filter(tipo='entrada').aggregate(total=Sum('quantidade'))['total'] or 0
+#         saidas = movimentacoes.filter(tipo='saida').aggregate(total=Sum('quantidade'))['total'] or 0
+#         saldo = produto.quantidade #campo onde guarda o estoque atual
+
+#         resumo_estoque.append({
+#             'produto': produto,
+#             'entradas': entradas,
+#             'saidas': saidas,
+#             'saldo': saldo, 
+#         })
+
+#     resumo_estoque = sorted(resumo_estoque, key=lambda item: item['produto'].nome.lower())
+
+#     # Histórico de entradas
+#     historico = MovimentacaoEstoque.objects.select_related('cliente', 'produto').annotate(
+#         data_dia=TruncDate('data')
+#     )
+#     #historico_entradas = MovimentacaoEstoque.objects.select_related('produto').filter(tipo='entrada').order_by('-data')
+#     #historico_saida = MovimentacaoEstoque.objects.select_related('produto').filter(tipo='saida').order_by('-data')
+
+    
+
+#     if inicio:
+#         historico = historico.filter(data_dia__gte=inicio)
+#     if fim:
+#         historico = historico.filter(data_dia__lte=fim)
+#     if cliente_id:
+#         historico = historico.filter(cliente_id=cliente_id)
+#     if search:
+#         historico = historico.filter(cliente__nome__icontains=search)
+
+#     historico = historico.order_by('-data_dia', '-data')
+#     context = {
+#         'resumo_estoque': resumo_estoque,
+#         'historico': historico,
+#         'search': search,
+#     }
+
+#     return render(request, 'estoque/relatorio.html', context)
+
+def relatorio_estoque(request):
     data_inicio = request.GET.get('data_inicio')
     data_fim = request.GET.get('data_fim')
     cliente_id = request.GET.get('cliente')
@@ -203,42 +288,50 @@ def relatorio_estoque(request): # FUNCIONANDO
     inicio = parse_date(data_inicio) if data_inicio else None
     fim = parse_date(data_fim) if data_fim else None
 
-    # Resumo do relatório
-    produtos = ProdutoEstoque.objects.all()
+    # 1. Filtro base para movimentações do período
+    movimentacoes_periodo = MovimentacaoEstoque.objects.all()
+    if inicio:
+        movimentacoes_periodo = movimentacoes_periodo.filter(data__date__gte=inicio)
+    if fim:
+        movimentacoes_periodo = movimentacoes_periodo.filter(data__date__lte=fim)
 
-    resumo_estoque = []
-    for produto in produtos:
-        movimentacoes = produto.movimentacoes.all()
-        #entradas = produto.movimentacoes.filter(tipo='entrada').aggregate(total=Sum('quantidade'))['total'] or 0
-        #saidas = produto.movimentacoes.filter(tipo='saida').aggregate(total=Sum('quantidade'))['total'] or 0
-        #saldo = produto.quantidade #campo onde guarda o estoque atual
-        # aplica filtro de data
-        if inicio:
-            movimentacoes = movimentacoes.filter(data__date__gte=inicio)
-        if fim:
-            movimentacoes = movimentacoes.filter(data__date__lte=fim)
+    # 2. Subqueries para agregação eficiente
+    entradas_periodo_subquery = movimentacoes_periodo.filter(
+        produto=OuterRef('pk'),
+        tipo=MovimentacaoEstoque.ENTRADA
+    ).values('produto').annotate(total=Sum('quantidade')).values('total')
 
-        entradas = movimentacoes.filter(tipo='entrada').aggregate(total=Sum('quantidade'))['total'] or 0
-        saidas = movimentacoes.filter(tipo='saida').aggregate(total=Sum('quantidade'))['total'] or 0
-        saldo = produto.quantidade #campo onde guarda o estoque atual
+    saidas_periodo_subquery = movimentacoes_periodo.filter(
+        produto=OuterRef('pk'),
+        tipo=MovimentacaoEstoque.SAIDA
+    ).values('produto').annotate(total=Sum('quantidade')).values('total')
 
-        resumo_estoque.append({
-            'produto': produto,
-            'entradas': entradas,
-            'saidas': saidas,
-            'saldo': saldo, 
-        })
+    # 3. Query principal anotada
+    produtos_resumo_qs = ProdutoEstoque.objects.annotate(
+        entradas_periodo=Coalesce(Subquery(entradas_periodo_subquery, output_field=models.IntegerField()), 0),
+        saidas_periodo=Coalesce(Subquery(saidas_periodo_subquery, output_field=models.IntegerField()), 0),
+        saldo_atual=Coalesce(Sum(
+            Case(
+                When(movimentacoes__tipo=MovimentacaoEstoque.ENTRADA, then=F('movimentacoes__quantidade')),
+                When(movimentacoes__tipo=MovimentacaoEstoque.SAIDA, then=-F('movimentacoes__quantidade')),
+                default=Value(0), output_field=models.IntegerField()
+            )
+        ), 0)
+    ).order_by('nome')
+    
+    resumo_estoque = [
+        {
+            'produto': p,
+            'entradas': p.entradas_periodo,
+            'saidas': p.saidas_periodo,
+            'saldo': p.saldo_atual,
+        } for p in produtos_resumo_qs
+    ]
 
-    resumo_estoque = sorted(resumo_estoque, key=lambda item: item['produto'].nome.lower())
-
-    # Histórico de entradas
+    # Histórico de movimentações
     historico = MovimentacaoEstoque.objects.select_related('cliente', 'produto').annotate(
         data_dia=TruncDate('data')
-    )
-    #historico_entradas = MovimentacaoEstoque.objects.select_related('produto').filter(tipo='entrada').order_by('-data')
-    #historico_saida = MovimentacaoEstoque.objects.select_related('produto').filter(tipo='saida').order_by('-data')
-
-    
+        )
 
     if inicio:
         historico = historico.filter(data_dia__gte=inicio)
@@ -250,6 +343,7 @@ def relatorio_estoque(request): # FUNCIONANDO
         historico = historico.filter(cliente__nome__icontains=search)
 
     historico = historico.order_by('-data_dia', '-data')
+
     context = {
         'resumo_estoque': resumo_estoque,
         'historico': historico,

@@ -151,6 +151,7 @@
                 data-quantidade="{{ produto.quantidade }}"
                 data-preco_unitario="{{ produto.preco_unitario }}"
                 data-descricao="{{ produto.descricao|default:'' }}">
+                
                     {{ produto.nome }} • {{ produto.quantidade }} unidades • {{ produto.preco_unitario|floatformat:2|cut:'.' }}€ 
                 </button>
                 {% endfor %}

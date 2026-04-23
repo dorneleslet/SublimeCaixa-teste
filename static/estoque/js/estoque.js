@@ -74,6 +74,9 @@ function cadastrarProduto(event) {
     .catch(err => console.error('Erro:', err));
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    listarProdutos();
+});
 
 //Filtrar produtos na lista
 function filtrarProdutos() {
@@ -305,13 +308,16 @@ function listarProdutos() {
       const lista = document.getElementById('lista-produtos');
       lista.innerHTML = ''; // limpa a lista atual
       document.getElementById('search-bar-produto').style.display = 'block';
-       // ordem alfabética ignorando os acentos
-      produtos.sort((a, b) => {
-        const nomeA = removerAcentos(a.nome);
-        const nomeB = removerAcentos(b.nome);
-        return nomeA.localeCompare(nomeB);
-      });
-      
+    //    // ordem alfabética ignorando os acentos AQUI TA FUNCIONANDO  
+    //   produtos.sort((a, b) => {
+    //     const nomeA = removerAcentos(a.nome);
+    //     const nomeB = removerAcentos(b.nome);
+    //     return nomeA.localeCompare(nomeB);
+    //   });
+
+      // DocumentFragment melhora a performance de renderização no navegador
+      const fragment = document.createDocumentFragment();
+
       produtos.forEach(produto => {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -326,25 +332,27 @@ function listarProdutos() {
         const precoFormatado = produto.preco_unitario.toString().replace('.', ',');
 
         btn.textContent = `${produto.nome} • ${produto.quantidade} unidades • ${precoFormatado}€`;
-        lista.appendChild(btn);
+        //lista.appendChild(btn); AQUI TA FUNCIONANDO
+        fragment.appendChild(btn);
       });
+      lista.appendChild(fragment);
     })
     .catch(err => console.error('Erro ao listar produtos:', err));
 
-// filtro usando a função removerAcentos
-document.getElementById('search-bar-produto').addEventListener('input', function() {
-    const query = removerAcentos(this.value);
+// filtro usando a função removerAcentos AQUI TA FUNCIONANDO
+// document.getElementById('search-bar-produto').addEventListener('input', function() {
+//     const query = removerAcentos(this.value);
 
-    const botoes = document.querySelectorAll('#lista-produtos button');
-    botoes.forEach(btn => {
-        const nomeProduto = removerAcentos(btn.dataset.nome);
-        if (nomeProduto.includes(query)) {
-            btn.style.display = '';
-        } else {
-            btn.style.display = 'none';
-        }
-    });
-});
+//     const botoes = document.querySelectorAll('#lista-produtos button');
+//     botoes.forEach(btn => {
+//         const nomeProduto = removerAcentos(btn.dataset.nome);
+//         if (nomeProduto.includes(query)) {
+//             btn.style.display = '';
+//         } else {
+//             btn.style.display = 'none';
+//         }
+//     });
+// });
 
 }
 
