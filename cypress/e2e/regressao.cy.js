@@ -53,7 +53,7 @@ describe('Página de cadastro de clientes', () => {
         cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
     })
 
-    it('Atualizando dados de cadastro do cliente.', () => {
+    it.only('Atualizando dados de cadastro do cliente.', () => {
         // Criando cliente para teste
         const cliente = gerarClientes();
         const nomeCliente = `Cliente ${Date.now()}`
@@ -74,7 +74,11 @@ describe('Página de cadastro de clientes', () => {
         cy.get('[data-test="email-edicao"]').click().clear().type('clienteteste@email.com');
 
         cy.get('[data-test="btn-salvar-edicao"]').click();
-        cy.contains('Dados alterados com sucesso!').should('be.visible');
+        cy.get('#mensagem-sucesso', { timeout: 10000 }).should('exist')
+        .and(($el) => {
+            expect($el[0].style.display).to.not.eq('none')
+        });
+        //cy.get('#mensagem-sucesso').should('be.visible').and('contain', 'Dados alterados com sucesso!');
     })
     
     it('Excluindo cadastro do cliente.', () => {

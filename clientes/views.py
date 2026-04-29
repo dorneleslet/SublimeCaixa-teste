@@ -30,8 +30,9 @@ def dados_cliente(request, id):
 
 def clientes(request): # lista todos os clientes ou cadastra um novo
     if request.method == "GET":
+        is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
         cliente_list = Cliente.objects.all().order_by('nome').filter(ativo=True).values() #coloca a lista em ordem a-z
-        return render(request, 'clientes.html',  {'clientes': cliente_list})
+        return render(request, 'clientes.html',  {'clientes': cliente_list, 'is_admin': is_admin })
     elif request.method == "POST":
         nome = request.POST.get('nome') #vai capturar um dado do metodo post
         telefone = request.POST.get('telefone')
@@ -47,7 +48,8 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
             'nif': nif,
             'nascimento': nascimento,
             'email': email if email else '',
-            'clientes': Cliente.objects.all().order_by('nome').filter(ativo=True).values()
+            'clientes': Cliente.objects.all().order_by('nome').filter(ativo=True).values(),
+            'is_admin': request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
         }
 
         # Verifica os campos obrigatórios
@@ -101,7 +103,8 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
 
         return render(request, 'clientes.html', {
             'mensagem_sucesso':True,
-            'clientes': Cliente.objects.all().order_by('nome').filter(ativo=True).values()
+            'clientes': Cliente.objects.all().order_by('nome').filter(ativo=True).values(),
+            'is_admin': request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
         })
         
 def att_cliente(request): #onde seleciona o id para ser atualizado
@@ -231,8 +234,9 @@ def adicionar_ficha(request, cliente_id): #salva ficha e retorna json
 def detalhe_cliente(request, cliente_id): #mostrar as fichas no histórico
     cliente = get_object_or_404(Cliente, id=cliente_id)
     fichas = cliente.fichas.order_by('-data')
+    is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
 
-    return render(request, 'clientes/fichashistorico.html', {'fichas': fichas})
+    return render(request, 'clientes/fichashistorico.html', {'fichas': fichas, 'is_admin': is_admin})
 
 def ocultar_cliente(request, cliente_id):
     if request.method == 'POST':

@@ -679,4 +679,6 @@ input.form-control.buscar_cliente {
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
 }
 
-/* Aj
+.bottom-space { /* criar um espaçamento no final da página clientes.html */
+  height: 80px;
+}

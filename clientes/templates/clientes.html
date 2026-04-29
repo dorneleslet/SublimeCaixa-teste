@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+<link rel="icon" type="image/x-icon" href="{% static 'general/img/favicon.png' %}">
 {% block title %}Clientes | Sublime Caixa{% endblock %}
 
 {% block head %}
@@ -488,8 +488,8 @@
                             <div class="card card-body text-white border-secondary" style="background: #2A2A2A;">
                                 <h5>Histórico do Cliente</h5>
                                 <div class="table-responsive">
-                                <div id="historico-fichas" data-test="historico-fichas">
-                                    {% include 'clientes/fichashistorico.html' with fichas=fichas %}
+                                <div id="historico-fichas" data-test="historico-fichas" >
+                                    {% include 'clientes/fichashistorico.html' with fichas=fichas is_admin=is_admin %}
                                 </div>
                             </div>
                         </div>

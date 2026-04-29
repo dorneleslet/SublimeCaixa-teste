@@ -1,6 +1,6 @@
 {% if fichas %}
     {% for ficha in fichas %}
-        {% include 'clientes/fichacliente.html' %}
+        {% include 'clientes/fichacliente.html' with ficha=ficha is_admin=is_admin  %}
     {% endfor %}
 {% else %}
     <p class="text-muted">Nenhuma ficha adicionada ainda.</p>

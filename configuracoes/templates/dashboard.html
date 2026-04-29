@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+<link rel="icon" type="image/x-icon" href="{% static 'general/img/favicon.png' %}">
 {% csrf_token %}
 
 {% block title %}Página Inicial | Sublime Caixa{% endblock %}
@@ -111,13 +112,16 @@
 <div class="container">
     <div class="dashboard-home">
         <div class="welcome-section">
-            <h1 id="greeting-text">Bom dia, @{{ request.user.username|default:"usuario" }}</h1>
+            <h1 id="greeting-text" 
+                data-username="{{ request.user.username|default:'usuario' }}">
+                Bom dia, @{{ request.user.username|default:"usuario" }}
+            </h1>
             <p id="display-date">Carregando data...</p>
         </div>
 
         <div class="quick-access-grid">
             <a href="/caixa/" class="quick-card" style="text-decoration: none;">
-                <i class='bx bx-calculator'></i>
+                <i class='bx bx-dollar'></i>
                 <span>Caixa</span>
             </a>
             <a href="/clientes/" class="quick-card" style="text-decoration: none;">
@@ -151,14 +155,17 @@
         const greetingEl = document.getElementById('greeting-text');
         const dateEl = document.getElementById('display-date');
         const now = new Date();
+
+        if (!greetingEl || !dateEl) return;
         
         // Lógica de saudação baseada no horário
         const hours = now.getHours();
+        const username = greetingEl.dataset.username;
         let greeting = "Bom dia";
         if (hours >= 12 && hours < 18) greeting = "Boa tarde";
         else if (hours >= 18 || hours < 5) greeting = "Boa noite";
         
-        greetingEl.textContent = `${greeting}, @{{ request.user.username|default:"usuario" }}`;
+        greetingEl.textContent = `${greeting}, @${username}`;
 
         // Formatação da Data conforme solicitado: "dia da semana, data DD de mês de YYYY"
         const diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];

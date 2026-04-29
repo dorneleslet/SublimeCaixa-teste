@@ -3,12 +3,14 @@
     <div class="card-header d-flex justify-content-between align-items-center py-2 border-secondary">
         <span class="fw-bold">Ficha #{{ forloop.revcounter }}</span> <!-- Assim as fichas ficam "Ficha #16", a seguinte será a "Ficha #15", e assim por diante -->
         <div class="ficha-actions">
+            {% if is_admin %}
             <button class="btn btn-sm btn-outline-light py-0 px-1" onclick="abrirModalEdicaoFicha('{{ ficha.id }}')" title="Editar Ficha" data-test="btn-editar-ficha">
                 <i class='bx bxs-pencil fs-6' style="pointer-events: none;"></i>
             </button>
             <button class="btn btn-sm btn-outline-danger py-0 px-1 btn-excluir-ficha" data-id="{{ ficha.id }}" data-test="btn-excluir-ficha" title="Excluir Ficha">
                 <i class='bx bx-x fs-6' style="pointer-events: none;"></i>
             </button>
+            {% endif %}
         </div>
     </div>
     <div class="card-body py-2 px-3">
