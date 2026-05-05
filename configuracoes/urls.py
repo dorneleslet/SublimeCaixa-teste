@@ -12,6 +12,7 @@ urlpatterns = [
     path('message/', views.message, name='message'),
     path('landingpage/', views.landing_page_view, name='landing_page'),
     path('embaralhar/', views.embaralhar_lista, name='embaralhar'),
+    path('historico_acoes/', views.historico_acoes, name='historico_acoes'),
 
 
 

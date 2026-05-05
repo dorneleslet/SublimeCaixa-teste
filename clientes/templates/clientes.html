@@ -15,7 +15,7 @@
             </div>    
 
             <div onclick="exibir_form('2')" class="col-md card-dashboard" data-test="btn-atualizar-cliente">
-            <p class="text-card">Atualizar clientes</p> 
+                <p class="text-card">Atualizar clientes</p> 
             </div>
 
         </div>
@@ -615,4 +615,14 @@
     </script>
     <div class="bottom-space"></div>
     <script src="{% static 'clientes/js/clientes.js' %}"></script>
+
+    {% if exibir_atualizar %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof exibir_form === "function") {
+                exibir_form('2'); // Chama a lógica que mostra a busca e esconde o cadastro
+            }
+        });
+    </script>
+    {% endif %}
 {% endblock %}

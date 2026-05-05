@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Histórico de Ações | Sublime Caixa{% endblock %}
+
+{% block dashboard %}
+<div class="container fluid" style="background-color: #292929;">
+    <div class="row">
+        <div class="col">
+            <br>
+            <h2 class="mb-1">📋 Histórico de Ações</h2>
+            <small class="text-muted">Registro de atividades importantes no sistema.</small>
+            <hr style="border-top: 1px solid #555;">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="list-group">
+                {% for log in logs %}
+                    <div class="list-group-item list-group-item-action bg-dark text-white border-secondary mb-2">
+                        <p class="mb-0"><strong>@{{ log.user.username|default:"Usuário Desconhecido" }}</strong> <br> {{ log.action_description }}</p>
+                        <small class="text-muted">{{ log.timestamp|date:"d \d\e M \d\e Y H:i" }}</small>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">Nenhuma ação registrada ainda.</p>
+                {% endfor %}
+            </div>
+
+            <!-- Controles de Paginação -->
+            <nav aria-label="Navegação de página" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if logs.has_previous %}
+                        <li class="page-item"><a class="page-link bg-dark text-white border-secondary" href="?page=1">&laquo; Primeira</a></li>
+                        <li class="page-item"><a class="page-link bg-dark text-white border-secondary" href="?page={{ logs.previous_page_number }}">Anterior</a></li>
+                    {% endif %}
+
+                    <li class="page-item disabled"><span class="page-link bg-dark text-white border-secondary">Página {{ logs.number }} de {{ logs.paginator.num_pages }}</span></li>
+
+                    {% if logs.has_next %}
+                        <li class="page-item"><a class="page-link bg-dark text-white border-secondary" href="?page={{ logs.next_page_number }}">Próxima</a></li>
+                        <li class="page-item"><a class="page-link bg-dark text-white border-secondary" href="?page={{ logs.paginator.num_pages }}">Última &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

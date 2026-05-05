@@ -5,6 +5,7 @@ urlpatterns = [
     path('atualiza_cliente/', views.att_cliente, name='atualiza_cliente'),
     path('update_cliente/<int:id>', views.update_cliente, name='update_cliente'),
     path('buscar/', views.buscar_clientes, name='buscar_clientes'),
+    path('buscar_clientes/', views.buscar_clientes_page, name='buscar_clientes_page'),
     path('dados_cliente/<int:id>/', views.dados_cliente, name='dados_cliente'),
     path('clientes/listar/', views.listar_todos_clientes, name='listar_clientes'),
     path('<int:cliente_id>/ficha/adicionar/', views.adicionar_ficha, name='adicionar_ficha'),

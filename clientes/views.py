@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from datetime import datetime
 from .models import Cliente, FichaCliente
 import re
+from django.contrib.auth.models import User # Import User model
 from django.core import serializers
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -11,7 +12,12 @@ from django.shortcuts import redirect, get_object_or_404, render
 from django.db.models import Q
 from django.utils import timezone
 from django.template.loader import render_to_string
+from .models import ActionLog # Import the new ActionLog model
 
+def log_action(user, description):
+    # Garante que o usuário está autenticado antes de registrar a ação
+    if user.is_authenticated:
+        ActionLog.objects.create(user=user, action_description=description)
 
 
 def dados_cliente(request, id): 
@@ -100,6 +106,7 @@ def clientes(request): # lista todos os clientes ou cadastra um novo
         )
 
         cliente.save()
+        log_action(request.user, f"🟢 Cadastrou cliente {nome}")
 
         return render(request, 'clientes.html', {
             'mensagem_sucesso':True,
@@ -172,6 +179,7 @@ def update_cliente(request, id): #atualiza dados via json
         cliente.email = email    
         cliente.nif = nif
         cliente.save()
+        log_action(request.user, f"🟡 Alterou dados do cliente {nome}")
 
         return JsonResponse({'status': '200',
                               'nome': nome,
@@ -192,6 +200,12 @@ def buscar_clientes(request):
     ).filter(ativo=True).values('id', 'nome', 'telefone', 'nif')[:10]
 
     return JsonResponse({'clientes': list(clientes)})
+
+def buscar_clientes_page(request): # View para carregar a página já na aba de busca
+    is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
+    cliente_list = Cliente.objects.all().order_by('nome').filter(ativo=True).values()
+    return render(request, 'clientes.html',  {'clientes': cliente_list, 'is_admin': is_admin, 'exibir_atualizar': True })
+
 
 def listar_todos_clientes(request):
     clientes = Cliente.objects.all().order_by('nome').filter(ativo=True).values('id', 'nome', 'telefone', 'nif')
@@ -227,6 +241,7 @@ def adicionar_ficha(request, cliente_id): #salva ficha e retorna json
                 homecare=homecare,
                 observacao=observacao,
             )
+            log_action(request.user, f"🟢 Adicionou ficha de procedimento ao cliente {cliente.nome}")
 
             html_ficha = render_to_string('clientes/fichacliente.html', {'ficha': ficha})
             return JsonResponse({'status': 'ok', 'html_ficha': html_ficha})
@@ -244,6 +259,7 @@ def ocultar_cliente(request, cliente_id):
             cliente = Cliente.objects.get(pk=cliente_id)
             cliente.ativo = False
             cliente.save()
+            log_action(request.user, f"🔴 Removeu cliente {cliente.nome}")
             return JsonResponse({'success': True})
         except Cliente.DoesNotExist:
             return JsonResponse({'success': False, 'error': 'Cliente não encontrado'})
@@ -254,6 +270,7 @@ def excluir_ficha(request, ficha_id):
 
     if request.method == 'POST':
         ficha.delete()
+        log_action(request.user, f"🔴 Removeu ficha de procedimento do cliente {ficha.cliente.nome}")
         return JsonResponse({'status': 'ok', 'ficha_id': ficha_id})
     else:
         return JsonResponse({'status': 'erro', 'mensagem': 'Método inválido'})
@@ -308,6 +325,7 @@ def update_ficha(request, ficha_id):
             ficha.observacao = data.get('observacao', '')
             
             ficha.save()
+            log_action(request.user, f"🟡 Editou ficha de procedimento do cliente {ficha.cliente.nome}")
 
             return JsonResponse({'status': 'ok'})
         except Exception as e:

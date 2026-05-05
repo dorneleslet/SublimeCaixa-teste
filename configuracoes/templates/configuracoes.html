@@ -38,7 +38,9 @@
                 <button class="collapse-btn" style="color: #fff;">Relatórios</button>
                 <div class="collapse-content">
                     <a href="{% url 'relatorio_estoque' %}"> Ver Relatório do Estoque </a><hr>
-                    <a href="{% url 'historico_vendas' %}"> Ver Histórico de Vendas</a>
+                    <a href="{% url 'historico_vendas' %}"> Ver Histórico de Vendas</a><hr>
+                    <a href="{% url 'historico_acoes' %}"> Ver Histórico de Ações</a>
+                    
                 </div>
                 <br>
                 <button class="collapse-btn" style="color: #fff;">Acessos</button>
@@ -49,6 +51,7 @@
                 <button class="collapse-btn" style="color: #fff;">Ferramentas</button>
                 <div class="collapse-content">
                     <a href="{% url 'embaralhar' %}"> Marketing - Criação de conteúdos para redes sociais</a><hr>
+                    
                     <a href="{% url 'message' %}"> Envio de mensagens</a><hr>
                     <a href="{% url 'landing_page' %}" target="_blank"> Landing Page Cursos Sublime</a>
                 </div>

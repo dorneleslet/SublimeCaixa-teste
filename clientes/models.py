@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 class Cliente(models.Model):
@@ -7,7 +8,6 @@ class Cliente(models.Model):
     nif = models.CharField(max_length=12)
     nascimento = models.DateField(max_length=8, null=True, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
-
     ativo = models.BooleanField(default=True)
     
     def __str__(self) ->str:
@@ -23,5 +23,15 @@ class FichaCliente(models.Model):
       observacao = models.TextField(blank=True, null=True)
 
       def __str__(self):
-            return f'Ficha de {self.cliente.nome} - {self.data}'
-      
+        return f"Ficha {self.id} - {self.cliente.nome} ({self.data.strftime('%d/%m/%Y')})"
+
+class ActionLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    action_description = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"@{self.user.username if self.user else 'Usuário Desconhecido'} - {self.action_description} - {self.timestamp.strftime('%d de %b de %Y %H:%M')}"
+
+    class Meta:
+        ordering = ['-timestamp']

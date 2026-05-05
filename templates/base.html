@@ -20,7 +20,7 @@
     
     <div class="sidebar">
         <div class="logo-details">
-              <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+              <a href="http://127.0.0.1:8000/" style="text-decoration: none;">
                 <div class="logo_name">SUBLIME CAIXA</div>
               </a>
               <i class='bx bx-menu' id="btn" ></i>
@@ -40,6 +40,13 @@
               <span class="links_name">Clientes</span>
             </a>
             <span class="tooltip">Clientes</span>
+            </li>
+            <li>
+            <a href="{% url 'buscar_clientes_page' %}" class="{% if request.resolver_match.url_name == 'buscar_clientes_page' %}active{% endif %}">
+              <i class='bx bx-cabinet' ></i>
+              <span class="links_name">Fichas de Clientes</span>
+            </a>
+            <span class="tooltip">Fichas de Clientes</span>
             </li>
             <li>
               <a href="https://buk.pt/espaco-sublime/dashboard/calendar/week" target="_blank" rel="noopener noreferrer">

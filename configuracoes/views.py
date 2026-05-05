@@ -1,14 +1,36 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
+from clientes.models import ActionLog # Import ActionLog from clientes app
+from django.core.paginator import Paginator
 
+#Helper para verificar se o usuário é administrador
+def is_admin_check(user):
+    return user.groups.filter(name='Administrador').exists() or user.is_superuser
 
+@login_required
 def configuracoes(request):
-    return render(request, 'configuracoes.html')
-
-def dashboard(request):
+    # Esta view renderiza o configuracoes.html principal
     is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
-    return render(request, 'dashboard.html', {'is_admin': is_admin})
+    # return render(request, 'configuracoes.html') #AQUI FUNCIONANDO
+    return render(request, 'configuracoes.html', {'is_admin': is_admin})
+
+def dashboard(request): #AQUI FUNCIONANDO
+    is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
+    return render(request, 'dashboard.html', {'is_admin': is_admin} )
+
+@login_required
+@user_passes_test(is_admin_check) # Apenas administradores podem ver o histórico de ações
+def historico_acoes(request):
+    logs_list = ActionLog.objects.all().order_by('-timestamp') 
+    paginator = Paginator(logs_list, 20) # Define 20 logs por página
+
+    page_number = request.GET.get('page')
+    logs = paginator.get_page(page_number)
+
+    is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
+    return render(request, 'configuracoes/historico_acoes.html', {'logs': logs})
 
 def usuarios(request):
     users = User.objects.all()

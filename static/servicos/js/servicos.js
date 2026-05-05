@@ -96,7 +96,7 @@ function update_servico(){
 
     const id_servico = document.getElementById("id_servico").value;
     const nome = document.getElementById("nome").value.trim();
-    const preco = document.getElementById("preco-edit").value.trim().replace(',', '.');
+    const preco = document.getElementById("preco-edit").value.trim().replace(/\./g, '').replace(',', '.');
     const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 
