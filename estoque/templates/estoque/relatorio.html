@@ -121,7 +121,7 @@
                                     <td>{{ m.get_tipo_display }}</td>
                                     <td>{{ m.quantidade }}</td>
                                     <td>{% if m.cliente %}{{ m.cliente.nome }}{% else %}-{% endif %}</td>
-                                    <td>{{ m.data|date:"d/m/Y H:i" }}</td>
+                                    <td data-order="{{ m.data|date:'YmdHis' }}">{{ m.data|date:"d/m/Y H:i" }}</td>
                                 </tr>
                                
                                 {% endfor %}
@@ -140,7 +140,8 @@
                 "language": { 
                     "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json",
                     "emptyTable": "Nenhuma movimentação encontrada."
-                 }
+                 },
+                "order": [[4, "desc"]]
             });
         });
     </script>
