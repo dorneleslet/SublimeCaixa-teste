@@ -10,16 +10,61 @@
     <link rel="stylesheet" href="{% static 'general/css/landing_page.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'general/img/favicon.png' %}">
     
-    <title>Sublime Cursos</title>
+    <title>Espaço Sublime</title>
+    <style>
+        /* Espaçamento para navbar fixa e rolagem suave */
+        html { scroll-behavior: smooth; }
+        body { padding-top: 70px; }
+        .navbar-brand img { height: 40px; }
+        .nav-link { cursor: pointer; }
+
+        /* Estilos locais para a galeria do Instagram */
+        .instagallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .instagallery .col-md-3 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        @media (min-width: 768px) {
+            .instagallery .col-md-3 {
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Navbar: logo + menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{% static 'general/img/favicon.png' %}" alt="Espaço Sublime">
+                <span class="ml-2 font-weight-bold">Espaço Sublime</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Serviços</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">E-commerce</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contatos</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <header class="hero-section text-center">
         <div class="container">
             <h1 class="display-4">Transforme a qualidade dos seus procedimentos</h1>
             <p class="lead">Aprenda os segredos da naturalidade e da excelência em cabelos para encantar e fidelizar até as clientes mais exigentes.</p>
-            <img src="https://via.placeholder.com/450x280.png?text=Dashboard+Sublime+Caixa" alt="Dashboard do Sublime Caixa" class="img-fluid my-4 rounded shadow-lg">
+            <!-- <img src="https://via.placeholder.com/450x280.png?text=Dashboard+Sublime+Caixa" alt="Dashboard do Sublime Caixa" class="img-fluid my-4 rounded shadow-lg"> -->
             <br>
             <a href="#pricing" class="btn btn-cta btn-lg mt-3">Quero experimentar agora!</a>
             <p class="mt-2"><small>Acesso imediato. Cancele quando quiser.</small></p>
@@ -30,33 +75,33 @@
         <!-- Features Section -->
         <section id="features" class="py-5">
             <div class="container text-center">
-                <h2 class="mb-5">O que você vai dominar com o Cabelos Sublime</h2>
+                <h2 class="mb-5">Experiência que você merece</h2>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="feature-box">
-                            <i class='bx bx-user-circle'></i>
-                            <h3>Gestão de Clientes</h3>
+                            <!-- <i class='bx bx-user-circle'></i> -->
+                            <h3>Diagnóstico personalizado</h3>
                             <p>Aprenda a fidelizar as clientes, ter um protocolo a seguir, criar um histórico de atendimentos e mantenha um relacionamento próximo.</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="feature-box">
-                            <i class='bx bx-dollar-circle'></i>
-                            <h3>Controle de Caixa</h3>
+                            <!-- <i class='bx bx-dollar-circle'></i> -->
+                            <h3>Procedimento de acordo com sua necessidade</h3>
                             <p>Aprenda a registrar todas as entradas, saídas e lucro sem dor de cabeça.</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="feature-box">
-                            <i class='bx bx-package'></i>
-                            <h3>Gestão de Estoque</h3>
+                            <!-- <i class='bx bx-package'></i> -->
+                            <h3>Ambiente relaxante</h3>
                             <p>Aprenda a ter um controle de quais produtos você tem, quantidade de uso.</p>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="feature-box">
-                            <i class='bx bx-line-chart'></i>
-                            <h3>Aprendendo de forma inteligente</h3>
+                            <!-- <i class='bx bx-sparkle-circle'></i> -->
+                            <h3>Para você se sentir radiante</h3>
                             <p>Acompanhe seu desempenho com relatórios na plataforma, serviços mais populares, como dominar as técnicas e muito mais.</p>
                         </div>
                     </div>
@@ -68,20 +113,75 @@
         <section id="about" class="py-5 bg-darker">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-4 text-center">
+                    <!-- <div class="col-md-4 text-center">
                         <img src="https://via.placeholder.com/300" class="img-fluid rounded-circle" alt="Foto do criador">
-                    </div>
+                    </div> -->
                     <div class="col-md-8">
-                        <h3>Criado por quem entende de cabelos</h3>
-                        <p>Craudia Lima é especialista em cabeleleila leila, com mais de 20 anos de experiência na área de cabeleireiros. Já formou mais de 20 mil alunas e dedica-se a ajudar profissionais a evoluírem de assistentes para cabeleireiras de qualidade.</p>
-                        <p>Nossa missão é dar a você, profissional da beleza, mais técnicas para focar no que faz de melhor: encantar seus clientes.</p>
+                        <h3>Sobre o Espaço Sublime</h3>
+                        <p>No Espaço Sublime, acreditamos que cada pessoa carrega uma beleza única e o nosso propósito é realçá-la.</p>
+                        <p></p>Somos um espaço de cabeleireiro dedicado a oferecer muito mais do que um simples serviço. Aqui, cada visita é uma experiência pensada ao detalhe: desde o momento em que entra pela nossa porta até o reflexo que vê ao espelho antes de partir.</p>
+                        <h5>O que nos move</h5>
+                        <p>A nossa equipa está em constante evolução, sempre à procura das melhores técnicas e produtos para cuidar dos seus fios com o carinho que eles merecem. Oferecemos tratamentos capilares personalizados — de hidratações profundas a reconstruções capilares completas — adaptados às necessidades únicas do seu cabelo.</p>
+                        <h5>O nosso ambiente</h5>
+                        <p>Sabemos que cuidar de si vai além da aparência. Por isso, criámos um espaço tranquilo e acolhedor, onde pode respirar fundo, desligar do dia a dia e entregar-se a um momento só seu. Porque sentir-se bem por dentro reflete-se sempre por fora.</p>
+                        <h5>O nosso compromisso</h5>
+                        <p>No Espaço Sublime, cada cliente é tratado de forma individual. Ouvimos, aconselhamos e criamos soluções à medida — porque a sua beleza merece atenção personalizada.</p>
+                        <p><em>Venha descobrir sua melhor versão. Estamos à sua espera.</em></p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Services Section (Instagram gallery + link to agenda) -->
+        <section id="services" class="py-5">
+            <div class="container text-center">
+                <h2 class="mb-4">Serviços & Inspirações</h2>
+                <p class="lead mb-4">Veja alguns trabalhos recentes no nosso Instagram. Clique numa imagem para visitar o perfil.</p>
+
+                <div class="row instagallery mb-4">
+                    {% if instagram_images %}
+                        {% for img in instagram_images %}
+                            <div class="col-6 col-md-3 mb-3">
+                                <a href="https://www.instagram.com/espaco_sublime.pt/" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ img }}" alt="Insta {{ forloop.counter }}" class="img-fluid rounded shadow-sm">
+                                </a>
+                            </div>
+                        {% endfor %}
+                        {# If less than 4 images, fill remaining with placeholders to keep layout #}
+                        {% for i in 1|add:0|make_list %}{% endfor %}
+                    {% else %}
+                        <div class="col-6 col-md-3 mb-3">
+                            <a href="https://www.instagram.com/espaco_sublime.pt/" target="_blank" rel="noopener noreferrer">
+                                <img src="https://via.placeholder.com/400x400.png?text=Insta+1" alt="Insta 1" class="img-fluid rounded shadow-sm">
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <a href="https://www.instagram.com/espaco_sublime.pt/" target="_blank" rel="noopener noreferrer">
+                                <img src="https://via.placeholder.com/400x400.png?text=Insta+2" alt="Insta 2" class="img-fluid rounded shadow-sm">
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <a href="https://www.instagram.com/espaco_sublime.pt/" target="_blank" rel="noopener noreferrer">
+                                <img src="https://via.placeholder.com/400x400.png?text=Insta+3" alt="Insta 3" class="img-fluid rounded shadow-sm">
+                            </a>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3 d-none d-md-block">
+                            <a href="https://www.instagram.com/espaco_sublime.pt/" target="_blank" rel="noopener noreferrer">
+                                <img src="https://via.placeholder.com/400x400.png?text=Insta+4" alt="Insta 4" class="img-fluid rounded shadow-sm">
+                            </a>
+                        </div>
+                    {% endif %}
+
+                     {% if instagram_images %}<pre>{{ instagram_images }}</pre>{% else %}<p>nenhuma imagem</p>{% endif %}  <!-- tem que remover depois, é só pra teste -->
+                 </div>
+
+                 <a href="https://buk.pt/espaco-sublime" target="_blank" rel="noopener noreferrer" class="btn btn-cta btn-lg">Agenda online</a>
+                 <p class="mt-2"><small>Agende já a sua experiência connosco.</small></p>
+            </div>
+        </section>
+
         <!-- Pricing Section -->
-        <section id="pricing" class="py-5 text-center">
+        <!-- <section id="pricing" class="py-5 text-center">
             <div class="container">
                 <h2>Um investimento que se paga sozinho</h2>
                 <p class="lead mb-5">Comece a transformar sua técnica hoje mesmo.</p>
@@ -101,7 +201,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- FAQ Section -->
         <section id="faq" class="py-5 bg-darker">
@@ -112,13 +212,13 @@
                         <div class="card-header" id="headingOne">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Esse curso serve para iniciantes?
+                                    Para que serve o diagnóstico capilar?
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
                             <div class="card-body">
-                                Não! O Curso Sublime é uma especialização em procedimentos para quem já trabalha com cabelos, logo ele não é recomendado para iniciantes.
+                                O diagnóstico capilar é uma avaliação detalhada da saúde dos cabelos e couro cabeludo. Ele ajuda a identificar problemas como queda, quebra, oleosidade excessiva, entre outros, permitindo que sejam recomendados procedimentos e tratamentos adequados.
                             </div>
                         </div>
                     </div>
@@ -126,13 +226,13 @@
                         <div class="card-header" id="headingTwo">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Quanto tempo de acesso ao curso?
+                                    Por que preciso pagar sinal para agendar?
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
                             <div class="card-body">
-                                O acesso do Curso Sublime é de 1 ano pela plataforma da Hotmart.
+                                O sinal é uma forma de garantir o seu agendamento e reservar o horário para você. Ele demonstra compromisso com o serviço e ajuda a evitar cancelamentos de última hora, permitindo que possamos oferecer um atendimento de qualidade a todos os nossos clientes.
                             </div>
                         </div>
                     </div>
@@ -140,13 +240,13 @@
                         <div class="card-header" id="headingThree">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    O curso tem suporte?
+                                    Quais são os métodos de pagamento aceitos?
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
                             <div class="card-body">
-                                Sim, o suporte do curso é pela plataforma da Hotmart durante todo período de acesso. Sempre que surgir uma dúvida ela pode ser deixada abaixo da aula que será respondida o mais breve possível.
+                                Aceitamos diversos métodos de pagamento, incluindo cartões de crédito, débito, MBWay e transferências bancárias. Para mais detalhes, entre em contato conosco.
                             </div>
                         </div>
                     </div>
@@ -154,17 +254,17 @@
                         <div class="card-header" id="headingFour">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    As aulas são ao vivo?
+                                    Preciso marcar com antecedência?
                                 </button>
                             </h2>
                         </div>
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
                             <div class="card-body">
-                                Não, todas as aulas são gravadas e liberadas de forma gradual para que nenhuma etapa do aprendizado seja negligenciada.
+                                Sim, é recomendado agendar com antecedência para garantir o horário desejado e evitar esperas. O agendamento prévio permite que possamos organizar melhor nossa agenda e oferecer um atendimento de qualidade.
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <!-- <div class="card">
                         <div class="card-header" id="headingFive">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -191,20 +291,49 @@
                                 Sim, o prazo de garantia do curso é de 07 dias úteis.
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="text-center py-4">
+    <!-- Seção de contactos com mapa lateral -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 contact-info">
+                    <h3>Contactos</h3>
+                    <h4>Morada</h4>
+                    <p>Rua Padre José Estevens Dias, nº 87<br>2955-212 Pinhal Novo</p>
+
+                    <h4>Horário</h4>
+                    <p>Terça a sábado: 9h30 – 18h00<br>Domingo e Segunda: Encerrados</p>
+
+                    <h4>Email</h4>
+                    <p class="mt-3"><a href="mailto:espacosublime.reservas@gmail.com">espacosublime.reservas@gmail.com</a></p>
+
+                    <h4>Telefone</h4>
+                    <p class="mt-3"><a href="tel:+351910496885">+351 910 496 885</a></p>
+                </div>
+                <div class="col-md-6 contact-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d779.1516590928767!2d-8.917612064873508!3d38.63492951267538!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd194126e7f54c79%3A0x62a67424840e1a49!2sEspa%C3%A7o%20Sublime!5e0!3m2!1spt-PT!2spt!4v1779282093897!5m2!1spt-PT!2spt"
+                        width="100%" height="300" align-items="center" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer id="contact" class="text-center py-4">
         <div class="container">
             <div class="mb-3">
                 <a href="https://www.instagram.com/espaco_sublime.pt" target="_blank" class="text-dark mx-2" title="Instagram"><i class='bx bxl-instagram bx-sm'></i></a>
                 <a href="https://www.facebook.com/espacosublimept" target="_blank" class="text-dark mx-2" title="Facebook"><i class='bx bxl-facebook bx-sm'></i></a>
                 <a href="https://wa.me/351910496885" target="_blank" class="text-dark mx-2" title="WhatsApp"><i class='bx bxl-whatsapp bx-sm'></i></a>
             </div>
-            <p>&copy; {% now "Y" %} Sublime Cursos. Todos os direitos reservados.</p>
+            <p>&copy; {% now "Y" %} Espaço Sublime. Todos os direitos reservados.</p>
         </div>
     </footer>
 

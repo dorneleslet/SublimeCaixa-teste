@@ -4,6 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from clientes.models import ActionLog # Import ActionLog from clientes app
 from django.core.paginator import Paginator
+from django.core.cache import cache
+
+import requests
+import re
+import json
 
 #Helper para verificar se o usuário é administrador
 def is_admin_check(user):
@@ -102,7 +107,69 @@ def message(request):
     return render(request, 'message.html')
 
 def landing_page_view(request):
-    return render(request, 'landing_page.html')
+    """Renderiza a landing page. Tenta buscar as últimas imagens do Instagram do perfil
+    'espaco_sublime.pt' e passa uma lista de URLs para o template em 'instagram_images'.
+    O resultado é cacheado por 1 hora para reduzir requests.
+    """
+    instagram_images = cache.get('instagram_images')
+    if instagram_images is None:
+        instagram_images = []
+        try:
+            url = 'https://www.instagram.com/espaco_sublime.pt/'
+            headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36'}
+            resp = requests.get(url, headers=headers, timeout=10)
+            html = resp.text
+
+            print(resp.status_code)
+            print(html[:500])
+
+            # Tenta extrair JSON do window._sharedData (formato que ainda aparece em algumas páginas)
+            m = re.search(r'window\._sharedData = (.*?);</script>', html, re.DOTALL)
+            data = None
+            if m:
+                try:
+                    data = json.loads(m.group(1))
+                except Exception:
+                    data = None
+
+            # Alternativa: buscar o bloco 'ProfilePage' caso _sharedData não funcione
+            if not data:
+                m2 = re.search(r'"ProfilePage"\s*:\s*\[\{(.*?)\}\]\,', html, re.DOTALL)
+                if m2:
+                    # tenta recuperar por meio de fragmento; não garantido
+                    try:
+                        # busca trecho mais amplo e tenta localizar json via outra regex
+                        m3 = re.search(r'window\.__additionalDataLoaded\(([^,]+),\s*(\{.*?\})\);', html, re.DOTALL)
+                        if m3:
+                            data = json.loads(m3.group(2))
+                    except Exception:
+                        data = None
+
+            images = []
+            if data:
+                try:
+                    edges = data.get('entry_data', {}).get('ProfilePage', [])[0].get('graphql', {}).get('user', {}).get('edge_owner_to_timeline_media', {}).get('edges', [])
+                    for edge in edges[:5]:
+                        node = edge.get('node', {})
+                        url_img = node.get('display_url') or node.get('thumbnail_src')
+                        if url_img:
+                            images.append(url_img)
+                except Exception:
+                    images = []
+
+            instagram_images = images
+            # Garantir exatamente 4 imagens (preencher com placeholders se necessário)
+            placeholder = 'https://via.placeholder.com/400x400.png?text=Sublime'
+            while len(instagram_images) < 4:
+                instagram_images.append(placeholder)
+            instagram_images = instagram_images[:4]
+        except Exception:
+            instagram_images = []
+
+        # Cache por 1 hora
+        cache.set('instagram_images', instagram_images, 60 * 60)
+
+    return render(request, 'landing_page.html', {'instagram_images': instagram_images})
 
 def embaralhar_lista(request):
     return render(request, 'embaralhar.html')
