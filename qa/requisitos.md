@@ -56,7 +56,21 @@ O sistema deve permitir remover clientes cadastrados.
 
 ---
 
-## RF005 - Cadastro de Serviços
+## RF005 - Gerenciamento de Fichas de Cliente
+
+O sistema deve permitir registrar e consultar fichas técnicas associadas a um cliente.
+
+### Regras de Negócio
+
+* Cada ficha deve estar vinculada a um cliente cadastrado.
+* O sistema deve permitir cadastrar novas fichas.
+* O sistema deve permitir consultar fichas existentes.
+* O sistema deve armazenar o histórico das fichas do cliente.
+* O sistema deve impedir o cadastro de fichas sem um cliente associado.
+
+---
+
+## RF006 - Cadastro de Serviços
 
 O sistema deve permitir cadastrar serviços.
 
@@ -73,7 +87,7 @@ O sistema deve permitir cadastrar serviços.
 
 ---
 
-## RF006 - Controle de Estoque
+## RF007 - Controle de Estoque
 
 O sistema deve permitir gerenciar produtos do estoque.
 
@@ -86,7 +100,19 @@ O sistema deve permitir gerenciar produtos do estoque.
 
 ---
 
-## RF007 - Registro de Vendas
+## RF008 - Gerenciamento de Usuários
+
+O sistema deve permitir cadastrar, editar e excluir usuários.
+
+### Regras de Negócio
+
+* Apenas administradores podem gerenciar usuários.
+* Usuário e senha são obrigatórios.
+* O sistema deve impedir usuários duplicados.
+
+---
+
+## RF009 - Registro de Vendas no Caixa
 
 O sistema deve permitir registrar vendas.
 
@@ -95,3 +121,6 @@ O sistema deve permitir registrar vendas.
 * A venda deve possuir ao menos um item (serviço ou produto).
 * O valor total deve ser calculado automaticamente.
 * A forma de pagamento deve ser informada.
+
+
+
