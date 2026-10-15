@@ -187,43 +187,125 @@ function removerAcentos(texto) {
     return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
-
-function inicializarBuscaCliente(bloco) {
-    const input = bloco.querySelector('.buscar_cliente'); // campo de texto para digitar o nome do cliente
-    const lista = bloco.querySelector('.lista_clientes'); // lista onde os resultados da busca são exibidos
-    const dados = bloco.querySelector('.dados_cliente'); // bloco onde exibe os detalhes do cliente selecionado
-    const tel = bloco.querySelector('.cliente_telefone'); // campo telefone do cliente
-    const nif = bloco.querySelector('.cliente_nif'); // campo nif do cliente
-    const email = bloco.querySelector('.cliente_email'); // campo e-mail do cliente
-    const nasc = bloco.querySelector('.cliente_nascimento'); // campo nascimento do cliente
+// ESSA FUNCTION TA FUNCIONANDO
+// function inicializarBuscaCliente(bloco) {
+//     const input = bloco.querySelector('.buscar_cliente'); // campo de texto para digitar o nome do cliente
+//     const lista = bloco.querySelector('.lista_clientes'); // lista onde os resultados da busca são exibidos
+//     const dados = bloco.querySelector('.dados_cliente'); // bloco onde exibe os detalhes do cliente selecionado
+//     const tel = bloco.querySelector('.cliente_telefone'); // campo telefone do cliente
+//     const nif = bloco.querySelector('.cliente_nif'); // campo nif do cliente
+//     const email = bloco.querySelector('.cliente_email'); // campo e-mail do cliente
+//     const nasc = bloco.querySelector('.cliente_nascimento'); // campo nascimento do cliente
     
-    // evento para quando o usuário digitar no campo de busca
-    input.addEventListener('input', function() {
-        const termoDigitado = this.value.trim().toLowerCase();
-        const termoNormalizado = removerAcentos(termoDigitado); // remove os espaços extras e acentos digitados
+//     // evento para quando o usuário digitar no campo de busca
+//     input.addEventListener('input', function() {
+//         const termoDigitado = this.value.trim().toLowerCase();
+//         const termoNormalizado = removerAcentos(termoDigitado); // remove os espaços extras e acentos digitados
 
-        if (termoDigitado.length > 0) {
-            // faz uma requisição para buscar clientes que corresponde a pesquisa
-            fetch(`/caixa/buscar-clientes/?q=${encodeURIComponent(termoDigitado)}`)
+//         if (termoDigitado.length > 0) {
+//             // faz uma requisição para buscar clientes que corresponde a pesquisa
+//             fetch(`/caixa/buscar-clientes/?q=${encodeURIComponent(termoDigitado)}`)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     lista.innerHTML = ''; // limpa a lista antes de mostrar novos
+
+//                     const resultados = data.filter(c => {
+//                         const nomeNormalizado = removerAcentos((c.nome || '').toLowerCase());
+//                         const telefone = (c.telefone || '');
+//                         const nifCliente = (c.nif || '');
+                        
+//                         return (
+//                             nomeNormalizado.includes(termoNormalizado) || 
+//                             telefone.includes(termoDigitado) || 
+//                             nifCliente.includes(termoDigitado)
+//                         );
+//                     });    
+
+
+//                     if (data.length === 0) {
+//                         // Nenhum cliente encontrado > mostra o link para cadastro
+//                         lista.innerHTML = `
+//                             <li class="text-danger">
+//                                 Cliente não encontrado.
+//                                 <a href="/clientes/" class="text-primary">Adicionar cliente</a>
+//                             </li>`;
+//                         return;
+//                     }
+
+//                     // para cada cliente encontrado, cria um item na lista
+//                     data.forEach(c => {
+                        
+//                             const li = document.createElement('li');
+//                             li.classList.add('list-group-item', 'list-group-item-action');
+//                             li.textContent = `${c.nome} • ${c.telefone} • NIF: ${c.nif}`; // onde exibe os dados do cliente
+//                             li.style.cursor = 'pointer';
+
+//                             // evento de clique em um cliente selecionado
+//                             li.addEventListener('click', () => {
+//                                 input.value = c.nome; // preenche o input com o nome do cliente selecionado
+//                                 clienteSelecionado = c.id; // armazena o id do cliente selecionado
+//                                 document.getElementById('cliente_id').value = c.id; // atualiza o campo hidden com o id
+//                                 lista.innerHTML = ''; // limpa a lista
+
+//                                 // Busca os dados completos do cliente
+//                                 fetch(`/caixa/detalhes_cliente/${c.id}/`)
+//                                     .then(res => res.json())
+//                                     .then(cliente => {
+//                                         tel.value = cliente.telefone || ''; // preenche o telefone
+//                                         nif.value = cliente.nif || ''; // preenche o nif
+//                                         email.value = cliente.email || ''; //preenche o email
+//                                         nasc.value = cliente.nascimento || ''; // preenche o nascimento
+//                                         dados.style.display = 'block'; // mostra o bloco
+//                                     });
+//                                 //define hidden e carrega histórico    
+//                                 const modalHidden = document.getElementById('id_cliente_caixa'); //!!!!!!!!!!!!!!!!
+//                                 if (modalHidden) modalHidden.value = c.id; //!!!!!!!!!!!!!!!!!
+//                                 carregarHistoricoFicha(c.id); // carrega historico imediatamente
+//                             });
+//                             lista.appendChild(li); // adiciona o item na lista
+                        
+//                     });
+//                 });
+//         } else {
+//             lista.innerHTML = '';
+//             dados.style.display = 'none';
+//         }
+//     });
+// }
+function inicializarBuscaCliente(bloco) {
+    const input = bloco.querySelector('.buscar_cliente');
+    const lista = bloco.querySelector('.lista_clientes');
+    const dados = bloco.querySelector('.dados_cliente');
+    const tel = bloco.querySelector('.cliente_telefone');
+    const nif = bloco.querySelector('.cliente_nif');
+    const email = bloco.querySelector('.cliente_email');
+    const nasc = bloco.querySelector('.cliente_nascimento');
+    
+    let timeout = null;
+
+    input.addEventListener('input', function() {
+        const termo = this.value.trim();
+        clearTimeout(timeout);
+
+        if (termo.length === 0) {
+            lista.innerHTML = '';
+            if (dados) dados.style.display = 'none';
+            return;
+        }
+
+        timeout = setTimeout(() => {
+            fetch(`/caixa/buscar-clientes/?q=${encodeURIComponent(termo)}`)
                 .then(response => response.json())
                 .then(data => {
-                    lista.innerHTML = ''; // limpa a lista antes de mostrar novos
+                    // Proteção essencial: se o usuário já limpou o input enquanto a rede respondia, não renderiza
+                    if (input.value.trim().length === 0) {
+                        lista.innerHTML = '';
+                        return;
+                    }
 
-                    const resultados = data.filter(c => {
-                        const nomeNormalizado = removerAcentos((c.nome || '').toLowerCase());
-                        const telefone = (c.telefone || '');
-                        const nifCliente = (c.nif || '');
-                        
-                        return (
-                            nomeNormalizado.includes(termoNormalizado) || 
-                            telefone.includes(termoDigitado) || 
-                            nifCliente.includes(termoDigitado)
-                        );
-                    });    
-
+                    lista.innerHTML = '';
 
                     if (data.length === 0) {
-                        // Nenhum cliente encontrado > mostra o link para cadastro
                         lista.innerHTML = `
                             <li class="text-danger">
                                 Cliente não encontrado.
@@ -232,49 +314,84 @@ function inicializarBuscaCliente(bloco) {
                         return;
                     }
 
-                    // para cada cliente encontrado, cria um item na lista
                     data.forEach(c => {
-                        
-                            const li = document.createElement('li');
-                            li.classList.add('list-group-item', 'list-group-item-action');
-                            li.textContent = `${c.nome} • ${c.telefone} • NIF: ${c.nif}`; // onde exibe os dados do cliente
-                            li.style.cursor = 'pointer';
+                        const li = document.createElement('li');
+                        li.classList.add('list-group-item', 'list-group-item-action');
+                        li.textContent = `${c.nome} • ${c.telefone} • NIF: ${c.nif}`;
+                        li.style.cursor = 'pointer';
 
-                            // evento de clique em um cliente selecionado
-                            li.addEventListener('click', () => {
-                                input.value = c.nome; // preenche o input com o nome do cliente selecionado
-                                clienteSelecionado = c.id; // armazena o id do cliente selecionado
-                                document.getElementById('cliente_id').value = c.id; // atualiza o campo hidden com o id
-                                lista.innerHTML = ''; // limpa a lista
+                        li.addEventListener('click', () => {
+                            input.value = c.nome;
+                            clienteSelecionado = c.id;
+                            document.getElementById('cliente_id').value = c.id;
+                            lista.innerHTML = '';
 
-                                // Busca os dados completos do cliente
-                                fetch(`/caixa/detalhes_cliente/${c.id}/`)
-                                    .then(res => res.json())
-                                    .then(cliente => {
-                                        tel.value = cliente.telefone || ''; // preenche o telefone
-                                        nif.value = cliente.nif || ''; // preenche o nif
-                                        email.value = cliente.email || ''; //preenche o email
-                                        nasc.value = cliente.nascimento || ''; // preenche o nascimento
-                                        dados.style.display = 'block'; // mostra o bloco
-                                    });
-                                //define hidden e carrega histórico    
-                                const modalHidden = document.getElementById('id_cliente_caixa'); //!!!!!!!!!!!!!!!!
-                                if (modalHidden) modalHidden.value = c.id; //!!!!!!!!!!!!!!!!!
-                                carregarHistoricoFicha(c.id); // carrega historico imediatamente
-                            });
-                            lista.appendChild(li); // adiciona o item na lista
-                        
+                            fetch(`/caixa/detalhes_cliente/${c.id}/`)
+                                .then(res => res.json())
+                                .then(cliente => {
+                                    tel.value = cliente.telefone || '';
+                                    nif.value = cliente.nif || '';
+                                    email.value = cliente.email || '';
+                                    nasc.value = cliente.nascimento || '';
+                                    if (dados) dados.style.display = 'block';
+                                });
+                            
+                            const modalHidden = document.getElementById('id_cliente_caixa');
+                            if (modalHidden) modalHidden.value = c.id;
+                            carregarHistoricoFicha(c.id);
+                        });
+                        lista.appendChild(li);
                     });
                 });
-        } else {
-            lista.innerHTML = '';
-            dados.style.display = 'none';
-        }
+        }, 300); // 300ms de debounce para evitar requisições desnecessárias
     });
 }
+
 // Inicializa todos os blocos de cliente
 document.querySelectorAll('.cliente-bloco').forEach(inicializarBuscaCliente);
 
+// ESSE AQUI TA FUNCIONANDO 
+// function inicializarBuscaServico(bloco) {
+//     const input = bloco.querySelector(".buscar_servico");
+//     const lista = bloco.querySelector(".lista_servicos");
+//     const dados = bloco.querySelector(".dados_servico");
+//     const valor = bloco.querySelector(".servico_valor");
+
+//     input.addEventListener('input', function() {
+//         const termo = this.value.trim();
+
+//         if (termo.length < 1) {
+//             lista.innerHTML = '';
+//             return;
+//         }
+
+//         fetch(`/caixa/buscar-servicos/?q=${encodeURIComponent(termo)}`)
+//             .then(r => r.json())
+//             .then(servicos => {
+//                 lista.innerHTML = '';
+
+//                 servicos.forEach(s => {
+//                     const li = document.createElement('li');
+//                     const novoPreco = Number(s.preco).toLocaleString('pt-PT', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+//                     li.textContent = `${s.nome} • ${novoPreco}€`;
+//                     li.style.cursor = 'pointer';
+
+//                     li.addEventListener('click', () => {
+//                         input.value = s.nome;
+//                         valor.value = novoPreco; // coloca o valor no campo
+//                         calcularTotal(); // força o cálculo do valor total no caixa
+//                         dados.style.display = 'block';
+//                         lista.innerHTML = '';
+
+//                         bloco.classList.add('servico-selecionado');
+//                         bloco.dataset.id = s.id;
+//                         bloco.dataset.quantidade = 1;
+//                     });
+//                     lista.appendChild(li);
+//                 });
+//             });
+//     });
+// }
 
 function inicializarBuscaServico(bloco) {
     const input = bloco.querySelector(".buscar_servico");
@@ -282,39 +399,50 @@ function inicializarBuscaServico(bloco) {
     const dados = bloco.querySelector(".dados_servico");
     const valor = bloco.querySelector(".servico_valor");
 
+    let timeout = null;
+
     input.addEventListener('input', function() {
         const termo = this.value.trim();
+        clearTimeout(timeout);
 
         if (termo.length < 1) {
             lista.innerHTML = '';
             return;
         }
 
-        fetch(`/caixa/buscar-servicos/?q=${encodeURIComponent(termo)}`)
-            .then(r => r.json())
-            .then(servicos => {
-                lista.innerHTML = '';
-
-                servicos.forEach(s => {
-                    const li = document.createElement('li');
-                    const novoPreco = Number(s.preco).toLocaleString('pt-PT', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                    li.textContent = `${s.nome} • ${novoPreco}€`;
-                    li.style.cursor = 'pointer';
-
-                    li.addEventListener('click', () => {
-                        input.value = s.nome;
-                        valor.value = novoPreco; // coloca o valor no campo
-                        calcularTotal(); // força o cálculo do valor total no caixa
-                        dados.style.display = 'block';
+        timeout = setTimeout(() => {
+            fetch(`/caixa/buscar-servicos/?q=${encodeURIComponent(termo)}`)
+                .then(r => r.json())
+                .then(servicos => {
+                    // Proteção essencial: descarta a resposta caso o campo tenha sido apagado
+                    if (input.value.trim().length === 0) {
                         lista.innerHTML = '';
+                        return;
+                    }
 
-                        bloco.classList.add('servico-selecionado');
-                        bloco.dataset.id = s.id;
-                        bloco.dataset.quantidade = 1;
+                    lista.innerHTML = '';
+
+                    servicos.forEach(s => {
+                        const li = document.createElement('li');
+                        const novoPreco = Number(s.preco).toLocaleString('pt-PT', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                        li.textContent = `${s.nome} • ${novoPreco}€`;
+                        li.style.cursor = 'pointer';
+
+                        li.addEventListener('click', () => {
+                            input.value = s.nome;
+                            valor.value = novoPreco;
+                            calcularTotal();
+                            if (dados) dados.style.display = 'block';
+                            lista.innerHTML = '';
+
+                            bloco.classList.add('servico-selecionado');
+                            bloco.dataset.id = s.id;
+                            bloco.dataset.quantidade = 1;
+                        });
+                        lista.appendChild(li);
                     });
-                    lista.appendChild(li);
                 });
-            });
+        }, 300);
     });
 }
 
@@ -388,6 +516,13 @@ function inicializarBuscaProduto(bloco) {
             .then(response => response.json())
             .then(data => {
                 //lista.innerHTML = '';
+                //MUDEI AQUI
+                // Checagem se o input foi esvaziado durante o trânsito da requisição
+                if (input.value.trim().length === 0) {
+                    lista.replaceChildren();
+                    return;
+                }
+                // ATE AQUI
                 lista.replaceChildren();
 
                 if (!data || data.length === 0) {
