@@ -39,7 +39,12 @@ function dados_cliente(id){  // busca e preenche os dados do cliente ao editar
         document.getElementById('ficha-container').style.display = 'block'; // mostra a ficha só quando tem o cliente
         const ficha = document.getElementById('fichaCliente');
         if (ficha) ficha.classList.remove('show');
+        ['collapseHistoricoFichas', 'collapseHistoricoVendas', 'collapseAdicionarFicha'].forEach(collapseId => {
+            const el = document.getElementById(collapseId);
+            if (el) el.classList.remove('show');
+        });
         carregarFichas(data.id); // carrega o histórico desse cliente
+        carregarVendas(data.id); // carrega o histórico de vendas desse cliente
 
     })
 
@@ -293,6 +298,12 @@ function voltarParaLista() {
     document.getElementById('form-att-cliente').style.display = 'none';
     document.getElementById('ficha-container').style.display = 'none';
 
+    // Fecha seções de histórico e ficha
+    ['collapseHistoricoFichas', 'collapseHistoricoVendas', 'collapseAdicionarFicha'].forEach(collapseId => {
+        const el = document.getElementById(collapseId);
+        if (el) el.classList.remove('show');
+    });
+
     // Reseta o estado do formulário para "congelado"
     document.getElementById('edit-nome').disabled = true;
     document.getElementById('edit-telefone').disabled = true;
@@ -429,6 +440,32 @@ function carregarFichas(clienteId) {
         })
         .catch(console.error);
 }
+
+function carregarVendas(clienteId) {
+    const container = document.getElementById('historico-vendas-cliente');
+    if (!container) return;
+    fetch(`/clientes/${clienteId}/vendas/`, { headers: { 'X-Requested-With': 'XMLHttpRequest' }})
+        .then(r => r.text())
+        .then(html => {
+            container.innerHTML = html;
+        })
+        .catch(err => {
+            console.error('Erro ao carregar vendas:', err);
+            container.innerHTML = '<p class="text-muted">Erro ao carregar histórico de vendas.</p>';
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnVendas = document.querySelector('[data-test="btn-ver-vendas-cliente"]');
+    if (btnVendas) {
+        btnVendas.addEventListener('click', function() {
+            const clienteId = document.getElementById('id_cliente').value;
+            if (clienteId) {
+                carregarVendas(clienteId);
+            }
+        });
+    }
+});
 
 function selecionarCliente(id, nome) {
     const searchBar = document.getElementById('search-bar');

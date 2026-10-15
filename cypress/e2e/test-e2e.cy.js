@@ -171,6 +171,7 @@ describe('E2E - Produto', () => {
       cy.get('[data-test="barra-pesquisa-produtos"]').type(nomeProduto);
       cy.contains(nomeProduto).should('be.visible').click();
 
+      cy.get('[data-test="btn-editar"]').click();
       cy.get('[data-test="preco-produto-edicao"]').clear().type('29,00');
 
       cy.get('[data-test="btn-salvar-edicao"]').click();

@@ -1,0 +1,8 @@
+{% if vendas %}
+    {% for venda in vendas %}
+        {% include 'clientes/vendacliente.html' with venda=venda %}
+    {% endfor %}
+{% else %}
+    <p class="text-muted">Nenhuma venda registrada para este cliente ainda.</p>
+{% endif %}
+

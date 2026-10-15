@@ -53,7 +53,7 @@ describe('Página de cadastro de clientes', () => {
         cy.contains('Cliente cadastrado com sucesso!').should('be.visible');
     })
 
-    it.only('Atualizando dados de cadastro do cliente.', () => {
+    it('Atualizando dados de cadastro do cliente.', () => {
         // Criando cliente para teste
         const cliente = gerarClientes();
         const nomeCliente = `Cliente ${Date.now()}`
@@ -320,6 +320,7 @@ describe('Página de cadastro de serviços', () => {
         cy.get('[data-test="btn-editar-servico"]').click();
         cy.get('[data-test="barra-pesquisa-servicos"]').should('be.visible').type(nomeServico);
         cy.contains(nomeServico).should('be.visible').click();
+        cy.get('[data-test="btn-editar"]').click();
         cy.get('[data-test="preco-servico-edicao"]').type('50,00');
 
         cy.get('[data-test="btn-salvar-edicao"]').click();
@@ -381,6 +382,7 @@ describe('Página de cadastro de produtos', () => {
         cy.get('[data-test="barra-pesquisa-produtos"]').type(nomeProduto);
         cy.contains(nomeProduto).should('be.visible').click();
 
+        cy.get('[data-test="btn-editar"]').click();
         cy.get('[data-test="adcQuantidade-produto-edicao"]').type('3');
 
         cy.get('[data-test="btn-salvar-edicao"]').click();

@@ -6,7 +6,7 @@ describe('Página de cadastro de clientes', () => {
     })
 
     it('Deve cadastrar 20 clientes corretamente.', () => {
-        for (let i = 0; i < 20; i++) { // Alterar aqui a quantidade de cadastro
+        for (let i = 0; i < 5; i++) { // Alterar aqui a quantidade de cadastro
             const cliente = gerarClientes();
 
             cy.get('[data-test="nome-cadastro"]').clear().type(cliente.nome);

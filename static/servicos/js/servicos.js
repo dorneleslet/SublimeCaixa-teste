@@ -275,7 +275,6 @@ function excluirServico(id) {
                 msg.innerHTML = '<p>Serviço excluído com sucesso!</p>';
                 msg.style.display = 'block';
 
-                // Após 2 segundos, esconde a mensagem e volta para a lista
                 setTimeout(() => {
                     msg.style.display = 'none';
                     voltarLista(); // Esconde o formulário de edição e mostra a lista

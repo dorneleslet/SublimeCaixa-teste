@@ -1,0 +1,86 @@
+<div class="card bg-dark text-light border-secondary mb-3" id="venda-{{ venda.id }}">
+    <div class="card-header d-flex justify-content-between align-items-center py-2 border-secondary">
+        <span class="fw-bold">Venda #{{ venda.id }}</span>
+        <div class="venda-actions d-flex align-items-center">
+            {% if venda.status == 'pago' %}
+                <span class="badge badge-success mr-2">Pago</span>
+            {% elif venda.status == 'pendente' %}
+                <span class="badge badge-warning mr-2">Pendente</span>
+            {% endif %}
+            <a href="{% url 'relatorio_venda' venda.id %}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light py-0 px-2" title="Visualizar Recibo">
+                <i class='bx bx-receipt fs-6 align-middle'></i> Recibo
+            </a>
+        </div>
+    </div>
+    <div class="card-body py-2 px-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Data:</strong> {{ venda.data|date:'d/m/Y H:i' }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Total:</strong> {{ venda.total|floatformat:2 }}€</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Pagamento:</strong> {{ venda.get_forma_pagamento_display }}</p>
+            </div>
+            {% if venda.profissional %}
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Profissional:</strong> {{ venda.profissional }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if venda.desconto and venda.desconto > 0 or venda.sinal and venda.sinal > 0 %}
+        <div class="row">
+            {% if venda.desconto and venda.desconto > 0 %}
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Desconto:</strong> {{ venda.desconto|floatformat:2 }}€</p>
+            </div>
+            {% endif %}
+            {% if venda.sinal and venda.sinal > 0 %}
+            <div class="col-sm-6">
+                <p class="mb-1"><strong>Sinal:</strong> {{ venda.sinal|floatformat:2 }}€</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if venda.fatura %}
+        <p class="mb-1"><strong>Fatura com NIF:</strong> {{ venda.get_fatura_display }}</p>
+        {% endif %}
+
+        {% if venda.itens.all %}
+        <div class="mt-2 pt-2 border-top border-secondary">
+            <p class="mb-1"><strong>Itens da venda:</strong></p>
+            <ul class="list-unstyled mb-0 pl-2">
+                {% for item in venda.itens.all %}
+                    <li class="small text-light">
+                        • {{ item.quantidade }}x 
+                        {% if item.nome_servico %}
+                            {{ item.nome_servico }}
+                        {% elif item.servico %}
+                            {{ item.servico.nome }}
+                        {% elif item.nome_produto %}
+                            {{ item.nome_produto }}
+                        {% elif item.produto %}
+                            {{ item.produto.nome }}
+                        {% else %}
+                            Item
+                        {% endif %}
+                        ({{ item.valor_unitario|floatformat:2 }}€)
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if venda.observacoes %}
+            <div class="mt-2 pt-2 border-top border-secondary">
+                <p class="mb-1"><strong>Observações:</strong> {{ venda.observacoes }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+

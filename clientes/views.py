@@ -13,6 +13,7 @@ from django.db.models import Q
 from django.utils import timezone
 from django.template.loader import render_to_string
 from .models import ActionLog # Import the new ActionLog model
+from caixa.models import Venda
 
 def log_action(user, description):
     # Garante que o usuário está autenticado antes de registrar a ação
@@ -252,6 +253,12 @@ def detalhe_cliente(request, cliente_id): #mostrar as fichas no histórico
     is_admin = request.user.groups.filter(name='Administrador').exists() or request.user.is_superuser
 
     return render(request, 'clientes/fichashistorico.html', {'fichas': fichas, 'is_admin': is_admin})
+    
+def vendas_cliente(request, cliente_id): # mostrar as vendas no histórico
+    cliente = get_object_or_404(Cliente, id=cliente_id)
+    vendas = Venda.objects.filter(cliente=cliente).prefetch_related('itens', 'itens__servico', 'itens__produto').order_by('-data')
+    return render(request, 'clientes/vendashistorico.html', {'vendas': vendas, 'cliente': cliente})
+
 
 def ocultar_cliente(request, cliente_id):
     if request.method == 'POST':

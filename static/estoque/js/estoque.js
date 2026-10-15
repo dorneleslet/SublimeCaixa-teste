@@ -111,12 +111,27 @@ function carregarProduto(id, el) {
         const campoPreco = document.getElementById('editar_preco_unitario');
         campoPreco.value = isNaN(Number(preco_unitario.replace(',', '.'))) ? 0: Number(preco_unitario.replace(',', '.')); // Se não conseguir converter, põe 0
         document.getElementById('editar_descricao').value = descricao || '';
-        
-        id.value = id;
-        nome.value = nome;
-        quantidade.value = quantidade;
-        preco_unitario.value = preco_unitario;
-        descricao.value = descricao; 
+        document.getElementById('nova_entrada').value = '';
+
+        // Bloqueia todos os campos para edição ao abrir
+        document.getElementById('editar_nome').disabled = true;
+        document.getElementById('editar_quantidade').disabled = true;
+        document.getElementById('nova_entrada').disabled = true;
+        document.getElementById('editar_preco_unitario').disabled = true;
+        document.getElementById('editar_descricao').disabled = true;
+
+        // Reseta os botões de ação: exibe "Editar dados" e esconde "Salvar alterações"
+        const btnEditar = document.getElementById('btn-editar-produto-dados');
+        if (btnEditar) btnEditar.style.display = 'inline-block';
+        const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+        if (btnSalvar) btnSalvar.style.display = 'none';
+        const btnExcluir = document.getElementById('btn-excluir-produto');
+        if (btnExcluir) btnExcluir.style.display = 'none';
+
+        // Limpa possíveis validações de erro anteriores
+        const erroDiv = document.getElementById('erro-editar-preco');
+        if (erroDiv) erroDiv.style.display = 'none';
+        campoPreco.classList.remove('is-invalid');
 
         // Define a action do form dinamicamente
         const form = document.getElementById('form-produto-edicao') || document.querySelector('#form-produto-edicao form');
@@ -133,9 +148,26 @@ function carregarProduto(id, el) {
 
 }
 
+function habilitarEdicaoProduto() {
+    // Habilita os campos do formulário para edição
+    document.getElementById('editar_nome').disabled = false;
+    document.getElementById('nova_entrada').disabled = false;
+    document.getElementById('editar_preco_unitario').disabled = false;
+    document.getElementById('editar_descricao').disabled = false;
+
+    // Alterna os botões
+    const btnEditar = document.getElementById('btn-editar-produto-dados');
+    if (btnEditar) btnEditar.style.display = 'none';
+    const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+    if (btnSalvar) btnSalvar.style.display = 'inline-block';
+    const btnExcluir = document.getElementById('btn-excluir-produto');
+    if (btnExcluir) btnExcluir.style.display = 'inline-block';
+}
+
 function editarProduto(produtoId) {
     // Esconde a lista
     document.getElementById('lista-produtos').style.display = 'none';
+    document.getElementById('search-bar-produto').style.display = 'none';
 
     // Mostra o formulário de edição
     document.getElementById('form-produto-edicao').style.display = 'block';
@@ -148,7 +180,22 @@ function editarProduto(produtoId) {
             document.getElementById('editar_quantidade').value = data.quantidade;
             document.getElementById('editar_preco_unitario').value = data.preco_unitario;
             document.getElementById('editar_descricao').value = data.descricao;
-            document.getElementById('editar_id').value = produtoId;
+            document.getElementById('produto_id').value = produtoId;
+            document.getElementById('nova_entrada').value = '';
+
+            // Bloqueia todos os campos para edição ao abrir
+            document.getElementById('editar_nome').disabled = true;
+            document.getElementById('editar_quantidade').disabled = true;
+            document.getElementById('nova_entrada').disabled = true;
+            document.getElementById('editar_preco_unitario').disabled = true;
+            document.getElementById('editar_descricao').disabled = true;
+
+            const btnEditar = document.getElementById('btn-editar-produto-dados');
+            if (btnEditar) btnEditar.style.display = 'inline-block';
+            const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+            if (btnSalvar) btnSalvar.style.display = 'none';
+            const btnExcluir = document.getElementById('btn-excluir-produto');
+            if (btnExcluir) btnExcluir.style.display = 'none';
         })
         .catch(error => console.error('Erro ao buscar produto:', error));
 }
@@ -159,6 +206,21 @@ function voltarListaProduto() {
     document.getElementById('lista-produtos').style.display = 'block';
     document.getElementById('search-bar-produto').style.display = 'block';
     document.getElementById('mensagem-sucesso-produto').style.display = 'none';
+
+    // Reseta o estado dos campos para disabled
+    document.getElementById('editar_nome').disabled = true;
+    document.getElementById('editar_quantidade').disabled = true;
+    document.getElementById('nova_entrada').disabled = true;
+    document.getElementById('editar_preco_unitario').disabled = true;
+    document.getElementById('editar_descricao').disabled = true;
+
+    // Reseta botões
+    const btnEditar = document.getElementById('btn-editar-produto-dados');
+    if (btnEditar) btnEditar.style.display = 'inline-block';
+    const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+    if (btnSalvar) btnSalvar.style.display = 'none';
+    const btnExcluir = document.getElementById('btn-excluir-produto');
+    if (btnExcluir) btnExcluir.style.display = 'none';
 }
 
 // Limpar formulário de edição
@@ -166,12 +228,28 @@ function limparFormularioEdicao() {
     document.getElementById('produto_id').value = '';
     document.getElementById('editar_nome').value = '';
     document.getElementById('editar_quantidade').value = '';
+    document.getElementById('nova_entrada').value = '';
     document.getElementById('editar_preco_unitario').value = '';
     document.getElementById('editar_descricao').value = '';
     document.getElementById('form-produto-edicao').style.display = 'none';
     document.getElementById('lista-produtos').style.display = 'block';
     document.getElementById('search-bar-produto').style.display = 'block';
     document.getElementById('mensagem-sucesso-produto').style.display = 'none';
+
+    // Reseta o estado dos campos para disabled
+    document.getElementById('editar_nome').disabled = true;
+    document.getElementById('editar_quantidade').disabled = true;
+    document.getElementById('nova_entrada').disabled = true;
+    document.getElementById('editar_preco_unitario').disabled = true;
+    document.getElementById('editar_descricao').disabled = true;
+
+    // Reseta botões
+    const btnEditar = document.getElementById('btn-editar-produto-dados');
+    if (btnEditar) btnEditar.style.display = 'inline-block';
+    const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+    if (btnSalvar) btnSalvar.style.display = 'none';
+    const btnExcluir = document.getElementById('btn-excluir-produto');
+    if (btnExcluir) btnExcluir.style.display = 'none';
 }
 
 
@@ -259,6 +337,11 @@ function atualizarProduto() {
         return;
     }
 
+    const btnSalvar = document.getElementById('btn-edit-salvar-produto');
+    const originalText = btnSalvar.value;
+    btnSalvar.disabled = true;
+    btnSalvar.value = "Salvando...";
+
     // envia para o backend
     fetch(`/estoque/editar/${produtoId}/`, { 
         method: 'POST',
@@ -277,18 +360,37 @@ function atualizarProduto() {
         .then(resp => {
             if (resp.ok) {
                 document.getElementById('mensagem-sucesso-produto').style.display = 'block';
+                btnSalvar.value = "Salvo!";
 
                 // limpa o campo nova_entrada
                 document.getElementById('nova_entrada').value = '';
 
+                // Bloqueia todos os campos novamente
+                document.getElementById('editar_nome').disabled = true;
+                document.getElementById('editar_quantidade').disabled = true;
+                document.getElementById('nova_entrada').disabled = true;
+                document.getElementById('editar_preco_unitario').disabled = true;
+                document.getElementById('editar_descricao').disabled = true;
+
+                const btnEditar = document.getElementById('btn-editar-produto-dados');
+                if (btnEditar) btnEditar.style.display = 'inline-block';
+                if (btnSalvar) btnSalvar.style.display = 'none';
+                const btnExcluir = document.getElementById('btn-excluir-produto');
+                if (btnExcluir) btnExcluir.style.display = 'none';
+
                 setTimeout(() => {
                    document.getElementById('mensagem-sucesso-produto').style.display = 'none'; 
+                   btnSalvar.disabled = false;
+                   btnSalvar.value = originalText;
                    listarProdutos(); // atualiza a lista sem reload
-                   // também pode esconder o formulário e mostrar a lista
+                   // esconde o formulário e mostra a lista
                    document.getElementById('form-produto-edicao').style.display = 'none';
                    document.getElementById('lista-produtos').style.display = 'block';
+                   document.getElementById('search-bar-produto').style.display = 'block';
                 }, 2000);
             } else {
+                btnSalvar.disabled = false;
+                btnSalvar.value = originalText;
                 resp.json().then(j => {
                     console.error('Erro ao atualizar:', j);
                     alert('Erro ao atualizar produto. Veja console.', j);
@@ -297,6 +399,8 @@ function atualizarProduto() {
         })
         .catch(err => {
             console.error('fetch error:', err);
+            btnSalvar.disabled = false;
+            btnSalvar.value = originalText;
             alert('Erro ao atualizar produto (network).');
         });
 }

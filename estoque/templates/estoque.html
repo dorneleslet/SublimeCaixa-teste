@@ -165,16 +165,16 @@
                     <input type="hidden" id="produto_id" name="id">
 
                     <label for="editar_nome">Nome do Produto:<span style="color: red;">*</span></label>
-                    <input type="text" data-test="nome-produto-edicao" id="editar_nome" name="nome" class="form-control" maxlength="50" required>
+                    <input type="text" data-test="nome-produto-edicao" id="editar_nome" name="nome" class="form-control" maxlength="50" required disabled>
 
                     <label for="editar_quantidade" class="mt-2">Quantidade atual:</label>
-                    <input type="number" id="editar_quantidade" name="quantidade" class="form-control" value="{{ produto.quantidade }}" readonly>
+                    <input type="number" id="editar_quantidade" name="quantidade" class="form-control" value="{{ produto.quantidade }}" readonly disabled>
                     
                     <label for="nova_entrada" class="mt-2">Adicionar ao Estoque:</label>
-                    <input type="text" data-test="adcQuantidade-produto-edicao" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar"> 
+                    <input type="text" data-test="adcQuantidade-produto-edicao" id="nova_entrada" class="form-control" min="0" maxlength="5" inputmode="numeric" pattern="\d{1,5}" placeholder="Quantidade a adicionar" disabled> 
 
                     <label for="editar_preco_unitario" class="mt-2">Preço Unitário:<span style="color: red;">*</span></label>
-                    <input type="text" data-test="preco-produto-edicao" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0.01" maxlength="10" inputmode="numeric" required>
+                    <input type="text" data-test="preco-produto-edicao" id="editar_preco_unitario" name="preco_unitario" class="form-control" min="0.01" maxlength="10" inputmode="numeric" required disabled>
                     <div id="erro-editar-preco" class="error-message" style="display: none; color: #dc3545; font-size: 0.875em;" class="mt-1">O preço unitário deve ser maior que zero (ex: 1,99).</div>
 
                     <script>
@@ -185,11 +185,13 @@
                     </script>
 
                     <label for="editar_descricao" class="mt-2">Descrição:</label>
-                    <textarea id="editar_descricao" data-test="descricao-produto-edicao" name="descricao" class="form-control" rows="2" maxlength="200"></textarea>
+                    <textarea id="editar_descricao" data-test="descricao-produto-edicao" name="descricao" class="form-control" rows="2" maxlength="200" disabled></textarea>
 
+                    <hr style="background-color:gray;">
                     <br>
-                    <input type="button" data-test="btn-salvar-edicao" class="btn btn-success" value="Salvar alterações" onclick="atualizarProduto()">
-                    <button type="button" data-test="btn-excluir-produto" class="btn btn-danger" onclick="confirmarExcluirProduto()">Excluir</button>
+                    <button id="btn-editar-produto-dados" data-test="btn-editar" type="button" onclick="habilitarEdicaoProduto()" class="btn btn-secondary">Editar dados</button>
+                    <input id="btn-edit-salvar-produto" data-test="btn-salvar-edicao" type="button" class="btn btn-success" value="Salvar alterações" onclick="atualizarProduto()" style="display: none;">
+                    <button id="btn-excluir-produto" data-test="btn-excluir-produto" type="button" class="btn btn-danger" onclick="confirmarExcluirProduto()" style="display: none;">Excluir</button>
                 
                 <div id="mensagem-sucesso-produto" class="alert alert-success mt-3" style="display: none;">
                     <p>Produto atualizado com sucesso!</p>

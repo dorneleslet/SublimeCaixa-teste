@@ -6,7 +6,10 @@ from clientes.models import ActionLog # Import ActionLog from clientes app
 from django.core.paginator import Paginator
 from django.core.cache import cache
 
-import requests
+try:
+    import requests
+except ImportError:
+    requests = None
 import re
 import json
 

@@ -30,7 +30,7 @@
             <div class="row">
                 <div class="col-md">
                     <label for="nome">Nome do Serviço:<span style="color: red;">*</span></label>
-                    <input data-test="nome-servico-cadastro" type="text" class="form-control" placeholder="Nome do serviço" name="nome" maxlength="50" required>
+                    <input data-test="nome-servico-cadastro" type="text" class="form-control" placeholder="Nome do serviço" name="nome" maxlength="100" required>
                 </div>
             
                 <div class="col-md">
@@ -163,7 +163,7 @@
             <hr>
             <input type="hidden" id="id_servico">
             <label for="nome">Nome do Serviço:<span style="color: red;">*</span></label>
-            <input id="nome" data-test="nome-servico-edicao" type="text" class="form-control" maxlength="50" required disabled>
+            <input id="nome" data-test="nome-servico-edicao" type="text" class="form-control" maxlength="100" required disabled>
             <br>
             <label for="preco">Preço:<span style="color: red;">*</span></label>
             <input id="preco-edit" data-test="preco-servico-edicao" type="text" step="0.01" min="0" maxlength="7" class="form-control" required disabled>
@@ -209,7 +209,7 @@
 
             <hr style="background-color:gray;">
             <br>
-            <button id="btn-editar-servico" type="button" onclick="habilitarEdicaoServico()" class="btn btn-secondary">Editar dados</button>
+            <button id="btn-editar-servico" data-test="btn-editar" type="button" onclick="habilitarEdicaoServico()" class="btn btn-secondary">Editar dados</button>
             <input id="btn-salvar-servico" data-test="btn-salvar-edicao" onclick="update_servico()" type="button" value="Salvar alterações" class="btn btn-success" style="display: none;">
             <button id="btn-excluir-servico" data-test="btn-excluir-servico" class="btn btn-danger" onclick="excluirServico(document.getElementById('id_servico').value)" style="display: none;">Excluir</button>
 

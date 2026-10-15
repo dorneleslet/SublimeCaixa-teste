@@ -380,12 +380,17 @@
                     <div id="ficha-container" style="display: none;">
                         <hr>
                         <div class="row mb-3">
-                            <div class="col-md-6 mb-2 mb-md-0">
+                            <div class="col-md-4 mb-2 mb-md-0">
                                 <button class="btn btn-secondary w-100" data-test="btn-ver-ficha-cliente" type="button" data-toggle="collapse" data-target="#collapseHistoricoFichas" aria-expanded="false">
                                     📑 Ver ficha/histórico
                                 </button>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4 mb-2 mb-md-0">
+                                <button class="btn btn-secondary w-100" data-test="btn-ver-vendas-cliente" type="button" data-toggle="collapse" data-target="#collapseHistoricoVendas" aria-expanded="false">
+                                    🛒 Ver vendas/histórico
+                                </button>
+                            </div>
+                            <div class="col-md-4">
                                 <button class="btn btn-secondary w-100" data-test="btn-add-ficha-cliente" type="button" data-toggle="collapse" data-target="#collapseAdicionarFicha" aria-expanded="false">
                                     📝 Adicionar ficha
                                 </button>
@@ -484,16 +489,28 @@
                         </div>
 
                         <!-- SEÇÃO: HISTÓRICO DE FICHAS -->
-                        <div class="collapse" id="collapseHistoricoFichas">
+                        <div class="collapse mb-3" id="collapseHistoricoFichas">
                             <div class="card card-body text-white border-secondary" style="background: #2A2A2A;">
                                 <h5>Histórico do Cliente</h5>
                                 <div class="table-responsive">
-                                <div id="historico-fichas" data-test="historico-fichas" >
-                                    {% include 'clientes/fichashistorico.html' with fichas=fichas is_admin=is_admin %}
+                                    <div id="historico-fichas" data-test="historico-fichas" >
+                                        {% include 'clientes/fichashistorico.html' with fichas=fichas is_admin=is_admin %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- SEÇÃO: HISTÓRICO DE VENDAS -->
+                        <div class="collapse mb-3" id="collapseHistoricoVendas">
+                            <div class="card card-body text-white border-secondary" style="background: #2A2A2A;">
+                                <h5>Histórico de Vendas</h5>
+                                <div class="table-responsive">
+                                    <div id="historico-vendas-cliente" data-test="historico-vendas-cliente">
+                                        {% include 'clientes/vendashistorico.html' with vendas=vendas %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
             
         </div>
     </div>
